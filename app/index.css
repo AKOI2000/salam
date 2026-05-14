@@ -1131,6 +1131,21 @@ header nav .nav-links.active:hover::before {
   font-size: var(--base-size);
 }
 
+.case-study-process {
+  overflow: hidden;
+}
+.case-study-process .img-flex .img-box {
+  position: relative;
+}
+@media (max-width: 768px) {
+  .case-study-process .img-flex .img-box {
+    aspect-ratio: 16/9;
+  }
+}
+.case-study-process .img-flex .img-box img {
+  object-fit: cover;
+}
+
 .case-study p {
   width: 70%;
   line-height: 1.5;
