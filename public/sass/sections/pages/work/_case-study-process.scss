@@ -1,0 +1,17 @@
+.case-study-process {
+  overflow: hidden;
+
+  .img-flex {
+    .img-box {
+      position: relative;
+
+      @include respond(md) {
+        aspect-ratio: 16/9;
+      }
+
+      img {
+        object-fit: cover;
+      }
+    }
+  }
+}

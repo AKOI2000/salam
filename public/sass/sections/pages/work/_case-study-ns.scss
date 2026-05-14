@@ -1,20 +1,10 @@
 .case-study-ns {
   overflow: hidden;
-
-  .img-flex{
-    .img-box {
-      position: relative;
-      img {
-        object-fit: cover;
-      }
-    }
-  }
 }
 
 .img-flex {
   .img-box {
     position: relative;
-    aspect-ratio: 4/5;
 
     @include respond(md) {
       aspect-ratio: 16/9;
