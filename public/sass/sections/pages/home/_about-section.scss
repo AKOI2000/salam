@@ -1,0 +1,14 @@
+.about-section {
+  h5 {
+    width: 50%;
+
+    @include respond(mdl) {
+      width: 70%;
+    }
+
+    @include respond(mds) {
+      width: 100%;
+
+    }
+  }
+}

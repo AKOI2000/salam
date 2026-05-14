@@ -1,0 +1,90 @@
+.col-2-by-1 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+
+  @include respond(mds) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.col-eq-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+
+  @include respond(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond(mds) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.col-4-by-1 {
+  display: grid;
+  grid-template-columns: 20% 30% 1fr 1fr;
+  column-gap: 1rem;
+  row-gap: 2rem;
+
+  @include respond(xl) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.col-2_5-by-1 {
+  display: grid;
+  grid-template-columns: 25% 75%;
+  // column-gap: 1rem;
+
+  @include respond(xl) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.col-5-by-1 {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+
+  @include respond(lg) {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    // place-items: center;
+
+    .item:nth-child(1),
+    .item:nth-child(2) {
+      grid-column: span 3;
+    }
+
+    .item:nth-child(3) {
+      grid-column: span 6;
+    }
+
+    .item:nth-child(4),
+    .item:nth-child(5) {
+      grid-column: span 3;
+    }
+  }
+
+  @include respond(mds) {
+    grid-template-columns: 1fr;
+
+    .item:nth-child(1),
+    .item:nth-child(2) {
+      grid-column: span 1;
+    }
+
+    .item:nth-child(3) {
+      grid-column: span 1;
+    }
+
+    .item:nth-child(4),
+    .item:nth-child(5) {
+      grid-column: span 1;
+    }
+  }
+}

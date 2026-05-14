@@ -1,0 +1,23 @@
+.container {
+    padding: 5rem 10rem;
+  
+    @include respond(lg) {
+      padding: 5rem 5rem;
+    }
+  
+    @include respond(mdl) {
+      padding: 5rem 4rem;
+    }
+  
+    @include respond(mds) {
+      padding: 5rem 3rem;
+    }
+  
+    @include respond(sm) {
+      padding: 5rem 3rem;
+    }
+  
+    @include respond(xs) {
+      padding: 5rem 2rem;
+    }
+}

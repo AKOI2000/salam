@@ -1,0 +1,48 @@
+.about-hero {
+  h1 {
+    font-size: calc(((var(--base-size) * 1.25) * 1.25) * 1.25);
+    font-weight: 400;
+    line-height: 1.5;
+    margin-bottom: 10rem;
+    // text-align: center;
+
+    @include respond(mds) {
+      font-size: 2.1rem;
+    }
+  }
+
+  p {
+    font-weight: 400;
+    color: var(--darker-grey);
+    width: 60%;
+    margin: auto;
+    line-height: 1.7;
+    margin-bottom: 5rem;
+
+    @include respond(md) {
+      width: 75%;
+    }
+
+    @include respond(mds) {
+      width: 100%;
+    }
+  }
+}
+
+.about-img-box {
+  //   position: relative;
+  //   width: 100%;
+  //   margin: auto;
+  // aspect-ratio: 16/9;
+  // max-height: 800px;
+
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    // max-height: 1200px;
+    // object-position: top;
+  }
+}
+
+

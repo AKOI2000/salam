@@ -1,0 +1,77 @@
+:root {
+  --duration: 40s; /* lower = faster */
+}
+
+.quality-spread {
+  display: grid;
+  grid-template-rows: 1fr;
+  overflow: hidden;
+  padding: 5rem 0;
+}
+
+.white-gradient {
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  pointer-events: none;
+  grid-row: 1 / -1;
+  grid-column: 1 / -1;
+  background: linear-gradient(
+    to right,
+    rgba(255,255,255,1)   0%,
+    rgba(255,255,255,0.5) 6%,
+    rgba(255,255,255,0)   15%,
+    rgba(255,255,255,0)   85%,
+    rgba(255,255,255,0.5) 94%,
+    rgba(255,255,255,1)   100%
+  );
+}
+
+.marquee {
+  width: 100%;
+  overflow: hidden;
+  grid-row: 1 / -1;
+  grid-column: 1 / -1;
+}
+
+/* two groups side by side, total width = 2x one group */
+.marquee__inner {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee var(--duration) linear infinite;
+}
+
+/* each group holds your content repeated N times */
+.marquee__group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.marquee__item {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 3rem;
+  font-size: 3rem;
+  font-weight: 300;
+  white-space: nowrap;
+
+  filter: grayscale(100);
+  transition: all .2s ease;
+
+  &:hover{
+    filter: grayscale(0);
+  }
+}
+
+/* -50% = exactly one group width, loop is seamless */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee__logo {
+  height: 28px; /* adjust to taste */
+  width: auto;
+}

@@ -1,0 +1,15 @@
+.case-study-reflection {
+  .img-box {
+    position: relative;
+    grid-column: span 2;
+    aspect-ratio: 16/9;
+
+    @include respond(md) {
+      grid-column: span 1;
+    }
+
+    img {
+      object-fit: cover;
+    }
+  }
+}

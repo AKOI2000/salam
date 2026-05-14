@@ -1,0 +1,18 @@
+.project-meta-group {
+  // display: flex;
+  // justify-content: center;
+  text-align: center;
+  padding: 3rem;
+  font-size: calc(var(--base-size) + 1px);
+  border-right: 1px solid var(--foreground);
+  border-bottom: 1px solid var(--foreground);
+
+  .project-meta-question {
+    color: var(--darker-grey);
+    font-weight: 300;
+  }
+  .project-meta-answer {
+    color: var(--foreground);
+    font-weight: 500;
+  }
+}

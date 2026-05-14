@@ -1,0 +1,24 @@
+.reveal-text {
+  position: relative;
+  display: block;
+}
+
+.split-measure {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  inset: 0;
+}
+
+.line-mask {
+  display: block;
+  overflow: hidden;
+}
+
+.line-text {
+  display: block;
+  will-change:
+    transform,
+    opacity,
+    filter;
+}

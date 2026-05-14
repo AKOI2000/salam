@@ -1,0 +1,40 @@
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  h1 {
+    font-size: calc(((var(--base-size) * 1.25) * 1.25) * 1.25);
+    font-weight: 400;
+
+    // @include respond(mds) {
+    //   font-size: calc((((var(--base-size) * 1.25) * 1.25) * 1.25) * 1.25);
+    // }
+  }
+
+  p {
+    font-weight: 400;
+    color: var(--darker-grey);
+  }
+
+  h1,
+  p {
+    width: 50%;
+
+    &::selection {
+      background: var(--foreground);
+      color: var(--white-smoke);
+    }
+
+    @include respond(lg) {
+      width: 70%;
+    }
+    @include respond(mds) {
+      width: 87%;
+    }
+
+    @include respond(sm) {
+      width: 100%;
+    }
+  }
+}

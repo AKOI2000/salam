@@ -1,0 +1,26 @@
+::view-transition-old(root) {
+  animation: page-out 1s ease-in-out;
+  z-index: 0;
+}
+
+::view-transition-new(root) {
+  z-index: 1000;
+  animation: page-in 1s ease-in-out;
+}
+
+@keyframes page-out {
+  to {
+    /* transform: rotate(1deg); */
+    transform: scale(0.5) rotate(-10deg);
+    filter: brightness(0.9);
+  }
+}
+
+@keyframes page-in {
+  from {
+    transform: translateY(100%) scale(0.9) rotate(10deg);
+  }
+  to {
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}

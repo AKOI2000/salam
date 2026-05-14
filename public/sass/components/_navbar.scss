@@ -1,0 +1,166 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 1rem 10rem;
+
+  width: 100%;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  z-index: 100;
+
+  background: var(--background);
+
+  @include respond(lg) {
+    padding: 1rem 5rem;
+  }
+
+  @include respond(mds) {
+    padding: 1rem 3rem;
+  }
+
+  @include respond(xs) {
+    padding: 1rem 2rem;
+  }
+
+  .logo {
+    position: relative;
+    z-index: 101;
+    max-width: 11.7rem;
+
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+  }
+
+  .text-box {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  nav {
+    display: flex;
+    gap: 2rem;
+    transition: all 0.2s ease-in-out;
+
+    .nav-links {
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: var(--foreground);
+      position: relative;
+
+      transition: all 0.3s ease-in-out 0.2s;
+
+      &::before {
+        position: absolute;
+        height: 3px;
+        width: 0;
+        left: 0;
+        bottom: -3px;
+        background: var(--color-accent);
+        content: "";
+        transition: all 0.7s ease-in-out;
+      }
+
+      &:hover {
+        &::before {
+          width: 100%;
+        }
+      }
+
+      &.active {
+        // color: var(--color-accent);
+
+        &:hover {
+          &::before {
+            width: 0;
+          }
+        }
+      }
+    }
+
+    // MOBILE
+    @include respond(mds) {
+      position: fixed;
+      inset: 0;
+
+      width: 100%;
+      height: 100dvh;
+      opacity: 0;
+      visibility: hidden;
+
+      background: var(--background);
+
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      gap: 3rem;
+      transform: translateY(100%);
+
+      z-index: 90;
+
+      .nav-links {
+        transform: translateX(100%);
+        font-size: 4rem;
+      }
+
+      &.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+
+        .nav-links {
+          transform: translateX(0);
+        }
+      }
+    }
+  }
+}
+
+// .menu-button {
+//   width: 4rem;
+//   height: 4rem;
+
+//   border: none;
+//   background: transparent;
+
+//   cursor: pointer;
+
+//   display: none;
+
+//   z-index: 101;
+
+//   @include respond(mds) {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//   }
+// }
+
+.test {
+  width: 4rem;
+  height: 4rem;
+  position: relative;
+  cursor: pointer;
+  z-index: 101;
+  background-color: white;
+
+  span {
+    width: 1rem;
+    height: 1rem;
+    // border-radius: 50%;
+    background-color: var(--foreground);
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+  }
+}
