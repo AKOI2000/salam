@@ -41,7 +41,7 @@ function AboutHero() {
 
       <div className="about-img-box">
         <Image
-          src="/salam.png"
+          src="/Salam.png"
           alt="Salam"
           height={4}
           width={3}
