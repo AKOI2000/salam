@@ -1202,6 +1202,12 @@ header nav .nav-links.active:hover::before {
 .case-study-ns {
   overflow: hidden;
 }
+.case-study-ns .img-flex .img-box {
+  position: relative;
+}
+.case-study-ns .img-flex .img-box img {
+  object-fit: cover;
+}
 
 .img-flex .img-box {
   position: relative;
