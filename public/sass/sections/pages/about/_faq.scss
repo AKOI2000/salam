@@ -32,8 +32,13 @@
         width: 100%;
         padding: 3rem;
 
+        @include respond (mds) {
+          padding: 3rem 1rem;
+        }
+
         .faq-question {
           font-size: calc(var(--base-size) * 1.25);
+          text-align: left;
         }
 
         .faq-icon {

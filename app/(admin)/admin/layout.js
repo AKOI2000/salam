@@ -1,5 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "@/app/index.css";
+import Sidebar from "@/app/_components/Sidebar";
+import DashboardHead from "@/app/_components/DashboardHead";
+import { DashboardProvider } from "@/app/_context/DashboardContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,8 +23,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body>
-        <aside>Sidebar</aside>
-        <main>{children}</main>
+        <DashboardProvider>
+          <div className="dashboard">
+            <Sidebar />
+
+            <div className="dashboard__main">
+              <DashboardHead />
+              <main className="dashboard__content">{children}</main>
+            </div>
+          </div>
+        </DashboardProvider>
       </body>
     </html>
   );

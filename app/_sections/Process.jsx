@@ -6,7 +6,7 @@ function Process() {
       <div className="col-2_5-by-1">
         <div className="section-heading no-margin">
           <h2>Process.</h2>
-          <p>From early ideas to final execution - refining every frame</p>
+          <p className="no-padding">From early ideas to final execution - refining every frame</p>
         </div>
 
         <div className="img-flex col-eq-4">

@@ -57,9 +57,17 @@ h1 {
   margin-bottom: 3rem;
   text-transform: lowercase;
 
-  p{
+  p {
     margin-top: 1rem;
     padding: 1rem;
+
+    &.no-margin {
+      margin-top: 0;
+    }
+
+    &.no-padding {
+      padding: 1rem 1rem 0 0;
+    }
   }
 
   &.no-margin {

@@ -11,7 +11,7 @@ function AboutSection() {
 
       <RevealText
         as="h5"
-        text="I’m a curious designer based in Lagos, Nigeria—driven by a deep desire to solve problems and create meaningful connections. I use design thinking to link ideas, art to speak to the eyes, and strategy to engage the mind. When I’m not designing, you’ll find me at the piano, exploring new challenges, or simply enjoying good food."
+        text="I’m a curious designer based in Lagos, Nigeria—driven by a deep desire to solve problems and create meaningful connections. I use design thinking to link ideas, art to speak to the eyes, and strategy to engage the mind. When I’m not designing, you’ll find me at the piano, exploring new challenges, or simply enjoying good food. Away from the spotlight, I dabble.. I enjoy playing football, watching Breasts, playing FIFA and chess with friends, movies etc."
         animateInView={true}
         animateOnLoad={false}
       />

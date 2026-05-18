@@ -4,7 +4,7 @@ function Testimonial() {
   return (
     <section className="container">
       <div className="section-heading">
-        <p>You better listen</p>
+        <p className="no-margin no-padding">You better listen</p>
         <h3>
           words from the blessed.
         </h3>

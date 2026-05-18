@@ -8,7 +8,7 @@ function NarrativeSequence() {
           <h2>
             Narrative <br /> & <br /> Sequencing.
           </h2>
-          <p>
+          <p className="no-padding">
             The campaign was structured around escalation. Early scenes rely on
             stillness and negative space to create tension before transitioning
             into faster cuts, liquid motion, and typography reveals. Each

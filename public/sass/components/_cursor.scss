@@ -12,9 +12,21 @@
   transform: translate(-50%, -50%);
   transition: width 0.25s cubic-bezier(.23,1,.32,1),
               height 0.25s cubic-bezier(.23,1,.32,1);
+
+
+      @include respond (mds) {
+        width: 2.5rem;
+        height: 2.5rem;
+  }
+
 }
 
 .big {
   width: 7rem;
   height: 7rem;
+
+  @include respond (mds) {
+    width: 5rem;
+    height: 5rem;
+  }
 }

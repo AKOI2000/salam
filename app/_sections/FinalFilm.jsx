@@ -6,7 +6,7 @@ function FinalFilm() {
       <div className="col-2_5-by-1">
         <div className="section-heading no-margin">
           <h2>Final Film</h2>
-          <p>
+          <p className="no-padding">
             The final campaign brings together cinematic pacing, tactile motion,
             and atmospheric storytelling into a unified brand experience.
           </p>
