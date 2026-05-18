@@ -2,8 +2,7 @@ function FooterCTA() {
   return (
     <div className="footer-cta">
       <h4>
-        Curious about what we can create together? <br /> Let’s bring something
-        extraordinary to life!
+        Curious about the magic we can create? <br /> Let’s bring your vision to life
       </h4>
 
       <form action="">
