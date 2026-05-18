@@ -173,7 +173,7 @@ h4 {
 h3,
 h2,
 h1 {
-  line-height: 1.1;
+  line-height: 1.2;
   letter-spacing: -0.03em;
 }
 
@@ -340,30 +340,11 @@ h1 {
 :root {
   --sidebar-width: 300px;
   --header-height: 8rem;
-  --bg: #0f1115;
-  --surface: #171a21;
-  --surface-2: #1e222b;
-  --border: rgba(255, 255, 255, 0.08);
-  --text: #ffffff;
-  --text-muted: rgba(255, 255, 255, 0.6);
 }
 @media (max-width: 608px) {
   :root {
     --sidebar-width: 80%;
   }
-}
-
-html,
-body {
-  background: var(--background);
-  color: var(--foreground);
-}
-
-button {
-  border: none;
-  background: transparent;
-  color: inherit;
-  font: inherit;
 }
 
 .dashboard {
@@ -498,7 +479,6 @@ button {
 .dashboard__header {
   height: var(--header-height);
   padding: 0 2rem;
-  border-bottom: 1px solid var(--grey);
   background: var(--white-smoke);
   backdrop-filter: blur(12px);
   position: sticky;
@@ -511,6 +491,7 @@ button {
 @media (max-width: 768px) {
   .dashboard__header {
     padding: 0 1rem;
+    border-bottom: 1px solid var(--grey);
   }
 }
 
@@ -1320,8 +1301,14 @@ header nav .nav-links.active:hover::before {
 }
 .faq-section .faq-list .faq-item .faq-answer {
   background-color: var(--white-smoke);
+  padding: 3rem;
   overflow: hidden;
   font-size: var(--base-size);
+}
+@media (max-width: 608px) {
+  .faq-section .faq-list .faq-item .faq-answer {
+    padding: 3rem 1rem;
+  }
 }
 
 .case-study_hero {

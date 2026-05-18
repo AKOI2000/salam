@@ -43,8 +43,14 @@ function FAQItem({ faq, isOpen, onToggle }) {
       <motion.div
         animate={
           isOpen
-            ? { maxHeight: 500, opacity: 1, padding: "3rem" }
-            : { opacity: 0, maxHeight: 0, overflow: "hidden" }
+            ? { maxHeight: 500, opacity: 1, visibility: "visible" }
+            : {
+                opacity: 0,
+                maxHeight: 0,
+                overflow: "hidden",
+                visibility: "hidden",
+                padding: 0,
+              }
         }
         transition={{
           duration: 0.2,

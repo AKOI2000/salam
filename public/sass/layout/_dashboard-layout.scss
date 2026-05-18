@@ -4,36 +4,24 @@
   --sidebar-width: 300px;
   --header-height: 8rem;
 
-  @include respond (mds) {
+  @include respond(mds) {
     --sidebar-width: 80%;
   }
-
-  --bg: #0f1115;
-  --surface: #171a21;
-  --surface-2: #1e222b;
-
-  --border: rgba(255, 255, 255, 0.08);
-
-  --text: #ffffff;
-  --text-muted: rgba(255, 255, 255, 0.6);
 }
 
+// html,
+// body {
+//   background: var(--background);
+//   color: var(--foreground);
+// }
 
-html,
-body {
-  background: var(--background);
-  color: var(--foreground);
- 
-}
-
-
-button {
-  border: none;
-  background: transparent;
-  // cursor: pointer;
-  color: inherit;
-  font: inherit;
-}
+// button {
+//   border: none;
+//   background: transparent;
+//   // cursor: pointer;
+//   color: inherit;
+//   font: inherit;
+// }
 
 .dashboard {
   min-height: 100vh;
@@ -149,12 +137,13 @@ button {
 
     color: var(--foreground);
 
-    transition:background 0.25s ease, color 0.25s ease;
+    transition:
+      background 0.25s ease,
+      color 0.25s ease;
     position: relative;
     z-index: 0;
 
-
-    &::before{
+    &::before {
       content: "";
       height: 0;
       width: 100%;
@@ -162,7 +151,7 @@ button {
       position: absolute;
       top: 0;
       left: 0;
-      z-index: -1; 
+      z-index: -1;
     }
 
     &:hover::before {
@@ -200,8 +189,6 @@ button {
 
   padding: 0 2rem;
 
-  border-bottom: 1px solid var(--grey);
-
   background: var(--white-smoke);
 
   backdrop-filter: blur(12px);
@@ -215,8 +202,9 @@ button {
   align-items: center;
   justify-content: space-between;
 
-  @include respond (md) {
+  @include respond(md) {
     padding: 0 1rem;
+    border-bottom: 1px solid var(--grey);
   }
 }
 

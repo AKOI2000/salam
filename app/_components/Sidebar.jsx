@@ -52,6 +52,7 @@ function Sidebar() {
           <Link href="/admin">Overview</Link>
           <Link href="/admin/projects">Projects</Link>
           <Link href="/admin/analytics">Analytics</Link>
+          <Link href="/admin/leads">Leads</Link>
           <Link href="/" target="_blank">
             View Website
           </Link>

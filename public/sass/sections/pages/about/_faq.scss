@@ -48,9 +48,13 @@
 
       .faq-answer {
         background-color: var(--white-smoke);
-        // padding: 3rem;
+        padding: 3rem;
         overflow: hidden;
         font-size: var(--base-size);
+
+        @include respond (mds) {
+          padding: 3rem 1rem;
+        }
       }
     }
   }
