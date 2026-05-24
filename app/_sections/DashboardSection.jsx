@@ -104,16 +104,18 @@ const fakeData = [
 
 function DashboardSection() {
   return (
-    <div className="sections-table">
-      <div className="sections-table-header">
-        <p>Section Type</p>
-        <p>text</p>
-        <p>Media</p>
-      </div>
+    <div className="table-wrapper">
+      <div className="sections-table">
+        <div className="sections-table-header">
+          <p>Section Type</p>
+          <p>text</p>
+          <p>Media</p>
+        </div>
 
-      {fakeData.map((section, index) => (
-        <DashboardSectionRow key={index} section={section} />
-      ))}
+        {fakeData.map((section, index) => (
+          <DashboardSectionRow key={index} section={section} />
+        ))}
+      </div>
     </div>
   );
 }

@@ -45,17 +45,19 @@ const fakeData = [
 
 function DashboardProducts() {
   return (
-    <div className="products-table">
-      <div className="products-table-header">
-        <div></div>
-        <p>Title</p>
-        <p>Description</p>
-        <p>Show on homepage</p>
-        <p>Published</p>
+    <div className="table-wrapper">
+      <div className="products-table">
+        <div className="products-table-header">
+          <div></div>
+          <p>Title</p>
+          <p>Description</p>
+          <p>Show on homepage</p>
+          <p>Published</p>
+        </div>
+        {fakeData.map((product) => (
+          <DashboadrdProductCard key={product.id} product={product} />
+        ))}
       </div>
-      {fakeData.map((product) => (
-        <DashboadrdProductCard key={product.id} product={product} />
-      ))}
     </div>
   );
 }

@@ -2,6 +2,11 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  min-width: 100%;
+
+  @include respond(lg) {
+    min-width: 850px;
+  }
 
   .products-table-header {
     display: grid;
@@ -66,6 +71,11 @@
 }
 
 .sections-table {
+  min-width: 100%;
+
+  @include respond(lg) {
+    min-width: 900px;
+  }
   margin-bottom: 3rem;
   &-header {
     display: grid;
@@ -119,17 +129,21 @@
   }
 }
 
+.table-wrapper {
+  overflow-x: scroll;
+  overflow: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 .leads-table {
   min-width: 100%;
 
   @include respond(md) {
     min-width: 768px;
-  }
-  overflow-x: scroll;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  &::-webkit-scrollbar {
-    display: none;
   }
 
   .leads-table-header {
@@ -156,8 +170,8 @@
     align-items: center;
 
     .status {
-      padding: .7rem 1.4rem;
-      border-radius: .5rem;
+      padding: 0.7rem 1.4rem;
+      border-radius: 0.5rem;
       font-weight: 300;
       // min-width: 10rem;
       text-align: center;
@@ -173,12 +187,13 @@
       }
     }
 
-    a, p {
+    a,
+    p {
       justify-self: center;
       font-size: 1.6rem;
     }
 
-    a{
+    a {
       text-decoration: underline;
     }
   }
