@@ -1785,10 +1785,15 @@ header nav .nav-links.active:hover::before {
 }
 
 .leads-table {
-  min-width: 100vh;
+  min-width: 100%;
   overflow-x: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
+}
+@media (max-width: 768px) {
+  .leads-table {
+    min-width: 768px;
+  }
 }
 .leads-table::-webkit-scrollbar {
   display: none;

@@ -120,14 +120,18 @@
 }
 
 .leads-table {
-  min-width: 100vh;
+  min-width: 100%;
+
+  @include respond(md) {
+    min-width: 768px;
+  }
   overflow-x: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
   &::-webkit-scrollbar {
     display: none;
   }
-  
+
   .leads-table-header {
     display: grid;
     grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1fr 1fr;
