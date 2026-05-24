@@ -9,25 +9,16 @@
   }
 }
 
-// html,
-// body {
-//   background: var(--background);
-//   color: var(--foreground);
-// }
-
-// button {
-//   border: none;
-//   background: transparent;
-//   // cursor: pointer;
-//   color: inherit;
-//   font: inherit;
-// }
 
 .dashboard {
   min-height: 100vh;
   background: var(--background);
-  cursor: pointer;
+  cursor: default;
   display: flex;
+
+  button, a{
+    cursor: pointer;
+  }
 }
 
 /* =========================
@@ -69,7 +60,7 @@
   background: var(--white-smoke);
   border-right: 1px solid var(--border);
 
-  padding: 3rem 1.5rem 4rem;
+  padding: 3rem 1.5rem 7rem;
 
   position: sticky;
   top: 0;
@@ -115,8 +106,10 @@
 
   border-radius: 50%;
 
-  background: var(--color-accent);
-  color: var(--background);
+  background: var(--light-grey);
+  color: var(--foreground);
+  font-weight: 700;
+  font-size: 1.6rem;
   display: none;
   place-items: center;
 
@@ -133,6 +126,10 @@
 
   a {
     padding: 2rem;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
     // border-radius: 14px;
 
     color: var(--foreground);
@@ -147,7 +144,7 @@
       content: "";
       height: 0;
       width: 100%;
-      background: var(--color-accent);
+      background: var(--light-grey);
       position: absolute;
       top: 0;
       left: 0;
@@ -159,9 +156,19 @@
       transition: height 0.25s ease;
     }
 
-    &:hover {
-      // background: var(--color-accent);
-      color: var(--background);
+    // &:hover {
+    //   // background: var(--color-accent);
+    //   color: var(--background);
+    // }
+
+    &.active{
+      background-color: var(--light-grey);
+      color: var(--foreground);
+      font-weight: 500;
+    }
+
+    svg{
+      font-size: 2.5rem;
     }
   }
 }

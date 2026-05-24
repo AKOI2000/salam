@@ -1,0 +1,67 @@
+.section-checklist-box {
+  padding: 4rem 7rem;
+  background-color: var(--white-smoke);
+
+  .section-checklist {
+    padding: 4rem 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 4rem;
+
+    &:not(:last-child) {
+      border-bottom: 2px solid var(--light-grey);
+    }
+
+    form {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+
+      input {
+        position: relative;
+        // padding: 2rem;
+        height: 4rem;
+        width: 6rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: 1px solid var(--foreground);
+        padding: 0;
+
+        &:hover {
+          outline: 1px solid var(--foreground);
+          outline-offset: 1px;
+        }
+
+        &::after {
+          content: "";
+          color: var(--white-smoke);
+          width: 5px;
+          height: 10px;
+          border: solid var(--white-smoke);
+          border-width: 0 3px 3px 0;
+          font-size: 1.6rem;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%) rotate(45deg) scale(0);
+          opacity: 0;
+          transition: all 0.5s;
+        }
+
+        &:checked {
+          appearance: none;
+          // color: var(--color-accent);
+          background: var(--foreground);
+          outline: 2px solid var(--foreground);
+          outline-offset: 2px;
+          border-radius: 1rem;
+
+          &::after {
+            transform: translate(-50%, -50%) rotate(45deg) scale(1);
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}

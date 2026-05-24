@@ -16,6 +16,8 @@
 @import "./components/overflowspread";
 @import "./components/hover-video";
 @import "./components/reveal-text";
+@import "./components/modal";
+@import "./components/leads_detail";
 
 @import "./sections/pages/home/hero";
 @import "./sections/pages/home/selected-works";
@@ -34,3 +36,9 @@
 @import "./sections/pages/work/project-meta";
 @import "./sections/pages/work/case-study-ns";
 @import "./sections/pages/work/case-study-lr";
+
+@import "./sections/pages/dashboard/dashboard-head";
+@import "./sections/pages/dashboard/dashboard-table";
+@import "./sections/pages/dashboard/dashboardChecklist";
+@import "./sections/pages/dashboard/dashboardMetaForm";
+@import "./sections/pages/dashboard/leads-summary";

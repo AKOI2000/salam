@@ -1,11 +1,49 @@
 "use client";
+import {
+  IoHomeOutline,
+  IoBarChartSharp,
+  IoPeopleOutline,
+} from "react-icons/io5";
+import { GrProjects } from "react-icons/gr";
+import { CgWebsite } from "react-icons/cg";
 import { useEffect } from "react";
 import { useDashboard } from "../_context/DashboardContext";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+
+const sideLinks = [
+  {
+    path: "/admin",
+    name: "Overview",
+    icon: <IoHomeOutline />,
+  },
+  {
+    path: "/admin/projects",
+    name: "Projects",
+    icon: <GrProjects />,
+  },
+  {
+    path: "/admin/analytics",
+    name: "Analytics",
+    icon: <IoBarChartSharp />,
+  },
+  {
+    path: "/admin/leads",
+    name: "Leads",
+    icon: <IoPeopleOutline />,
+  },
+  {
+    path: "/",
+    name: "View Site",
+    target: "_blank",
+    icon: <CgWebsite />,
+  },
+];
 
 function Sidebar() {
   const { sidebarOpen, closeSidebar } = useDashboard();
+  const pathname = usePathname();
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 1024) {
@@ -49,16 +87,20 @@ function Sidebar() {
         </div>
 
         <nav className="dashboard__nav">
-          <Link href="/admin">Overview</Link>
-          <Link href="/admin/projects">Projects</Link>
-          <Link href="/admin/analytics">Analytics</Link>
-          <Link href="/admin/leads">Leads</Link>
-          <Link href="/" target="_blank">
-            View Website
-          </Link>
+          {sideLinks.map((link, index) => (
+            <Link
+              key={index}
+              href={link.path}
+              target={link.target}
+              className={pathname === link.path ? "active" : ""}
+            >
+              {link.icon}
+              {link.name}
+            </Link>
+          ))}
         </nav>
 
-        <button>Logout</button>
+        <button className="btn-dashboard-primary">Logout</button>
       </aside>
     </>
   );

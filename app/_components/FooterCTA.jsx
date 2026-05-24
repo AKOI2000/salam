@@ -5,7 +5,7 @@ function FooterCTA() {
         Curious about the magic we can create? <br /> Let’s bring your vision to life
       </h4>
 
-      <form action="">
+      <form action="" className="no-margin">
         <input type="text" name="" id="" placeholder="Your Name" />
 
         <input type="email" name="" id="" placeholder="Your email" />

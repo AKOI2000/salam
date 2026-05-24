@@ -1,7 +1,5 @@
 import Image from "next/image";
-// import Link from "next/link";
 import { Link } from "next-view-transitions";
-import HoverVideo from "./HoverVideo";
 import { FaArrowRightLong } from "react-icons/fa6";
 
 function WorkCard({ work, img = "/about-2.jpg" }) {

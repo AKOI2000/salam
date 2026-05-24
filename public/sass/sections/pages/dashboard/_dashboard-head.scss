@@ -1,0 +1,17 @@
+.dashboard-heading_flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+
+  @include respond(mds) {
+    flex-direction: column;
+  }
+
+  .dashboard-head{
+    max-width: 70rem;
+  }
+
+  btn{}
+}

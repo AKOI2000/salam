@@ -9,6 +9,11 @@
   --foreground: #000000;
   --color-accent: #765223;
   --color-accent-light: #ffecaf;
+  --color-blue: #00008B;
+  --color-yellow: #e2a624;
+  --color-green: #318b43; 
+  --color-orange: #f8920a;
+  --color-red: #ff0000;
   --base-size: 1.6rem;
 
   // @include respond(mds) {
@@ -97,7 +102,12 @@ button {
 
 input,
 textarea {
-  //   font-family: $font-text;
+    font-family: var(--font-inter);
+
+    &:placeholder-shown{
+      font-family: var(--font-inter);
+      // text-transform: capitalize;
+    }
 }
 
 // @media (prefers-color-scheme: dark) {
