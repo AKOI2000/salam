@@ -25,6 +25,11 @@
     transition: all 0.5s;
     cursor: pointer;
 
+
+    @include respond (mds) {
+      padding: 3rem;
+    }
+
     // @include respond(mdl) {
     //   width: 80%;
     //   height: auto;

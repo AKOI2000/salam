@@ -5,6 +5,9 @@ import Navbar from "@/app/_components/Navbar";
 import Footer from "@/app/_components/Footer";
 import Cursor from "@/app/_components/Cursor";
 import { ViewTransitions } from "next-view-transitions";
+import PostHogProvider from "../_context/PostHogProvider";
+import PostHogPageView from "../_context/PostHogPageView";
+import { Suspense } from "react";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -25,12 +28,18 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable}`}>
       <body>
-        <ViewTransitions>
-          <Navbar />
-          <Cursor />
-          <main style={{}}>{children}</main>
-          <Footer />
-        </ViewTransitions>
+        <PostHogProvider>
+          <Suspense fallback={null}>
+            <PostHogPageView />
+          </Suspense>
+
+          <ViewTransitions>
+            <Navbar />
+            <Cursor />
+            <main style={{}}>{children}</main>
+            <Footer />
+          </ViewTransitions>
+        </PostHogProvider>
       </body>
     </html>
   );

@@ -1,4 +1,3 @@
-import { id } from "date-fns/locale";
 import DashboardLeadsSummaryCard from "./DashboardLeadsSummaryCard";
 import { IoMdPerson } from "react-icons/io";
 import { IoPeople, IoCall } from "react-icons/io5";

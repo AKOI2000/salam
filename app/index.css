@@ -1091,6 +1091,11 @@ header nav .nav-links.active:hover::before {
   transition: all 0.5s;
   cursor: pointer;
 }
+@media (max-width: 608px) {
+  .modal-window {
+    padding: 3rem;
+  }
+}
 .modal-btn {
   background: none;
   border: none;
@@ -1126,6 +1131,11 @@ header nav .nav-links.active:hover::before {
 
 .lead-details {
   margin-top: 2rem;
+}
+@media (max-width: 608px) {
+  .lead-details {
+    min-width: 70vw;
+  }
 }
 .lead-details-info {
   margin-bottom: 2rem;
@@ -1837,12 +1847,14 @@ header nav .nav-links.active:hover::before {
 .leads-table .leads-table-row .status {
   padding: 0.7rem 1.4rem;
   border-radius: 0.5rem;
-  font-weight: 300;
+  font-weight: 500;
   text-align: center;
-  color: var(--background);
+  background-color: var(--foreground);
+  color: var(--white-smoke);
 }
 .leads-table .leads-table-row .status.new {
-  background-color: var(--color-blue);
+  background-color: var(--color-accent-light);
+  color: var(--foreground);
 }
 .leads-table .leads-table-row .status.contacted {
   background-color: var(--color-yellow);
@@ -2084,23 +2096,12 @@ form button {
   font-size: 5rem;
   justify-self: center;
   align-self: center;
-  color: var(--background);
+  color: var(--light-grey);
+  background-color: var(--foreground);
   padding: 1rem 1.5rem;
   display: flex;
   align-items: center;
   border-radius: 0.6rem;
-}
-.leads-summary-card_icon--1 {
-  background-color: var(--color-orange);
-}
-.leads-summary-card_icon--2 {
-  background-color: var(--color-green);
-}
-.leads-summary-card_icon--3 {
-  background-color: var(--color-yellow);
-}
-.leads-summary-card_icon--4 {
-  background-color: var(--color-blue);
 }
 .leads-summary-card_percentage {
   grid-column: 1/-1;
