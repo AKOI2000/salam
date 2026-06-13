@@ -14,15 +14,12 @@ import { fmtSeconds } from '@/app/_lib/analyticsUtils'
 function CustomTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null
   return (
-    <div style={{
-      background: '#1e1e2e', border: '1px solid #2d2d3f',
-      borderRadius: 8, padding: '10px 14px', fontSize: 13,
-    }}>
-      <div style={{ color: '#94a3b8', marginBottom: 4 }}>{label}</div>
-      <div style={{ color: '#f1f5f9' }}>
+    <div className='custom-tool_tip'>
+      <div className='custom-tool_tip-label'>{label}</div>
+      <div className='custom-tool_tip-value'>
         Avg time: <strong>{fmtSeconds(payload[0].value)}</strong>
       </div>
-      <div style={{ color: '#6b7280', fontSize: 12 }}>
+      <div className='custom-tool_tip-views'>
         {payload[0].payload.views?.toLocaleString()} views
       </div>
     </div>
@@ -60,7 +57,7 @@ export default function AvgTimeChart({ data }) {
 
         <Tooltip content={<CustomTooltip />} />
 
-        <Bar dataKey="avgSeconds" fill="#8b5cf6" radius={[0, 4, 4, 0]} />
+        <Bar dataKey="avgSeconds" fill="var(--foreground)" radius={[0, 4, 4, 0]} />
       </BarChart>
     </ResponsiveContainer>
   )

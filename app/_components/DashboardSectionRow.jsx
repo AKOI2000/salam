@@ -1,17 +1,21 @@
 import Image from "next/image";
 import DashboardSectionRowButtons from "../_sections/DashboardSectionRowButtons";
 
-function DashboardSectionRow({ section }) {
+function DashboardSectionRow({ section, params }) {
+  const {text, section_media, section_type} = section;
+  
+
   const shortText =
-    section.text.length > 50
-      ? section.text.substring(0, 42) + " ....."
-      : section.text;
+    text.length > 50
+      ? text.substring(0, 42) + " ....."
+      : text;
+
   return (
     <div className="sections-table-row">
-      <p>{section.section_type}</p>
+      <p>{section_type}</p>
       <p>{shortText}</p>
       <div className="section-media">
-        {section.medialist.map((media, index) => {
+        {section_media?.map((media, index) => {
           if (media.media_type === "image") {
             return (
               <Image
@@ -36,7 +40,7 @@ function DashboardSectionRow({ section }) {
         })}
       </div>
 
-      <DashboardSectionRowButtons/>
+      <DashboardSectionRowButtons section={section} params={params} />
     </div>
   );
 }

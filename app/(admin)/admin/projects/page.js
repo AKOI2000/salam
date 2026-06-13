@@ -4,8 +4,12 @@ import { IoAdd } from "react-icons/io5";
 import DashboardHeading from "@/app/_components/DashboardHeading";
 import DashboardProducts from "@/app/_sections/DashboardProducts";
 import AddProjectForm from "@/app/_components/AddProjectForm";
+import { getProjectBySlug, getProjects } from "@/app/_lib/projectAPI";
 
-function page() {
+async function page() {
+  const projects = await getProjects();
+  // console.log(projects);
+
   return (
     <>
       <DashboardHeading
@@ -16,7 +20,7 @@ function page() {
         <AddProjectForm />
       </DashboardHeading>
 
-      <DashboardProducts />
+      <DashboardProducts projects={projects} />
     </>
   );
 }

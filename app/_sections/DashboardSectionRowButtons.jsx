@@ -4,9 +4,11 @@ import { FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import Modal from "../_components/Modal";
 import ConfirmDelete from "../_components/ConfirmDelete";
-import EditSectionForm from "../_components/EditSection.form";
+import EditSectionForm from "../_components/EditSectionForm";
+import { deleteSection } from "../_lib/sections-actions";
 
-function DashboardSectionRowButtons() {
+function DashboardSectionRowButtons({section, params}) {
+  
   return (
     <div className="products-table-row-buttons">
       <Modal>
@@ -17,7 +19,7 @@ function DashboardSectionRowButtons() {
         </Modal.Open>
 
         <Modal.Window name="section-edit">
-          <EditSectionForm />
+          <EditSectionForm section={section} params={params} />
         </Modal.Window>
 
         <Modal.Open opens="section-delete">
@@ -27,7 +29,7 @@ function DashboardSectionRowButtons() {
         </Modal.Open>
 
         <Modal.Window name="section-delete">
-          <ConfirmDelete />
+          <ConfirmDelete resourceName={section.section_type} onConfirm={() => deleteSection(section.id, params)} />
         </Modal.Window>
       </Modal>
     </div>

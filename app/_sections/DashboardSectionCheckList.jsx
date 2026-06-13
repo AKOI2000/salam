@@ -1,13 +1,30 @@
-import DashboardChecklist from "../_components/DashboardChecklist"
+import DashboardChecklist from "../_components/DashboardChecklist";
+import { getProjectBySlug } from "../_lib/projectAPI";
 
-function DashboardSectionCheckList() {
-    return (
-        <div className="section-checklist-box">
-           <DashboardChecklist text={"Do you want the project on the homepage?"} confirmed={false}/>
+async function DashboardSectionCheckList({ params }) {
+  const { show_on_homepage, published, id } = await getProjectBySlug(params);
 
-           <DashboardChecklist text={"Is the project done and can be published?"} confirmed={true}/>
-        </div>
-    )
+//   console.log(show_on_homepage, published, id);
+
+  return (
+    <div className="section-checklist-box">
+      <DashboardChecklist
+        text={"Do you want the project on the homepage?"}
+        confirmed={show_on_homepage}
+        projectId={id}
+        field="show_on_homepage"
+        slug={params}
+      />
+
+      <DashboardChecklist
+        text={"Is the project done and can be published?"}
+        confirmed={published}
+        projectId={id}
+        field="published"
+        slug={params}
+      />
+    </div>
+  );
 }
 
-export default DashboardSectionCheckList
+export default DashboardSectionCheckList;

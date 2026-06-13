@@ -7,6 +7,8 @@ import Modal from "@/app/_components/Modal";
 import ConfirmDelete from "../_components/ConfirmDelete";
 import Link from "next/link";
 import EditProjectForm from "../_components/EditProjectForm";
+import { deleteProject } from "../_lib/products-actions";
+import { useTransition } from "react";
 
 function DashboardProductCardButtons({ product }) {
   return (
@@ -29,7 +31,7 @@ function DashboardProductCardButtons({ product }) {
         </Modal.Open>
 
         <Modal.Window name="product-delete-modal">
-        <ConfirmDelete resourceName={product.title}/>
+        <ConfirmDelete resourceName={product.title} onConfirm={() => deleteProject(product.id)}/>
         </Modal.Window>
       </Modal>
 

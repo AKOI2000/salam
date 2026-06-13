@@ -18,30 +18,30 @@ export default function VisitorsChart({ data }) {
   }))
 
   return (
-    <ResponsiveContainer width="100%" height={220}>
+    <ResponsiveContainer width="100%" minHeight={250}>
       <AreaChart data={chartData} margin={{ top: 8, right: 8, bottom: 0, left: 0 }}>
 
         {/* The fading gradient fill under the line */}
         <defs>
           <linearGradient id="visitorsGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%"  stopColor="#6366f1" stopOpacity={0.4} />
-            <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
+            <stop offset="5%"  stopColor="var(--foreground)" stopOpacity={0.4} />
+            <stop offset="95%" stopColor="var(--foreground)" stopOpacity={0} />
           </linearGradient>
         </defs>
 
-        <CartesianGrid stroke="#2d2d3f" strokeDasharray="3 3" />
+        <CartesianGrid stroke="var(--grey)" />
 
         {/* X axis: uses the 'label' field we added above */}
         <XAxis
           dataKey="label"
-          tick={{ fill: '#6b7280', fontSize: 11 }}
+          tick={{ fill: 'var(--foreground)', fontSize: "1.1rem" }}
           axisLine={false}
           tickLine={false}
         />
 
         {/* Y axis: just the numbers on the left */}
         <YAxis
-          tick={{ fill: '#6b7280', fontSize: 11 }}
+          tick={{ fill: 'var(--foreground)', fontSize: "1.1rem" }}
           axisLine={false}
           tickLine={false}
           width={36}
@@ -50,20 +50,20 @@ export default function VisitorsChart({ data }) {
         {/* Hover tooltip */}
         <Tooltip
           contentStyle={{
-            background:   '#1e1e2e',
-            border:       '1px solid #2d2d3f',
-            borderRadius: 8,
-            fontSize:     13,
+            background:   'var(--foreground)',
+            // border:       '1px solid #2d2d3f',
+            borderRadius: ".8rem",
+            fontSize:     "1.3rem",
           }}
-          labelStyle={{ color: '#94a3b8' }}
-          itemStyle={{ color: '#f1f5f9' }}
+          labelStyle={{ color: 'var(--grey)' }}
+          itemStyle={{ color: 'var(--whiter-smoke)' }}
         />
 
         {/* The actual line + fill */}
         <Area
           type="monotone"
           dataKey="visitors"
-          stroke="#6366f1"
+          stroke="var(--foreground)"
           strokeWidth={2}
           fill="url(#visitorsGrad)"
           dot={false}

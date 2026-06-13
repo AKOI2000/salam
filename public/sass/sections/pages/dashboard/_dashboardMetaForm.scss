@@ -27,13 +27,17 @@ form {
     align-items: center;
     margin-bottom: 1rem;
 
+    @include respond(md) {
+      grid-template-columns: 70% 30%;
+    }
+
     @include respond(mds) {
       grid-template-columns: 1fr;
       gap: 1rem;
     }
 
     span {
-      padding: 0 1rem;
+      padding: 0 2rem;
       font-size: 1.4rem;
     }
   }
@@ -78,6 +82,9 @@ form {
     label {
       font-size: 1.6rem;
       font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
 
     input {
@@ -87,7 +94,7 @@ form {
       width: 3rem;
       cursor: pointer;
       transition: all 0.2s;
-      border: .5px solid var(--foreground);
+      border: 0.5px solid var(--foreground);
       padding: 0;
 
       &:hover {
@@ -147,5 +154,37 @@ form {
 
   button {
     width: 100%;
+  }
+}
+
+.section-type-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  button {
+    flex: 1;
+    padding: 1.5rem;
+    border: 0.5px solid var(--foreground);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1.6rem;
+
+    @include respond(mds) {
+      padding: 1rem;
+    }
+
+    &:hover {
+      outline: 1px solid var(--foreground);
+      outline-offset: 1px;
+    }
+
+    &.selected {
+      background: var(--foreground);
+      color: var(--background);
+      outline: 2px solid var(--foreground);
+      outline-offset: 2px;
+    }
   }
 }

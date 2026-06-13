@@ -43,7 +43,7 @@ const fakeData = [
   },
 ];
 
-function DashboardProducts() {
+function DashboardProducts({projects}) {
   return (
     <div className="table-wrapper">
       <div className="products-table">
@@ -54,7 +54,7 @@ function DashboardProducts() {
           <p>Show on homepage</p>
           <p>Published</p>
         </div>
-        {fakeData.map((product) => (
+        {projects.map((product) => (
           <DashboadrdProductCard key={product.id} product={product} />
         ))}
       </div>

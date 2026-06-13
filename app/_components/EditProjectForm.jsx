@@ -1,26 +1,48 @@
-function EditProjectForm({product}) {
+import { useRef, useTransition } from "react";
+import { updateProject } from "../_lib/products-actions";
+import { useForm } from "react-hook-form";
+
+function EditProjectForm({ product, onCloseModal }) {
+  const [isPending, startTransition] = useTransition();
+  const formRef = useRef(null);
+
+  const {
+    register,
+    reset,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+  async function onSubmit(data) {
+    const formData = new FormData(formRef.current);
+    startTransition(async () => {
+      const result = await updateProject(formData);
+      if (result.success) {
+        reset();
+        onCloseModal?.();
+      }
+    });
+  }
   return (
     <div className="add-project-box">
       <h3>Edit {product.title} Project</h3>
 
-      <form action="">
-        <div className="input-box">
-          <input type="text" name="title" placeholder="Project Title" />
-        </div>
-
+      <form ref={formRef} onSubmit={handleSubmit(onSubmit)}>
         <div className="input-box">
           <input
             type="text"
-            name="short_description"
-            placeholder="Short Description... "
+            name="title"
+            placeholder="Project Title"
+            defaultValue={product.title}
           />
         </div>
 
         <div className="input-box">
-          <input
+          <textarea
             type="text"
-            name="slug"
-            placeholder="Your preferred website url endpoint (slug) for this project"
+            name="short_description"
+            placeholder="Short Description... "
+            defaultValue={product.short_description}
           />
         </div>
 
@@ -44,8 +66,17 @@ function EditProjectForm({product}) {
           <input type="file" name="case_study_cover" id="" />
         </div>
 
+        <input
+          type="hidden"
+          name="existing_product"
+          value={JSON.stringify(product)}
+        />
+
         <div className="input-box">
-          <button className="btn-dashboard-primary">Create Project</button>
+          <button className="btn-dashboard-primary">
+            {" "}
+            {isPending ? "Updating Project..." : "Update Project"}
+          </button>
         </div>
       </form>
     </div>

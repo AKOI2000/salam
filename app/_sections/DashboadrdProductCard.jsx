@@ -9,7 +9,7 @@ function DashboadrdProductCard({ product }) {
   return (
     <div className="products-table-row">
       <Image
-        alt={product.tile}
+        alt={product.title}
         src={product.homepage_thumbnail}
         width={300}
         height={200}

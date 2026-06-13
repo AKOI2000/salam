@@ -64,9 +64,11 @@ function Window({ children, name: windowName }) {
             onCloseModal: close,
           })}
         </div>
+
+        {/* <>{children}</> */}
       </div>
     </div>,
-    document.body
+    document.body,
   );
 }
 

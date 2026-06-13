@@ -4,27 +4,15 @@
 // data shape: [{ breakdown_value: '/blog/intro', visitors: 830, views: 1200 }, ...]
 
 // app/components/analytics/TopPagesTable.jsx
-'use client'
+"use client";
 
 export default function TopPagesTable({ data }) {
   return (
-    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
+    <table className="top-pages-table">
       <thead>
         <tr>
-          {['Page', 'Visitors', 'Views'].map(heading => (
-            <th
-              key={heading}
-              style={{
-                textAlign:     'left',
-                padding:       '8px 12px',
-                color:         '#6b7280',
-                fontWeight:    600,
-                fontSize:      12,
-                textTransform: 'uppercase',
-                letterSpacing: 0.8,
-                borderBottom:  '1px solid #2d2d3f',
-              }}
-            >
+          {["Page", "Visitors", "Views"].map((heading) => (
+            <th key={heading} className="top-pages-table-head">
               {heading}
             </th>
           ))}
@@ -33,28 +21,24 @@ export default function TopPagesTable({ data }) {
 
       <tbody>
         {data.map((row, i) => (
-          <tr key={i} style={{ borderBottom: '1px solid #1a1a2a' }}>
-
+          <tr key={i} className="top-pages-table-body">
             {/* field is now 'page' instead of 'breakdown_value' */}
-            <td style={{
-              padding:    '11px 12px',
-              color:      '#c4b5fd',
-              fontFamily: 'monospace',
-              fontSize:   13,
-            }}>
+            <td
+             className="body-data body-data-1"
+            >
               {row.page}
             </td>
 
-            <td style={{ padding: '11px 12px', color: '#f1f5f9' }}>
+            <td className="body-data body-data-2">
               {row.visitors?.toLocaleString()}
             </td>
 
-            <td style={{ padding: '11px 12px', color: '#9ca3af' }}>
+            <td  className="body-data body-data-2">
               {row.views?.toLocaleString()}
             </td>
           </tr>
         ))}
       </tbody>
     </table>
-  )
+  );
 }

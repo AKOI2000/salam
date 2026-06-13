@@ -1,4 +1,15 @@
-function ConfirmDelete({ resourceName, disabled, onCloseModal, onConfirm }) {
+import { useTransition } from "react";
+
+function ConfirmDelete({ resourceName, onCloseModal, onConfirm }) {
+  const [isPending, startTransition] = useTransition();
+
+  const handleConfirm = () => {
+    startTransition(async () => {
+      await onConfirm();
+      onCloseModal?.(); // close the modal after delete succeeds
+    });
+  };
+
   return (
     <div className="confirm-delete">
       <h3>Delete {resourceName}</h3>
@@ -10,18 +21,18 @@ function ConfirmDelete({ resourceName, disabled, onCloseModal, onConfirm }) {
 
       <div className="flex">
         <button
-          disabled={disabled}
-          onClick={onCloseModal}
-          className="btn-dashboard-primary"
+          disabled={isPending}
+          // onClick={onCloseModal}
+          className="btn-dashboard-tertiary"
         >
           Cancel
         </button>
         <button
-          disabled={disabled}
-          onClick={onConfirm}
-          className="btn-dashboard-tertiary"
+          disabled={isPending}
+          onClick={handleConfirm}
+          className="btn-dashboard-primary"
         >
-          Delete
+          {isPending ? "Deleting..." : "Delete"}
         </button>
       </div>
     </div>

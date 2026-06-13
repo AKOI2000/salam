@@ -1,19 +1,33 @@
-function MetaDataForm() {
+import { createMetaData, updateMetaData } from "../_lib/project-metadata-actions";
+
+async function MetaDataForm({ params, metadata, id }) {
+
   return (
     <div className="dashboard-metadata-box">
       <h3>The Project Metadata</h3>
-      <form>
+      <form action={!metadata ? createMetaData : updateMetaData}>
         <div className="input-box">
-          <input type="text" name="client" placeholder="Client Name" />
+          <input
+            type="text"
+            name="client"
+            placeholder="Client Name"
+            defaultValue={metadata?.client || ""}
+          />
         </div>
         <div className="input-box">
-          <input type="text" name="role" placeholder="What was your role?" />
+          <input
+            type="text"
+            name="role"
+            placeholder="What was your role?"
+            defaultValue={metadata?.role || ""}
+          />
         </div>
         <div className="input-box">
           <input
             type="text"
             name="timeline"
             placeholder="The Timeline [in weeks]"
+            defaultValue={metadata?.timeline || ""}
           />
         </div>
 
@@ -22,6 +36,7 @@ function MetaDataForm() {
             type="text"
             name="deliverables"
             placeholder="What are the deliverables? [separate with comma]"
+            defaultValue={metadata?.deliverables || ""}
           />
         </div>
         <div className="input-box">
@@ -29,10 +44,13 @@ function MetaDataForm() {
             type="text"
             name="tools"
             placeholder="What are the tools used? [separate with comma]"
+            defaultValue={metadata?.tools || ""}
           />
-
-          <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum tempore laudantium dicta quasi ipsam iste, architecto numquam voluptatem accusamus, facilis ab modi unde magnam voluptatum vel eaque at temporibus ratione.</span>
         </div>
+
+        <input type="hidden" name="project_id" value={id} />
+        <input type="hidden" name="slug" value={params} />
+
         <div className="input-box">
           <button className="btn-dashboard-primary">Submit</button>
         </div>
