@@ -2,14 +2,12 @@
 import { IoAdd } from "react-icons/io5";
 
 import DashboardHeading from "@/app/_components/DashboardHeading";
-import DashboardProducts from "@/app/_sections/DashboardProducts";
 import AddProjectForm from "@/app/_components/AddProjectForm";
-import { getProjectBySlug, getProjects } from "@/app/_lib/projectAPI";
+import { Suspense } from "react";
+import DashboardProjectList from "@/app/_sections/pages/Dashboard/DashboardProjectList";
+import ProjectsPageSkeleton from "@/app/_components/ProjectsPageSkeleton";
 
-async function page() {
-  const projects = await getProjects();
-  // console.log(projects);
-
+function page() {
   return (
     <>
       <DashboardHeading
@@ -20,7 +18,9 @@ async function page() {
         <AddProjectForm />
       </DashboardHeading>
 
-      <DashboardProducts projects={projects} />
+      <Suspense fallback={<ProjectsPageSkeleton />}>
+        <DashboardProjectList />
+      </Suspense>
     </>
   );
 }
