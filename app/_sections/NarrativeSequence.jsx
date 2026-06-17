@@ -1,6 +1,8 @@
 import Image from "next/image";
 
-function NarrativeSequence() {
+function NarrativeSequence({ section }) {
+  const { text, section_media } = section;
+
   return (
     <section className="container case-study-ns">
       <div className="col-2_5-by-1">
@@ -8,59 +10,20 @@ function NarrativeSequence() {
           <h2>
             Narrative <br /> & <br /> Sequencing.
           </h2>
-          <p className="no-padding">
-            The campaign was structured around escalation. Early scenes rely on
-            stillness and negative space to create tension before transitioning
-            into faster cuts, liquid motion, and typography reveals. Each
-            sequence was designed to reinforce anticipation and reward,
-            mirroring the emotional rhythm behind the Guinness pouring ritual.
-          </p>
+          <p className="no-padding">{text}</p>
         </div>
 
-        <div className="img-flex col-eq-4">
-          <div className="img-box">
-            <Image
-              src={"/about-1.jpg"}
-              alt="context"
-              // height={300}
-              // width={400}
-              // sizes="(max-width: 763px) 100vw, 100vw, (max-width: 1200px) 50vw, 33vw"
-              fill
-            />
-          </div>
-
-          <div className="img-box">
-            <Image
-              src={"/about-1.jpg"}
-              alt="context"
-              // height={300}
-              // width={400}
-              // sizes="(max-width: 763px) 100vw, 100vw, (max-width: 1200px) 50vw, 33vw"
-              fill
-            />
-          </div>
-
-          <div className="img-box">
-            <Image
-              src={"/about-1.jpg"}
-              alt="context"
-              // height={300}
-              // width={400}
-              // sizes="(max-width: 763px) 100vw, 100vw, (max-width: 1200px) 50vw, 33vw"
-              fill
-            />
-          </div>
-
-          <div className="img-box">
-            <Image
-              src={"/about-1.jpg"}
-              alt="context"
-              // height={300}
-              // width={400}
-              // sizes="(max-width: 763px) 100vw, 100vw, (max-width: 1200px) 50vw, 33vw"
-              fill
-            />
-          </div>
+        <div className="img-grid">
+          {section_media?.map((media, index) => (
+            <div className="img-box" key={index}>
+              <Image
+                src={media.media_url}
+                alt={media.alt_text ?? ""}
+                fill
+                sizes="(max-width: 763px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            </div>
+          ))}
         </div>
       </div>
     </section>

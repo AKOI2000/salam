@@ -39,9 +39,15 @@ function EditSectionForm({ section, params, onCloseModal }) {
       <form action="" ref={formRef} onSubmit={handleSubmit(onSubmit)}>
         <div className="input-box">
           <input
+            type="hidden"
+            name="section_type"
+            value={section?.section_type}
+          />
+          <input
             type="text"
             placeholder="Section Type..."
             name="section_type"
+            value={section?.section_type}
             {...register("section_type", {
               required: "Section type is required",
             })}
@@ -61,7 +67,13 @@ function EditSectionForm({ section, params, onCloseModal }) {
 
         <div className="input-group">
           <label htmlFor="case_study_cover">Section Media</label>
-          <input type="file" name="media" id="" accept="image" />
+          <input
+            type="file"
+            name="media"
+            id=""
+            accept="image/*, video/*"
+            multiple
+          />
         </div>
 
         <div className="input-flex">

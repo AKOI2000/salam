@@ -1,22 +1,18 @@
 import Image from "next/image";
 
-function CaseStudyHero() {
+function CaseStudyHero({ project }) {
+  const { case_study_cover, title, short_description } = project;
   return (
     <div className="page-start case-study_hero case-study">
       <div className="bg-overlay"></div>
-      <Image src="/bg.png" alt="Case Study" fill />
+      <Image src={case_study_cover} alt={`Salam for ${title}`} fill />
 
       <div className="case-study_hero-text-box">
         <h1>
-          Guiness <br />
-          Unleashed
+          Salam <br />
+          for {title}
         </h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias
-          animi natus sint nostrum porro recusandae officia iste nam, at
-          inventore expedita tenetur, amet voluptatum voluptates culpa soluta
-          nemo libero numquam?
-        </p>
+        <p>{short_description}</p>
       </div>
     </div>
   );

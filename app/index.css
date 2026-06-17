@@ -323,6 +323,20 @@ h1 {
   }
 }
 
+.img-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.img-grid .img-box {
+  position: relative;
+  flex: 1 1 300px;
+  min-height: 400px;
+}
+.img-grid .img-box img {
+  object-fit: cover;
+}
+
 .container {
   padding: 5rem 10rem;
 }
@@ -779,6 +793,8 @@ h1 {
 .footer-cta form textarea:active,
 .footer-cta form textarea:focus,
 .footer-cta form textarea :hover {
+  border: none;
+  outline: none;
   border-bottom: 2px solid var(--grey);
 }
 .footer-cta form input:placeholder-shown,
@@ -1130,32 +1146,58 @@ header nav .nav-links.active:hover::before {
 }
 
 .lead-details {
+  min-width: 50vw;
   margin-top: 2rem;
 }
-@media (max-width: 608px) {
+.lead-details btn {
+  width: 100%;
+}
+@media (max-width: 768px) {
   .lead-details {
     min-width: 70vw;
   }
 }
+@media (max-width: 360px) {
+  .lead-details {
+    min-width: 80vw;
+  }
+}
+.lead-details h3 {
+  margin-bottom: 1rem;
+}
 .lead-details-info {
   margin-bottom: 2rem;
 }
+.lead-details-info p {
+  margin-bottom: 0.5rem;
+}
 .lead-details p {
   font-size: 2rem;
-}
-.lead-details p:not(:last-child) {
-  margin-bottom: 0.5rem;
 }
 .lead-details p span {
   font-weight: 600;
 }
 .lead-details .message {
-  margin: 0;
+  margin-bottom: 3rem;
+  max-height: 35rem;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+}
+@media (max-width: 608px) {
+  .lead-details .message {
+    max-height: 30rem;
+  }
 }
 .lead-details .message span {
   display: block;
   margin-bottom: 0.5rem;
   font-size: 2rem;
+}
+.lead-details .section-type-box {
+  margin-bottom: 2rem;
+}
+.lead-details-select .btn {
+  width: 100%;
 }
 
 .skeleton {
@@ -1634,29 +1676,6 @@ header nav .nav-links.active:hover::before {
   object-fit: cover;
 }
 
-.case-study-ml .img-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
-}
-@media (max-width: 768px) {
-  .case-study-ml .img-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 608px) {
-  .case-study-ml .img-grid {
-    grid-template-columns: 1fr;
-  }
-}
-.case-study-ml .img-grid .img-box {
-  position: relative;
-  aspect-ratio: 16/9;
-}
-.case-study-ml .img-grid .img-box img {
-  object-fit: cover;
-}
-
 .project-meta-group {
   text-align: center;
   padding: 3rem;
@@ -1671,6 +1690,7 @@ header nav .nav-links.active:hover::before {
 .project-meta-group .project-meta-answer {
   color: var(--foreground);
   font-weight: 500;
+  text-transform: capitalize;
 }
 
 .case-study-ns {

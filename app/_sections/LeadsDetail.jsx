@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import LeadsDetailSelect from "../_components/LeadsDetailSelect";
-function LeadsDetail({ data }) {
-  const date = new Date(data.date);
+function LeadsDetail({ data, onCloseModal }) {
+  const date = new Date(data.created_at);
   const formattedDate = format(date, "MMMM d, yyyy");
   return (
     <div className="lead-details">
@@ -22,7 +22,7 @@ function LeadsDetail({ data }) {
       </p>
 
 
-      <LeadsDetailSelect status={data.status} />
+      <LeadsDetailSelect status={data.status} id={data.id} close={onCloseModal} />
     </div>
   );
 }

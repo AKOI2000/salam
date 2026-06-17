@@ -52,6 +52,8 @@
         &:active,
         &:focus,
         :hover {
+          border: none;
+          outline: none;
           border-bottom: 2px solid var(--grey);
         }
 

@@ -9,6 +9,7 @@ import VisitorsChart from "./VisitorsChart";
 import CountriesChart from "./CountriesChart";
 import AvgTimeChart from "./AvgTimeChart";
 import TopPagesTable from "./TopPagesTable";
+import AnalyticsPageSkeleton from "../AnalyticsPageSkeleton";
 
 function Section({ title, children }) {
   return (
@@ -25,16 +26,7 @@ export default function AnalyticsDashboard() {
   if (loading) {
     return (
       <div className="analytics-dashboard">
-        <div
-          style={{
-            color: "#6366f1",
-            textAlign: "center",
-            paddingTop: 100,
-            fontSize: 16,
-          }}
-        >
-          Loading analytics…
-        </div>
+        <AnalyticsPageSkeleton />
       </div>
     );
   }

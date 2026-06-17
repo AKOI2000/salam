@@ -1,5 +1,5 @@
+import { Suspense } from "react";
 import SelectedWorksLayout from "../_components/SelectedWorksLayout";
-
 
 function SelectedWorks() {
   return (
@@ -8,7 +8,9 @@ function SelectedWorks() {
         <h3>work.</h3>
       </div>
 
+      <Suspense fallback={<p>Loading..</p>}>
         <SelectedWorksLayout />
+      </Suspense>
     </section>
   );
 }

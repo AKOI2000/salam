@@ -89,3 +89,20 @@
     }
   }
 }
+
+
+.img-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    .img-box {
+      position: relative;
+      flex: 1 1 300px; // grows and shrinks, min width 300px
+      min-height: 400px; // controls the height — adjust to taste
+
+      img {
+        object-fit: cover;
+      }
+    }
+  }

@@ -22,7 +22,7 @@ function ConfirmDelete({ resourceName, onCloseModal, onConfirm }) {
       <div className="flex">
         <button
           disabled={isPending}
-          // onClick={onCloseModal}
+          onClick={onCloseModal}
           className="btn-dashboard-tertiary"
         >
           Cancel

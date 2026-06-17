@@ -4,8 +4,10 @@ import { FaEdit } from "react-icons/fa";
 import Modal from "@/app/_components/Modal";
 import ConfirmDelete from "../_components/ConfirmDelete";
 import LeadsDetail from "./LeadsDetail";
+import { deleteLead } from "../_lib/leads-actions";
 
-function AnalyticsTableRowButtons({ data }) {
+function LeadsTableRowButtons({ data }) {
+
     return (
          <div className="products-table-row-buttons">
       <Modal>
@@ -26,11 +28,11 @@ function AnalyticsTableRowButtons({ data }) {
         </Modal.Open>
 
         <Modal.Window name="product-delete-modal">
-        <ConfirmDelete/>
+      <ConfirmDelete resourceName="lead" onConfirm={() => deleteLead(data.id)}/>
         </Modal.Window>
       </Modal>
     </div>
     )
 }
 
-export default AnalyticsTableRowButtons
+export default LeadsTableRowButtons

@@ -14,7 +14,7 @@ const SECTION_TYPES = [
   "results and impact",
 ];
 
-function AddSectionForm({ id, slug, oncloseModal }) {
+function AddSectionForm({ id, slug, onCloseModal }) {
   const {
     register,
     handleSubmit,
@@ -38,7 +38,7 @@ function AddSectionForm({ id, slug, oncloseModal }) {
       if (result.success) {
         reset();
         setSelectedType(null);
-        oncloseModal?.(); // close the modal after successful submission
+        onCloseModal?.(); // close the modal after successful submission
       }
     });
   };
