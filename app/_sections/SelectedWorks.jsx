@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import SelectedWorksLayout from "../_components/SelectedWorksLayout";
+import SelectedWorksSkeleton from "../_components/SelectedWorksSkeleton";
 
 function SelectedWorks() {
   return (
@@ -8,7 +9,7 @@ function SelectedWorks() {
         <h3>work.</h3>
       </div>
 
-      <Suspense fallback={<p>Loading..</p>}>
+      <Suspense fallback={<SelectedWorksSkeleton />}>
         <SelectedWorksLayout />
       </Suspense>
     </section>

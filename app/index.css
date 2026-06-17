@@ -1222,6 +1222,32 @@ header nav .nav-links.active:hover::before {
   margin-top: 24px;
 }
 
+.skeleton-group {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 24px;
+}
+.skeleton-group .skeleton-card {
+  height: 40vh;
+  background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+.skeleton-group .skeleton-card:nth-child(1) {
+  animation-delay: 0s;
+}
+.skeleton-group .skeleton-card:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.skeleton-group .skeleton-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.skeleton-group .skeleton-card:nth-child(4) {
+  animation-delay: 0.45s;
+}
+
 @keyframes shimmer {
   0% {
     background-position: 200% 0;
