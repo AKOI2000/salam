@@ -6,13 +6,13 @@ import Image from "next/image";
 function HoverVideoCard({ thumbnail, video, alt }) {
   const videoRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [videoReady, setVideoReady] = useState(false); // ← new
 
   const handleMouseEnter = async () => {
     setIsHovered(true);
     try {
       await videoRef.current?.play();
     } catch (error) {
-      // AbortError is expected when hovering quickly — ignore it
       if (error.name !== "AbortError") {
         console.error(error);
       }
@@ -33,14 +33,14 @@ function HoverVideoCard({ thumbnail, video, alt }) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* this div controls the height — aspect ratio box */}
       <div className="work-img-box__ratio">
         <Image
           src={thumbnail}
           alt={alt}
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
-          className={isHovered ? "hidden" : ""}
+          // only hide image when BOTH hovered AND video is ready
+          className={isHovered && videoReady ? "hidden" : ""}
         />
 
         <video
@@ -50,7 +50,8 @@ function HoverVideoCard({ thumbnail, video, alt }) {
           loop
           playsInline
           preload="none"
-          className={isHovered ? "visible" : ""}
+          onCanPlay={() => setVideoReady(true)} // ← fires when video is ready
+          className={isHovered && videoReady ? "visible" : ""}
         />
       </div>
     </div>
