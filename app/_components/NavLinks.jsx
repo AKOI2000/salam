@@ -1,9 +1,19 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 
-function NavLinks({ setResponsive }) {
+function NavLinks({ setResponsive, onNavigate }) {
   const pathname = usePathname();
+
+  const handleClick = (e, path) => {
+    if (pathname === path) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+    onNavigate(); // flag navigation start
+    setResponsive(false);
+  };
 
   const linkVariants = {
     open: {
@@ -34,11 +44,6 @@ function NavLinks({ setResponsive }) {
       name: "Portfolio",
       path: "/portfolio",
     },
-
-    {
-      name: "Contact",
-      path: "/contact",
-    },
   ];
 
   return (
@@ -47,13 +52,8 @@ function NavLinks({ setResponsive }) {
         <motion.div key={link.path} variants={linkVariants}>
           <Link
             href={link.path}
-            onClick={(e) => {
-              if (pathname !== link.path) setResponsive(false);
-              if (pathname === link.path) {
-                e.preventDefault();
-                e.stopPropagation();
-              }
-            }}
+            prefetch={true}
+            onClick={(e) => handleClick(e, link.path)}
             className={`nav-links ${pathname === link.path ? "active" : ""}`}
           >
             {link.name}

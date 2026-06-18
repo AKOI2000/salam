@@ -9,34 +9,28 @@ import {
   updateProjectChecklist,
 } from "./projectAPI";
 import { revalidatePath } from "next/cache";
+import { logActivityApi } from "./activityAPI";
 
 export async function createNewProject(formData) {
   try {
-    // Text fields
     const title = formData.get("title");
     const short_description = formData.get("short_description");
-
-    // File fields
     const homepage_thumbnail = formData.get("homepage_thumbnail");
     const homepage_preview_video = formData.get("homepage_preview_video");
     const case_study_cover = formData.get("case_study_cover");
 
-    // Upload all 3 files in parallel
     const [thumbnailUrl, previewVideoUrl, coverUrl] = await Promise.all([
       homepage_thumbnail?.size > 0
         ? uploadToCloudinary(homepage_thumbnail)
         : null,
-
       homepage_preview_video?.size > 0
         ? uploadToCloudinary(homepage_preview_video)
         : null,
-
       case_study_cover?.size > 0 ? uploadToCloudinary(case_study_cover) : null,
     ]);
 
     const slug = slugify(title, { lower: true, strict: true });
 
-    // Now you have everything ready to send to Supabase
     const project = {
       title,
       slug,
@@ -47,6 +41,13 @@ export async function createNewProject(formData) {
     };
 
     await createProjectApi(project);
+
+    await logActivityApi({
+      type: "project",
+      action: "created",
+      message: `New project created: ${title}`,
+    });
+
     revalidatePath("/admin/projects");
     return { success: true };
   } catch (error) {
@@ -74,7 +75,6 @@ export async function updateProject(formData) {
       updatedData.short_description = short_description;
     }
 
-    // For each file field — delete old file first, then upload new one
     if (homepage_thumbnail?.size > 0) {
       if (parsedProduct.homepage_thumbnail) {
         await deleteFromCloudinary(parsedProduct.homepage_thumbnail, "image");
@@ -104,9 +104,14 @@ export async function updateProject(formData) {
 
     await updateProjectApi(parsedProduct.id, updatedData);
 
+    await logActivityApi({
+      type: "project",
+      action: "updated",
+      message: `Project updated: ${parsedProduct.title}`,
+    });
+
     revalidatePath("/admin/projects");
     revalidatePath(`/admin/projects/${parsedProduct.slug}`);
-
     return { success: true };
   } catch (error) {
     return { success: false, error: error.message };
@@ -117,10 +122,8 @@ export async function deleteProject(id) {
   try {
     if (!id) throw new Error("No project ID provided");
 
-    // Step 1 — fetch everything in one go
     const project = await getProjectByIdApi(id);
 
-    // Step 2 — collect all Cloudinary files
     const allMedia = [
       ...(project.homepage_thumbnail
         ? [{ url: project.homepage_thumbnail, type: "image" }]
@@ -139,14 +142,18 @@ export async function deleteProject(id) {
       ),
     ];
 
-    // Step 3 — delete everything from Cloudinary in parallel
     await Promise.all(
       allMedia.map((item) => deleteFromCloudinary(item.url, item.type)),
     );
 
-    // Step 4 — delete database rows (children first)
     await deleteSectionsApi(id);
     await deleteProjectApi(id);
+
+    await logActivityApi({
+      type: "project",
+      action: "deleted",
+      message: `Project deleted: ${project.title}`,
+    });
 
     revalidatePath("/admin/projects");
     return { success: true };
@@ -160,6 +167,12 @@ export async function updateCheckList(id, slug, field, currentValue) {
     if (!id) throw new Error("No project ID provided");
 
     await updateProjectChecklist(id, field, currentValue);
+
+    await logActivityApi({
+      type: "project",
+      action: "updated",
+      message: `Project ${field} set to ${!currentValue}`,
+    });
 
     revalidatePath(`/admin/projects/${slug}`);
     return { success: true };

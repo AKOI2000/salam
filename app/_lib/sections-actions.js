@@ -11,21 +11,19 @@ import {
   updateSectionApi,
 } from "./sectionApi";
 import { deleteSectionApi } from "./sectionApi";
+import { logActivityApi } from "./activityAPI";
 
 export async function createSection(formData) {
   try {
     const section_type = formData.get("section_type");
     const text = formData.get("text");
     const project_id = formData.get("project_id");
-    const alt_text = formData.get("media_alt") || ""; // Optional alt text for media
+    const alt_text = formData.get("media_alt") || "";
     const slug = formData.get("slug");
 
     const files = formData.getAll("section_images");
     const validFiles = files.filter((file) => file.size > 0);
 
-    // console.log({ section_type, text, project_id, validFiles, alt_text });
-
-    // Upload and keep track of each file's type alongside its URL
     const mediaItems = await Promise.all(
       validFiles.map(async (file) => {
         const url = await uploadToCloudinary(file);
@@ -38,10 +36,16 @@ export async function createSection(formData) {
 
     await createSectionApi({
       section_type,
-      text, // renamed here
+      text,
       project_id,
       alt_text,
       media: mediaItems,
+    });
+
+    await logActivityApi({
+      type: "section",
+      action: "created",
+      message: `New "${section_type}" section added`,
     });
 
     revalidatePath(`/admin/projects/${slug}`);
@@ -51,24 +55,26 @@ export async function createSection(formData) {
   }
 }
 
-// Deletes the entire section + all its media
 export async function deleteSection(sectionId, slug) {
   try {
     if (!sectionId) throw new Error("No section ID provided");
 
-    // Step 1 — fetch all media so we can delete from Cloudinary
     const mediaItems = await getSectionMediaApi(sectionId);
 
-    // Step 2 — delete each file from Cloudinary in parallel
     await Promise.all(
       mediaItems.map((item) =>
         deleteFromCloudinary(item.media_url, item.media_type),
       ),
     );
 
-    // Step 3 — delete the section (cascade handles section_media rows)
     await deleteMediaItemApi(sectionId);
     await deleteSectionApi(sectionId);
+
+    await logActivityApi({
+      type: "section",
+      action: "deleted",
+      message: `Section deleted`,
+    });
 
     revalidatePath(`/admin/projects/${slug}`);
     return { success: true };
@@ -86,25 +92,20 @@ export async function editSection(sectionId, formData, params) {
     const alt_text = formData.get("alt_text");
     const replaceMedia = formData.get("replace_media") === "on";
 
-    // Step 1 — update the section's text fields
     await updateSectionApi(sectionId, { section_type, text });
 
-    // Step 2 — if replace is checked, wipe existing media
     if (replaceMedia) {
       const existingMedia = await getSectionMediaApi(sectionId);
 
-      // Delete from Cloudinary in parallel
       await Promise.all(
         existingMedia.map((item) =>
           deleteFromCloudinary(item.media_url, item.media_type),
         ),
       );
 
-      // Delete the rows from Supabase
       await deleteMediaItemApi(sectionId);
     }
 
-    // Step 3 — upload any new files
     const files = formData.getAll("media");
     const validFiles = files.filter((file) => file.size > 0);
 
@@ -119,7 +120,6 @@ export async function editSection(sectionId, formData, params) {
         }),
       );
 
-      // Step 4 — insert new media rows
       const mediaRows = mediaItems.map(({ url, media_type }) => ({
         section_id: sectionId,
         media_url: url,
@@ -130,7 +130,12 @@ export async function editSection(sectionId, formData, params) {
       await createMediaItemApi(mediaRows);
     }
 
-    // Step 5 — revalidate
+    await logActivityApi({
+      type: "section",
+      action: "updated",
+      message: `"${section_type}" section updated`,
+    });
+
     revalidatePath(`/admin/projects/${params}`);
     return { success: true };
   } catch (error) {

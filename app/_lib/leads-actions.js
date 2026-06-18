@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createLeadApi, deleteLeadApi, updateLeadApi } from "./leadsAPI";
+import { logActivityApi } from "./activityAPI";
 
 export async function sendLead(formData) {
   try {
@@ -12,10 +13,15 @@ export async function sendLead(formData) {
 
     await createLeadApi({ name, email, phone, message });
 
+    await logActivityApi({
+      type: "lead",
+      action: "created",
+      message: `New lead from ${name}`,
+    });
+
     revalidatePath("/admin/leads");
     return { success: true };
   } catch (error) {
-    // Handle duplicate email specifically
     if (error.message.includes("23505")) {
       return { success: false, error: "This email has already been submitted" };
     }
@@ -29,8 +35,13 @@ export async function updateLeadStatus(id, status) {
 
     await updateLeadApi(id, { status });
 
+    await logActivityApi({
+      type: "lead",
+      action: "updated",
+      message: `Lead status updated to ${status}`,
+    });
+
     revalidatePath("/admin/leads");
-    revalidatePath(`/admin/leads`);
     return { success: true };
 
   } catch (error) {
@@ -38,12 +49,17 @@ export async function updateLeadStatus(id, status) {
   }
 }
 
-
 export async function deleteLead(id) {
   try {
     if (!id) throw new Error("No lead ID provided");
 
     await deleteLeadApi(id);
+
+    await logActivityApi({
+      type: "lead",
+      action: "deleted",
+      message: `Lead deleted`,
+    });
 
     revalidatePath("/admin/leads");
     return { success: true };

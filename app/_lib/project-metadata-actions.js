@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createMetaDataApi, updateMetaDataApi } from "./projectAPI";
+import { logActivityApi } from "./activityAPI";
 
 export async function createMetaData(formData) {
   const deliverables = formData.get("deliverables");
@@ -15,12 +16,12 @@ export async function createMetaData(formData) {
   const deliverablesArray = deliverables
     .split(",")
     .map((item) => item.trim())
-    .filter(Boolean); // removes any empty strings
+    .filter(Boolean);
 
   const toolsArray = tools
     .split(",")
     .map((item) => item.trim())
-    .filter(Boolean); // removes any empty strings
+    .filter(Boolean);
 
   const metadata = {
     client,
@@ -31,13 +32,16 @@ export async function createMetaData(formData) {
     tools: toolsArray,
   };
 
-  //   console.log(metadata, project_id);
-
   try {
     await createMetaDataApi(metadata);
 
-    revalidatePath(`/admin/projects/${slug}`);
+    await logActivityApi({
+      type: "project",
+      action: "created",
+      message: `Project metadata created for client: ${client}`,
+    });
 
+    revalidatePath(`/admin/projects/${slug}`);
     return { success: true };
   } catch (error) {
     return { success: false, error: error.message };
@@ -56,12 +60,12 @@ export async function updateMetaData(formData) {
   const deliverablesArray = deliverables
     .split(",")
     .map((item) => item.trim())
-    .filter(Boolean); // removes any empty strings
+    .filter(Boolean);
 
   const toolsArray = tools
     .split(",")
     .map((item) => item.trim())
-    .filter(Boolean); // removes any empty strings
+    .filter(Boolean);
 
   const metadata = {
     client,
@@ -74,8 +78,13 @@ export async function updateMetaData(formData) {
   try {
     await updateMetaDataApi(metadata, project_id);
 
-    revalidatePath(`/admin/projects/${slug}`);
+    await logActivityApi({
+      type: "project",
+      action: "updated",
+      message: `Project metadata updated for client: ${client}`,
+    });
 
+    revalidatePath(`/admin/projects/${slug}`);
     return { success: true };
   } catch (error) {
     return { success: false, error: error.message };
