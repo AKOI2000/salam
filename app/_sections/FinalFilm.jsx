@@ -1,4 +1,4 @@
-import HoverVideo from "../_components/HoverVideo";
+import HoverVideo from "../_components/HoverVideoCard";
 
 function FinalFilm() {
   return (
@@ -12,7 +12,7 @@ function FinalFilm() {
           </p>
         </div>
 
-        <HoverVideo src="videotest.mp4" muted={false}/>
+        {/* <HoverVideo src="videotest.mp4" muted={false}/> */}
       </div>
     </section>
   );

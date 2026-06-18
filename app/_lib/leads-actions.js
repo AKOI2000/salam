@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { createLeadApi, deleteLeadApi, updateLeadApi } from "./leadsAPI";
 import { logActivityApi } from "./activityAPI";
 
@@ -19,6 +19,8 @@ export async function sendLead(formData) {
       message: `New lead from ${name}`,
     });
 
+    revalidateTag("leads");
+    revalidateTag("activity");
     revalidatePath("/admin/leads");
     return { success: true };
   } catch (error) {
@@ -41,6 +43,8 @@ export async function updateLeadStatus(id, status) {
       message: `Lead status updated to ${status}`,
     });
 
+    revalidateTag("leads");
+    revalidateTag("activity");
     revalidatePath("/admin/leads");
     return { success: true };
 
@@ -61,6 +65,8 @@ export async function deleteLead(id) {
       message: `Lead deleted`,
     });
 
+    revalidateTag("leads");
+    revalidateTag("activity");
     revalidatePath("/admin/leads");
     return { success: true };
 

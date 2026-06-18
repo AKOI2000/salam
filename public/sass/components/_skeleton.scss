@@ -23,12 +23,20 @@
   gap: 1rem;
   margin-bottom: 24px;
 
+  @include respond(mds) {
+    grid-template-columns: 1fr;
+  }
+
   .skeleton-card {
     height: 40vh;
     background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite;
     border-radius: 8px;
+
+    @include respond(mds) {
+      height: 20vh;
+    }
 
     // stagger the animation so each card shimmers at a different time
     &:nth-child(1) {

@@ -1,4 +1,5 @@
 import { supabase } from "./supabase";
+import { unstable_cache } from "next/cache";
 
 export async function createProjectApi(newProject) {
   console.log(newProject);
@@ -28,46 +29,47 @@ export async function updateProjectChecklist(id, field, value) {
   return data;
 }
 
-export async function getProjectBySlug(slug) {
-  let { data: Projects, error } = await supabase
-    .from("Projects")
-    .select("*, project_metadata(*), project_sections(*, section_media(*))")
-    .eq("slug", slug)
-    .single();
+export const getProjectBySlug = unstable_cache(
+  async (slug) => {
+    let { data: Projects, error } = await supabase
+      .from("Projects")
+      .select("*, project_metadata(*), project_sections(*, section_media(*))")
+      .eq("slug", slug)
+      .single();
 
-  if (error) {
-    console.error(error);
-    throw new Error("Project could not be fetched... try again...");
+    if (error) {
+      console.error(error);
+      throw new Error("Project could not be fetched... try again...");
+    }
+
+    return Projects;
+  },
+  ["project-by-slug"],
+  {
+    revalidate: false,
+    tags: ["projects"],
   }
+);
 
-  return Projects;
-}
+export const getProjects = unstable_cache(
+  async () => {
+    let { data: Projects, error } = await supabase
+      .from("Projects")
+      .select("*");
 
-export async function getProjectByIdApi(id) {
-  let { data: project, error } = await supabase
-    .from("Projects")
-    .select("*, project_metadata(*), project_sections(*, section_media(*))")
-    .eq("id", id)
-    .single();
+    if (error) {
+      console.error(error);
+      throw new Error("Projects could not be fetched");
+    }
 
-  if (error) {
-    console.error(error);
-    throw new Error("Project could not be fetched... try again...");
+    return Projects;
+  },
+  ["projects"],
+  {
+    revalidate: false,
+    tags: ["projects"],
   }
-
-  return project;
-}
-
-export async function getProjects() {
-  let { data: Projects, error } = await supabase.from("Projects").select("*");
-
-  if (error) {
-    console.error(error);
-    throw new Error("Projects could not be fetched");
-  }
-
-  return Projects;
-}
+);
 
 export async function updateProjectApi(id, newProject) {
   const { data, error } = await supabase

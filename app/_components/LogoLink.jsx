@@ -6,6 +6,7 @@ function LogoLink() {
   const pathname = usePathname();
   return (
     <Link
+      prefetch={true}
       href="/"
       className="logo"
       onClick={(e) => {

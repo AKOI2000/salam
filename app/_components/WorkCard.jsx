@@ -1,18 +1,24 @@
 import Image from "next/image";
 import { Link } from "next-view-transitions";
 import { FaArrowRightLong } from "react-icons/fa6";
+import HoverVideoCard from "./HoverVideoCard";
 
 function WorkCard({ project }) {
-  const { short_description, homepage_thumbnail, slug } = project;
+  const {
+    title, 
+    short_description,
+    homepage_thumbnail,
+    slug,
+    homepage_preview_video,
+  } = project;
+
   return (
-    <div className={`work`}>
+    <div className="work">
       <div className="work-img-box">
-        <Image
-          alt="Work 1"
-          src={homepage_thumbnail}
-          height={4}
-          width={3}
-          sizes="(max-width: 763px) 100vw, 100vw, (max-width: 1200px) 50vw, 33vw"
+        <HoverVideoCard
+          thumbnail={homepage_thumbnail}
+          video={homepage_preview_video}
+          alt={title}
         />
 
         {/* <HoverVideo src={"/videotest2.mp4"} /> */}
@@ -26,6 +32,7 @@ function WorkCard({ project }) {
         <p>{short_description}</p>
 
         <Link
+          prefetch={true}
           data-cursor-grow
           href={`/portfolio/${slug}`}
           className="btn-tertiary"

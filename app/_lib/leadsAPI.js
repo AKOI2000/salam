@@ -1,11 +1,19 @@
 import { supabase } from "./supabase";
+import { unstable_cache } from "next/cache";
 
-export async function getLeadsApi() {
-  let { data: Leads, error } = await supabase.from("Leads").select("*");
+export const getLeadsApi = unstable_cache(
+  async () => {
+    let { data: Leads, error } = await supabase.from("Leads").select("*");
 
-  if (error) throw new Error(error.message);
-  return Leads;
-}
+    if (error) throw new Error(error.message);
+    return Leads;
+  },
+  ["leads"],
+  {
+    revalidate: false,
+    tags: ["leads"],
+  }
+);
 
 export async function createLeadApi(leadData) {
   const { data, error } = await supabase

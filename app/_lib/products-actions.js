@@ -8,7 +8,7 @@ import {
   updateProjectApi,
   updateProjectChecklist,
 } from "./projectAPI";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { logActivityApi } from "./activityAPI";
 
 export async function createNewProject(formData) {
@@ -48,6 +48,8 @@ export async function createNewProject(formData) {
       message: `New project created: ${title}`,
     });
 
+    revalidateTag("projects");
+    revalidateTag("activity");
     revalidatePath("/admin/projects");
     return { success: true };
   } catch (error) {
@@ -110,6 +112,8 @@ export async function updateProject(formData) {
       message: `Project updated: ${parsedProduct.title}`,
     });
 
+    revalidateTag("projects");
+    revalidateTag("activity");
     revalidatePath("/admin/projects");
     revalidatePath(`/admin/projects/${parsedProduct.slug}`);
     return { success: true };
@@ -155,6 +159,8 @@ export async function deleteProject(id) {
       message: `Project deleted: ${project.title}`,
     });
 
+    revalidateTag("projects");
+    revalidateTag("activity");
     revalidatePath("/admin/projects");
     return { success: true };
   } catch (error) {
@@ -174,6 +180,8 @@ export async function updateCheckList(id, slug, field, currentValue) {
       message: `Project ${field} set to ${!currentValue}`,
     });
 
+    revalidateTag("projects");
+    revalidateTag("activity");
     revalidatePath(`/admin/projects/${slug}`);
     return { success: true };
   } catch (error) {

@@ -24,7 +24,6 @@ async function page({ params }) {
   const { slug } = await params;
   const project = await getProjectBySlug(slug);
   const { project_sections } = project;
-  console.log(project_sections)
 
   return (
     <>

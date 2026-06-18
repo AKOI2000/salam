@@ -1,5 +1,5 @@
 import Image from "next/image";
-import HoverVideo from "../_components/HoverVideo";
+import HoverVideo from "../_components/HoverVideoCard";
 
 function OutcomePreview() {
   return (

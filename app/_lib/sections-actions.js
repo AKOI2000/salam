@@ -1,7 +1,7 @@
 // lib/sections-actions.js
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { deleteFromCloudinary, uploadToCloudinary } from "./helpers";
 import {
   createMediaItemApi,
@@ -48,6 +48,8 @@ export async function createSection(formData) {
       message: `New "${section_type}" section added`,
     });
 
+    revalidateTag("projects");
+    revalidateTag("activity");
     revalidatePath(`/admin/projects/${slug}`);
     return { success: true };
   } catch (error) {
@@ -76,6 +78,8 @@ export async function deleteSection(sectionId, slug) {
       message: `Section deleted`,
     });
 
+    revalidateTag("projects");
+    revalidateTag("activity");
     revalidatePath(`/admin/projects/${slug}`);
     return { success: true };
   } catch (error) {
@@ -136,6 +140,8 @@ export async function editSection(sectionId, formData, params) {
       message: `"${section_type}" section updated`,
     });
 
+    revalidateTag("projects");
+    revalidateTag("activity");
     revalidatePath(`/admin/projects/${params}`);
     return { success: true };
   } catch (error) {
