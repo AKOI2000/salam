@@ -28,10 +28,10 @@ function FooterCTA() {
   }
   return (
     <div className="footer-cta">
-      <h4>
+      <h5>
         Curious about the magic we can create? <br /> Let’s bring your vision to
         life
-      </h4>
+      </h5>
 
       <form
         ref={formRef}
