@@ -3,7 +3,7 @@
     font-size: calc(((var(--base-size) * 1.25) * 1.25) * 1.25);
     font-weight: 400;
     line-height: 1.5;
-    margin-bottom: 10rem;
+    margin-bottom: 7rem;
     // text-align: center;
 
     @include respond(mds) {
@@ -14,10 +14,11 @@
   p {
     font-weight: 400;
     color: var(--darker-grey);
-    width: 60%;
+    width: 70%;
     margin: auto;
     line-height: 1.7;
     margin-bottom: 5rem;
+    text-align: center;
 
     @include respond(md) {
       width: 75%;
@@ -25,6 +26,7 @@
 
     @include respond(mds) {
       width: 100%;
+      text-align: left;
     }
   }
 }
@@ -40,7 +42,7 @@
     object-fit: cover;
     width: 100%;
     height: auto;
-    // max-height: 1200px;
+    max-height: 1200px;
     // object-position: top;
   }
 }
