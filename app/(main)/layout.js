@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
-import "@/app/index.css";
 import "@/app/globals.css";
+import "@/app/index.css";
 import Navbar from "@/app/_components/Navbar";
 import Footer from "@/app/_components/Footer";
 import Cursor from "@/app/_components/Cursor";
@@ -12,6 +12,7 @@ import { Suspense } from "react";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
 // const geistMono = Geist_Mono({
