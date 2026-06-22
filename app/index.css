@@ -1439,7 +1439,7 @@ header nav .nav-links.active:hover::before {
 }
 .card-back p,
 .card-back h6 {
-  color: var(--foreground);
+  color: var(--darkest-grey);
 }
 .card-back_info {
   display: flex;
