@@ -69,11 +69,6 @@ html {
   font-size: 62.5%;
   scroll-behavior: smooth;
 }
-@media (min-width: 2000px) {
-  html {
-    font-size: 125%;
-  }
-}
 @media (max-width: 768px) {
   html {
     font-size: 50%;

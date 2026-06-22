@@ -52,9 +52,9 @@ html {
   font-size: 62.5%;
   scroll-behavior: smooth;
 
-  @include lgrespond(xxxl) {
-    font-size: 125%;
-  }
+  // @include lgrespond(xxxl) {
+  //   font-size: 125%;
+  // }
 
   @include respond(md) {
     font-size: 50%;
