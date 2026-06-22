@@ -30,9 +30,9 @@ export function fmtPercent(n) {
 
 // ── Bar chart colors — cycles if there are more than 10 items ─────────────
 export const CHART_COLORS = [
-  '#6366f1', '#8b5cf6', '#a78bfa', '#c4b5fd',
-  '#818cf8', '#4f46e5', '#7c3aed', '#5b21b6',
-  '#4338ca', '#3730a3',
+  '#000000', '#1a1a1a', '#333333', '#4d4d4d',
+  '#666666', '#808080', '#999999', '#b3b3b3',
+  '#cccccc', '#e6e6e6',
 ]
 
 

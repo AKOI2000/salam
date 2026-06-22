@@ -1,7 +1,3 @@
-// app/components/analytics/AvgTimeChart.jsx
-// Horizontal bar chart of average time on page, per URL.
-// data shape: [{ page: '/blog/intro', avgSeconds: 142, views: 830 }, ...]
-
 import {
   BarChart, Bar,
   XAxis, YAxis,
@@ -10,7 +6,6 @@ import {
 } from 'recharts'
 import { fmtSeconds } from '@/app/_lib/analyticsUtils'
 
-// Custom tooltip so it shows "2m 22s" instead of raw seconds
 function CustomTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null
   return (
@@ -31,33 +26,37 @@ export default function AvgTimeChart({ data }) {
     <ResponsiveContainer width="100%" height={300}>
       <BarChart
         data={data}
-        layout="vertical"
-        margin={{ left: 8, right: 48, top: 0, bottom: 0 }}
+        // Fix 1 — removed layout="vertical"
+        margin={{ left: 8, right: 8, top: 16, bottom: 0 }}
       >
-        <CartesianGrid stroke="#2d2d3f" strokeDasharray="3 3" horizontal={false} />
+        <CartesianGrid stroke="#2d2d3f" strokeDasharray="3 3" vertical={false} />
 
-        {/* X axis: raw seconds, formatted as "Xm Ys" */}
+        {/* Fix 1 — XAxis is now category (page paths) */}
         <XAxis
-          type="number"
+          type="category"
+          dataKey="page"
           tick={{ fill: '#6b7280', fontSize: 11 }}
+          axisLine={false}
+          tickLine={false}
+          tickFormatter={(value) =>
+            value.length > 8 ? `${value.slice(0, 8)}...` : value
+          }
+        />
+
+        {/* Fix 1 — YAxis is now number (seconds) */}
+        <YAxis
+          type="number"
+          tick={{ fill: '#9ca3af', fontSize: 11 }}
           tickFormatter={fmtSeconds}
           axisLine={false}
           tickLine={false}
-        />
-
-        {/* Y axis: the page paths */}
-        <YAxis
-          type="category"
-          dataKey="page"
-          tick={{ fill: '#9ca3af', fontSize: 11 }}
-          axisLine={false}
-          tickLine={false}
-          width={150}
+          width={40}
         />
 
         <Tooltip content={<CustomTooltip />} />
 
-        <Bar dataKey="avgSeconds" fill="var(--foreground)" radius={[0, 4, 4, 0]} />
+        {/* Fix 1 — radius flipped to top corners */}
+        <Bar dataKey="avgSeconds" fill="var(--foreground)" radius={[4, 4, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
   )
