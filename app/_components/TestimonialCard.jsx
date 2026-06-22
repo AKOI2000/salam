@@ -7,7 +7,7 @@ function TestimonialCard() {
         <div className="card-front">
           <div className="img-box">
             <Image
-              src={"/Hennessy.png"}
+              src={"/orijin.png"}
               alt="hennessy"
               width={150}
               height={150}

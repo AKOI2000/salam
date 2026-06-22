@@ -38,6 +38,7 @@
   --grey: #8d8d8d;
   --darker-grey: #646464;
   --darkest-grey: #00000080;
+  --foreground-light: #000000cc;
   --foreground: #000000;
   --color-accent: #765223;
   --color-accent-light: #ffecaf;
@@ -1418,6 +1419,9 @@ header nav .nav-links.active:hover::before {
   backface-visibility: hidden;
   overflow: hidden;
 }
+.card-front img, .card-back img {
+  filter: grayscale(100);
+}
 .card-front {
   background: var(--whiter-smoke);
   display: flex;
@@ -1439,7 +1443,7 @@ header nav .nav-links.active:hover::before {
 }
 .card-back p,
 .card-back h6 {
-  color: var(--darkest-grey);
+  color: var(--foreground-light);
 }
 .card-back_info {
   display: flex;

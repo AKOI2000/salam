@@ -38,6 +38,10 @@
     height: 100%;
     backface-visibility: hidden;
     overflow: hidden;
+
+    img {
+      filter: grayscale(100);
+    }
   }
 
   &-front {
@@ -54,13 +58,13 @@
     border-radius: 1.2rem;
     padding: 4rem 3rem;
 
-    @include respond (mds) {
+    @include respond(mds) {
       padding: 3rem 2rem;
     }
 
     p,
     h6 {
-      color: var(--darkest-grey);
+      color: var(--foreground-light);
     }
 
     &_info {
@@ -69,12 +73,12 @@
       justify-content: space-between;
       margin-top: auto;
 
-      h6{
+      h6 {
         font-size: 1.6rem;
         font-weight: 400;
       }
 
-      p{
+      p {
         color: var(--grey);
         font-size: 1.4rem;
       }
