@@ -88,7 +88,7 @@ export default function Carousel() {
                 alt={item.label}
                 width={4} // ratio hint — Next uses this for aspect-ratio CSS
                 height={3} // doesn't matter much, browser overrides with natural size
-                sizes="(max-width: 763px) 100vw, 100vw, (max-width: 1200px) 50vw, 33vw"
+               sizes="(max-width: 763px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 style={{
                   width: "100%",
                   height: "auto", // ← the key: natural height from real dimensions

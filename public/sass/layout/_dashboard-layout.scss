@@ -1,7 +1,7 @@
 // dashboard-layout.scss
 
 :root {
-  --sidebar-width: 300px;
+  --sidebar-width: 28rem;
   --header-height: 8rem;
 
   @include respond(mds) {

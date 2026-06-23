@@ -11,19 +11,19 @@ function CaseContext({ section }) {
 
         <p>{text}</p>
 
-        <div className="img-box">
-          {section_media?.map((media, index) => (
+        {section_media?.map((media, index) => (
+          <div className="img-box" key={index}>
             <Image
-              key={index}
+              // key={index}
               src={media.media_url}
               alt={media.alt_text}
               // height={300}
               // width={400}
-              // sizes="(max-width: 763px) 100vw, 100vw, (max-width: 1200px) 50vw, 33vw"
+             sizes="(max-width: 763px) 100vw, (max-width: 1200px) 50vw, 33vw"
               fill
             />
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </section>
   );

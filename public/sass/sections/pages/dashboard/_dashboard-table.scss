@@ -44,6 +44,7 @@
     p {
       justify-self: center;
       font-size: 1.6rem;
+      text-align: center;
     }
 
     @include respond(mds) {
@@ -109,6 +110,7 @@
     p {
       justify-self: center;
       font-size: 1.6rem;
+      text-align: center;
     }
 
     .section-media {

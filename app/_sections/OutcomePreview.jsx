@@ -15,7 +15,7 @@ function OutcomePreview() {
             src={"/bg.png"}
             height={9}
             width={16}
-            sizes="(max-width: 763px) 100vw, 100vw, (max-width: 1200px) 50vw, 33vw"
+           sizes="(max-width: 763px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
         <div className="preview-img-box">
@@ -24,7 +24,7 @@ function OutcomePreview() {
             src={"/about-2.jpg"}
             height={9}
             width={16}
-            sizes="(max-width: 763px) 100vw, 100vw, (max-width: 1200px) 50vw, 33vw"
+           sizes="(max-width: 763px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
       </div>

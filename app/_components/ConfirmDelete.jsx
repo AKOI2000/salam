@@ -1,12 +1,25 @@
 import { useTransition } from "react";
+import toast from "react-hot-toast";
 
 function ConfirmDelete({ resourceName, onCloseModal, onConfirm }) {
   const [isPending, startTransition] = useTransition();
 
   const handleConfirm = () => {
     startTransition(async () => {
-      await onConfirm();
-      onCloseModal?.(); // close the modal after delete succeeds
+      try {
+        const result = await onConfirm();
+        onCloseModal?.(); // close the modal after delete succeeds
+        if (result.success) {
+          toast.success("Section deleted successfully");
+          onCloseModal?.();
+        } else {
+          toast.error(result.error || "Something went wrong");
+        }
+
+        // in catch block
+      } catch (error) {
+        toast.error(error.message || "Upload failed");
+      }
     });
   };
 

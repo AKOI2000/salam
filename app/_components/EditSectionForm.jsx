@@ -3,6 +3,8 @@
 import { useForm } from "react-hook-form";
 import { useRef, useTransition, useState } from "react";
 import { editSection } from "../_lib/sections-actions";
+import { uploadToCloudinaryClient } from "@/app/_lib/uploadToCloudinaryClient";
+import toast from "react-hot-toast";
 
 function EditSectionForm({ section, params, onCloseModal }) {
   const {
@@ -21,14 +23,41 @@ function EditSectionForm({ section, params, onCloseModal }) {
   const [isPending, startTransition] = useTransition();
   const [replaceMedia, setReplaceMedia] = useState(false);
 
-  async function onSubmit(data) {
-    const formData = new FormData(formRef.current);
-
+  async function onSubmit() {
     startTransition(async () => {
-      const result = await editSection(section.id, formData, params);
-      if (result.success) {
-        reset();
-        onCloseModal?.();
+      try {
+        // Step 1 — upload files directly to Cloudinary from browser
+        const fileInput = formRef.current.querySelector('[name="media"]');
+        const files = Array.from(fileInput.files).filter((f) => f.size > 0);
+
+        const mediaItems = await Promise.all(
+          files.map(async (file) => {
+            const url = await uploadToCloudinaryClient(file);
+            return {
+              url,
+              media_type: file.type.startsWith("video/") ? "video" : "image",
+            };
+          }),
+        );
+
+        // Step 2 — build FormData with text fields + URLs (no raw files)
+        const formData = new FormData(formRef.current);
+        formData.delete("media");
+        formData.append("media_items", JSON.stringify(mediaItems));
+
+        // Step 3 — server action saves to Supabase
+        const result = await editSection(section.id, formData, params);
+        if (result.success) {
+          toast.success("Section edited successfully");
+          reset();
+          onCloseModal?.();
+        } else {
+          toast.error(result.error || "Something went wrong");
+        }
+
+        // in catch block
+      } catch (error) {
+        toast.error(error.message || "Upload failed");
       }
     });
   }
@@ -36,42 +65,39 @@ function EditSectionForm({ section, params, onCloseModal }) {
   return (
     <div className="add-section-box">
       <h3>Edit Section</h3>
-      <form action="" ref={formRef} onSubmit={handleSubmit(onSubmit)}>
+      <form ref={formRef} onSubmit={handleSubmit(onSubmit)}>
+        {/* hidden input carries value into FormData */}
+        <input
+          type="hidden"
+          name="section_type"
+          value={section?.section_type}
+        />
+
         <div className="input-box">
-          <input
-            type="hidden"
-            name="section_type"
-            value={section?.section_type}
-          />
-          <input
-            type="text"
-            placeholder="Section Type..."
-            name="section_type"
-            value={section?.section_type}
-            {...register("section_type", {
-              required: "Section type is required",
-            })}
-            disabled
-          />
+          {/* display only — disabled so it doesn't conflict */}
+          <input type="text" value={section?.section_type} disabled readOnly />
         </div>
+
         <div className="input-box">
           <textarea
-            name="text"
-            id=""
+            name="section_text"
             placeholder="Section Text ..."
             {...register("section_text", {
               required: "Section text is required",
             })}
           ></textarea>
+          {errors.section_text && (
+            <span className="error-message">{errors.section_text.message}</span>
+          )}
         </div>
 
         <div className="input-group">
-          <label htmlFor="case_study_cover">Section Media</label>
+          <label htmlFor="media">Section Media</label>
           <input
             type="file"
             name="media"
-            id=""
-            accept="image/*, video/*"
+            id="media"
+            accept="image/*,video/*"
             multiple
           />
         </div>
@@ -97,6 +123,9 @@ function EditSectionForm({ section, params, onCloseModal }) {
               required: "Alt text is required",
             })}
           />
+          {errors.alt_text && (
+            <span className="error-message">{errors.alt_text.message}</span>
+          )}
         </div>
 
         <div className="input-box">

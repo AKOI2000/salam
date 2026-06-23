@@ -3,6 +3,8 @@
 import { useForm } from "react-hook-form";
 import { useRef, useTransition, useState } from "react";
 import { createSection } from "@/app/_lib/sections-actions";
+import { uploadToCloudinaryClient } from "@/app/_lib/uploadToCloudinaryClient";
+import toast from "react-hot-toast";
 
 const SECTION_TYPES = [
   "context",
@@ -26,19 +28,46 @@ function AddSectionForm({ id, slug, onCloseModal }) {
   const [selectedType, setSelectedType] = useState(null);
   const [isPending, startTransition] = useTransition();
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if (!selectedType) return;
 
-    const formData = new FormData(formRef.current);
-
     startTransition(async () => {
-      const result = await createSection(formData);
-      if (!result.success) console.error(result.error);
+      try {
+        // Step 1 — upload files directly to Cloudinary from browser
+        const fileInput = formRef.current.querySelector(
+          '[name="section_images"]',
+        );
+        const files = Array.from(fileInput.files).filter((f) => f.size > 0);
 
-      if (result.success) {
-        reset();
-        setSelectedType(null);
-        onCloseModal?.(); // close the modal after successful submission
+        const mediaItems = await Promise.all(
+          files.map(async (file) => {
+            const url = await uploadToCloudinaryClient(file);
+            return {
+              url,
+              media_type: file.type.startsWith("video/") ? "video" : "image",
+            };
+          }),
+        );
+
+        // Step 2 — build FormData with text fields + URLs (no raw files)
+        const formData = new FormData(formRef.current);
+        formData.delete("section_images");
+        formData.append("media_items", JSON.stringify(mediaItems));
+
+        // Step 3 — server action just saves to Supabase
+        const result = await createSection(formData);
+
+        if (result.success) {
+          toast.success("Section added successfully");
+          reset();
+          onCloseModal?.();
+        } else {
+          toast.error(result.error || "Something went wrong");
+        }
+
+        // in catch block
+      } catch (error) {
+        toast.error(error.message || "Upload failed");
       }
     });
   };
@@ -56,7 +85,7 @@ function AddSectionForm({ id, slug, onCloseModal }) {
             {SECTION_TYPES.map((type) => (
               <button
                 key={type}
-                type="button" // important — prevents form submission
+                type="button"
                 onClick={() => setSelectedType(type)}
                 className={selectedType === type ? "selected" : "btn-inactive"}
               >
@@ -64,15 +93,14 @@ function AddSectionForm({ id, slug, onCloseModal }) {
               </button>
             ))}
           </div>
-
           {!selectedType && (
             <span className="error-message">Please select a section type</span>
           )}
         </div>
+
         <div className="input-box">
           <textarea
             name="text"
-            id=""
             placeholder="Section Text ..."
             {...register("text", { required: "Section text is required" })}
           ></textarea>
@@ -89,9 +117,6 @@ function AddSectionForm({ id, slug, onCloseModal }) {
             id="section_images"
             accept="image/*,video/*"
             multiple
-            // {...register("media", {
-            //   required: "At least one media file is required",
-            // })}
           />
         </div>
 

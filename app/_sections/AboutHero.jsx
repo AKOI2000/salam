@@ -45,7 +45,7 @@ function AboutHero() {
           alt="Salam"
           height={4}
           width={3}
-          sizes="(max-width: 763px) 100vw, 100vw, (max-width: 1200px) 50vw, 33vw"
+         sizes="(max-width: 763px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
     </div>

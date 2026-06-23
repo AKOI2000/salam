@@ -2,15 +2,15 @@
 "use server";
 
 import { revalidatePath, revalidateTag } from "next/cache";
-import { deleteFromCloudinary, uploadToCloudinary } from "./helpers";
+import { deleteFromCloudinary } from "./helpers";
 import {
   createMediaItemApi,
   createSectionApi,
   deleteMediaItemApi,
   getSectionMediaApi,
   updateSectionApi,
+  deleteSectionApi,
 } from "./sectionApi";
-import { deleteSectionApi } from "./sectionApi";
 import { logActivityApi } from "./activityAPI";
 
 export async function createSection(formData) {
@@ -21,18 +21,8 @@ export async function createSection(formData) {
     const alt_text = formData.get("media_alt") || "";
     const slug = formData.get("slug");
 
-    const files = formData.getAll("section_images");
-    const validFiles = files.filter((file) => file.size > 0);
-
-    const mediaItems = await Promise.all(
-      validFiles.map(async (file) => {
-        const url = await uploadToCloudinary(file);
-        return {
-          url,
-          media_type: file.type.startsWith("video/") ? "video" : "image",
-        };
-      }),
-    );
+    // URLs already uploaded from client — just parse them
+    const mediaItems = JSON.parse(formData.get("media_items") || "[]");
 
     await createSectionApi({
       section_type,
@@ -52,6 +42,7 @@ export async function createSection(formData) {
     revalidateTag("activity");
     revalidatePath(`/admin/projects/${slug}`);
     return { success: true };
+
   } catch (error) {
     return { success: false, error: error.message };
   }
@@ -110,20 +101,10 @@ export async function editSection(sectionId, formData, params) {
       await deleteMediaItemApi(sectionId);
     }
 
-    const files = formData.getAll("media");
-    const validFiles = files.filter((file) => file.size > 0);
+    // URLs already uploaded from client — just parse them
+    const mediaItems = JSON.parse(formData.get("media_items") || "[]");
 
-    if (validFiles.length > 0) {
-      const mediaItems = await Promise.all(
-        validFiles.map(async (file) => {
-          const url = await uploadToCloudinary(file);
-          return {
-            url,
-            media_type: file.type.startsWith("video/") ? "video" : "image",
-          };
-        }),
-      );
-
+    if (mediaItems.length > 0) {
       const mediaRows = mediaItems.map(({ url, media_type }) => ({
         section_id: sectionId,
         media_url: url,

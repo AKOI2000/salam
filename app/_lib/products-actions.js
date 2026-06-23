@@ -1,32 +1,26 @@
 "use server";
 import { deleteFromCloudinary, uploadToCloudinary } from "./helpers";
 import slugify from "slugify";
-import {
-  createProjectApi,
-  deleteProjectApi,
-  deleteSectionsApi,
-  updateProjectApi,
-  updateProjectChecklist,
-} from "./projectAPI";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { logActivityApi } from "./activityAPI";
+import { createProjectApi, deleteProjectApi, updateProjectApi, updateProjectChecklist } from "./projectAPI";
 
 export async function createNewProject(formData) {
   try {
     const title = formData.get("title");
     const short_description = formData.get("short_description");
     const homepage_thumbnail = formData.get("homepage_thumbnail");
-    const homepage_preview_video = formData.get("homepage_preview_video");
+    const homepage_preview_video_url = formData.get("homepage_preview_video_url"); // ← URL from client upload
     const case_study_cover = formData.get("case_study_cover");
 
-    const [thumbnailUrl, previewVideoUrl, coverUrl] = await Promise.all([
+    // images upload server-side (fast, no timeout)
+    const [thumbnailUrl, coverUrl] = await Promise.all([
       homepage_thumbnail?.size > 0
         ? uploadToCloudinary(homepage_thumbnail)
         : null,
-      homepage_preview_video?.size > 0
-        ? uploadToCloudinary(homepage_preview_video)
+      case_study_cover?.size > 0
+        ? uploadToCloudinary(case_study_cover)
         : null,
-      case_study_cover?.size > 0 ? uploadToCloudinary(case_study_cover) : null,
     ]);
 
     const slug = slugify(title, { lower: true, strict: true });
@@ -36,7 +30,7 @@ export async function createNewProject(formData) {
       slug,
       short_description,
       homepage_thumbnail: thumbnailUrl,
-      homepage_preview_video: previewVideoUrl,
+      homepage_preview_video: homepage_preview_video_url || null, // ← already a URL
       case_study_cover: coverUrl,
     };
 
@@ -62,7 +56,7 @@ export async function updateProject(formData) {
     const title = formData.get("title");
     const short_description = formData.get("short_description");
     const homepage_thumbnail = formData.get("homepage_thumbnail");
-    const homepage_preview_video = formData.get("homepage_preview_video");
+    const homepage_preview_video_url = formData.get("homepage_preview_video_url"); // ← URL from client upload
     const case_study_cover = formData.get("case_study_cover");
     const existing_product = formData.get("existing_product");
     const parsedProduct = JSON.parse(existing_product);
@@ -77,24 +71,20 @@ export async function updateProject(formData) {
       updatedData.short_description = short_description;
     }
 
+    // images — server side upload
     if (homepage_thumbnail?.size > 0) {
       if (parsedProduct.homepage_thumbnail) {
         await deleteFromCloudinary(parsedProduct.homepage_thumbnail, "image");
       }
-      updatedData.homepage_thumbnail =
-        await uploadToCloudinary(homepage_thumbnail);
+      updatedData.homepage_thumbnail = await uploadToCloudinary(homepage_thumbnail);
     }
 
-    if (homepage_preview_video?.size > 0) {
+    // video — already uploaded from client, just use the URL
+    if (homepage_preview_video_url) {
       if (parsedProduct.homepage_preview_video) {
-        await deleteFromCloudinary(
-          parsedProduct.homepage_preview_video,
-          "video",
-        );
+        await deleteFromCloudinary(parsedProduct.homepage_preview_video, "video");
       }
-      updatedData.homepage_preview_video = await uploadToCloudinary(
-        homepage_preview_video,
-      );
+      updatedData.homepage_preview_video = homepage_preview_video_url;
     }
 
     if (case_study_cover?.size > 0) {
@@ -182,7 +172,6 @@ export async function updateCheckList(id, slug, field, currentValue) {
 
     revalidateTag("projects");
     revalidateTag("activity");
-    updateT
     revalidatePath(`/admin/projects/${slug}`);
     return { success: true };
   } catch (error) {

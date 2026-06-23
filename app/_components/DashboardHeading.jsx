@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 // import Link from "next/link";
 import Modal from "@/app/_components/Modal";
@@ -17,11 +17,7 @@ function DashboardHeading({ title, desc, action, icon, children }) {
             </button>
           </Modal.Open>
 
-          <Modal.Window name={action}>
-            <>
-             {children}
-            </>
-          </Modal.Window>
+          <Modal.Window name={action}>{children}</Modal.Window>
         </Modal>
       )}
     </div>

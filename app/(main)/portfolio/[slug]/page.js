@@ -11,13 +11,10 @@ import { getProjectBySlug, getProjects } from "@/app/_lib/projectAPI";
 
 export async function generateStaticParams() {
   const projects = await getProjects();
-
   const ids = projects.map((project) => ({ slug: String(project.slug) }));
-
   return ids;
 }
 
-// Map section_type values to their components
 const SECTION_COMPONENTS = {
   context: CaseContext,
   "motion language": MotionLanguage,
@@ -28,23 +25,35 @@ const SECTION_COMPONENTS = {
   "results and impact": ResultsImpact,
 };
 
+const SECTION_ORDER = [
+  "context",
+  "motion language",
+  "narrative & sequencing",
+  "process",
+  "final film",
+  "reflection",
+  "results and impact",
+];
+
 async function page({ params }) {
   const { slug } = await params;
   const project = await getProjectBySlug(slug);
   const { project_sections } = project;
+
+  const sortedSections = [...(project_sections ?? [])].sort(
+    (a, b) =>
+      SECTION_ORDER.indexOf(a.section_type) -
+      SECTION_ORDER.indexOf(b.section_type)
+  );
 
   return (
     <>
       <CaseStudyHero project={project} />
       <ProjectMeta project={project} />
 
-      {project_sections?.map((section) => {
-        // look up the component for this section_type
+      {sortedSections.map((section) => {
         const SectionComponent = SECTION_COMPONENTS[section.section_type];
-
-        // if no matching component, skip it
         if (!SectionComponent) return null;
-
         return <SectionComponent key={section.id} section={section} />;
       })}
     </>
