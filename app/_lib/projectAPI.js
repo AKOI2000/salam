@@ -48,14 +48,27 @@ export const getProjectBySlug = unstable_cache(
   {
     revalidate: false,
     tags: ["projects"],
-  }
+  },
 );
+
+export async function getProjectByIdApi(id) {
+  let { data: project, error } = await supabase
+    .from("Projects")
+    .select("*, project_metadata(*), project_sections(*, section_media(*))")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Project could not be fetched... try again...");
+  }
+
+  return project;
+}
 
 export const getProjects = unstable_cache(
   async () => {
-    let { data: Projects, error } = await supabase
-      .from("Projects")
-      .select("*");
+    let { data: Projects, error } = await supabase.from("Projects").select("*");
 
     if (error) {
       console.error(error);
@@ -68,7 +81,7 @@ export const getProjects = unstable_cache(
   {
     revalidate: false,
     tags: ["projects"],
-  }
+  },
 );
 
 export async function updateProjectApi(id, newProject) {
@@ -134,4 +147,17 @@ export async function updateMetaDataApi(metaData, id) {
   }
 
   return data;
+}
+
+export async function deleteMetaDataApi(id) {
+  const { error } = await supabase
+    .from("project_metadata")
+    .delete()
+    .eq("project_id", id);
+
+
+      if (error) {
+    console.error(error);
+    throw new Error("Project Metadata could not be updated");
+  }
 }

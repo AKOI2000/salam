@@ -20,8 +20,6 @@ function WorkCard({ project }) {
           video={homepage_preview_video}
           alt={title}
         />
-
-        {/* <HoverVideo src={"/videotest2.mp4"} /> */}
       </div>
 
       <div className="work-text-box">
