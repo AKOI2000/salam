@@ -1,4 +1,4 @@
-function ProjectMeta({ project }) {
+function ProjectMeta({ project = {} }) {
   const { project_metadata } = project;
   const metaData = project_metadata[0];
   const { client, role, timeline, tools, deliverables } = metaData;

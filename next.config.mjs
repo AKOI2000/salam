@@ -1,9 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
   experimental: {
     serverActions: {
       bodySizeLimit: "100mb",
+      allowedOrigins: ["*"],
+    },
+  },
+  serverExternalPackages: ["cloudinary"], // run cloudinary in Node.js runtime
+  httpAgentOptions: {
+    keepAlive: true,
+  },
+  // increase timeout
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "100mb",
+      timeout: 120, // 120 seconds
     },
   },
   reactCompiler: true,
@@ -15,10 +26,11 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "res.cloudinary.com", // add as many as you need
+        hostname: "res.cloudinary.com",
       },
     ],
   },
 };
+
 
 export default nextConfig;

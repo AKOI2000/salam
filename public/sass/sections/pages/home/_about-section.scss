@@ -1,6 +1,10 @@
 .about-section {
   h5 {
-    width: 50%;
+    width: 55%;
+
+    @include respond(lg) {
+      width: 65%;
+    }
 
     @include respond(mdl) {
       width: 70%;
@@ -8,11 +12,10 @@
 
     @include respond(mds) {
       width: 100%;
-
     }
   }
 
-  a{
+  a {
     margin-top: 2rem;
   }
 }

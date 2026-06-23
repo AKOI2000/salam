@@ -31,7 +31,7 @@ function TestimonialCard() {
 
             <div className="img-box">
               <Image
-                src={"/orijin.png"}
+                src={"/Hennessy.png"}
                 alt="hennessy"
                 width={80}
                 height={80}

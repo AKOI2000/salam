@@ -182,6 +182,7 @@ export async function updateCheckList(id, slug, field, currentValue) {
 
     revalidateTag("projects");
     revalidateTag("activity");
+    updateT
     revalidatePath(`/admin/projects/${slug}`);
     return { success: true };
   } catch (error) {

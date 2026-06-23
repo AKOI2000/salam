@@ -7,16 +7,24 @@ import Process from "@/app/_sections/Process";
 import FinalFilm from "@/app/_sections/FinalFilm";
 import ResultsImpact from "@/app/_sections/ResultsImpact";
 import LearningReflection from "@/app/_sections/LearningReflection";
-import { getProjectBySlug } from "@/app/_lib/projectAPI";
+import { getProjectBySlug, getProjects } from "@/app/_lib/projectAPI";
+
+export async function generateStaticParams() {
+  const projects = await getProjects();
+
+  const ids = projects.map((project) => ({ slug: String(project.slug) }));
+
+  return ids;
+}
 
 // Map section_type values to their components
 const SECTION_COMPONENTS = {
-  "context": CaseContext,
+  context: CaseContext,
   "motion language": MotionLanguage,
   "narrative & sequencing": NarrativeSequence,
-  "process": Process,
+  process: Process,
   "final film": FinalFilm,
-  "reflection": LearningReflection,
+  reflection: LearningReflection,
   "results and impact": ResultsImpact,
 };
 

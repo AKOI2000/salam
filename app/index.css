@@ -1,5 +1,5 @@
 .page-start {
-  padding: 15rem 10rem;
+  padding: 15rem 7rem 12rem;
 }
 .page-start.works-hero h1 {
   margin-bottom: 4rem;
@@ -69,6 +69,11 @@ html {
   font-size: 62.5%;
   scroll-behavior: smooth;
 }
+@media (min-width: 2000px) {
+  html {
+    font-size: 125%;
+  }
+}
 @media (max-width: 768px) {
   html {
     font-size: 50%;
@@ -77,7 +82,7 @@ html {
 
 body {
   min-height: 100%;
-  color: var(--foreground);
+  color: var(--foreground-light);
   background: var(--background);
   font-family: var(--font-inter);
   -webkit-font-smoothing: antialiased;
@@ -146,7 +151,7 @@ p {
   font-size: var(--base-size);
   font-weight: 400;
   white-space: pre-wrap;
-  line-height: 1.3;
+  line-height: 1.4;
 }
 
 h6 {
@@ -334,7 +339,7 @@ h1 {
 }
 
 .container {
-  padding: 5rem 10rem;
+  padding: 5rem 7rem;
 }
 @media (max-width: 1024px) {
   .container {
@@ -847,7 +852,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 10rem;
+  padding: 1rem 7rem;
   width: 100%;
   position: fixed;
   top: 0;
@@ -1278,7 +1283,7 @@ header nav .nav-links.active:hover::before {
 }
 .hero h1,
 .hero p {
-  width: 50%;
+  width: 55%;
 }
 .hero h1::selection,
 .hero p::selection {
@@ -1381,7 +1386,7 @@ header nav .nav-links.active:hover::before {
   gap: 0.1rem;
   background-color: var(--background);
 }
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .testimonial-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1395,7 +1400,7 @@ header nav .nav-links.active:hover::before {
 .card {
   perspective: 5000px;
   width: 100%;
-  height: 30rem;
+  min-height: 35rem;
 }
 .card:hover .card-inner {
   transform: rotateY(-180deg);
@@ -1425,16 +1430,22 @@ header nav .nav-links.active:hover::before {
   justify-content: center;
 }
 .card-back {
-  background-color: var(--whiter-smoke);
+  background: var(--background);
+  border: 2px solid var(--whiter-smoke);
   display: flex;
   flex-direction: column;
   transform: rotateY(180deg);
-  border-radius: 1.2rem;
+  border-radius: 1.8rem;
   padding: 4rem 3rem;
 }
-@media (max-width: 608px) {
+@media (max-width: 1024px) {
   .card-back {
     padding: 3rem 2rem;
+  }
+}
+@media (max-width: 768px) {
+  .card-back {
+    padding: 3rem;
   }
 }
 .card-back p,
@@ -1447,17 +1458,32 @@ header nav .nav-links.active:hover::before {
   justify-content: space-between;
   margin-top: auto;
 }
+.card-back_info .img-box {
+  width: 7rem;
+  height: 7rem;
+  overflow: hidden;
+  position: relative;
+}
+.card-back_info .img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .card-back_info h6 {
-  font-size: 1.6rem;
-  font-weight: 400;
+  font-size: calc(var(--base-size) * 1.25);
 }
 .card-back_info p {
   color: var(--grey);
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 }
 
 .about-section h5 {
-  width: 50%;
+  width: 55%;
+}
+@media (max-width: 1024px) {
+  .about-section h5 {
+    width: 65%;
+  }
 }
 @media (max-width: 880px) {
   .about-section h5 {
@@ -1509,7 +1535,7 @@ header nav .nav-links.active:hover::before {
   object-fit: cover;
   width: 100%;
   height: auto;
-  max-height: 1200px;
+  max-height: 1000px;
 }
 
 .services {
@@ -1762,7 +1788,7 @@ header nav .nav-links.active:hover::before {
 .project-meta-group {
   text-align: center;
   padding: 3rem;
-  font-size: calc(var(--base-size) + 1px);
+  font-size: var(--base-size);
   border-right: 1px solid var(--foreground);
   border-bottom: 1px solid var(--foreground);
 }
@@ -1771,9 +1797,10 @@ header nav .nav-links.active:hover::before {
   font-weight: 300;
 }
 .project-meta-group .project-meta-answer {
-  color: var(--foreground);
+  color: var(--foreground-light);
   font-weight: 500;
   text-transform: capitalize;
+  margin-top: 0.5rem;
 }
 
 .case-study-ns {

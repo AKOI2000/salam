@@ -3,7 +3,7 @@
   // justify-content: center;
   text-align: center;
   padding: 3rem;
-  font-size: calc(var(--base-size) + 1px);
+  font-size: var(--base-size);
   border-right: 1px solid var(--foreground);
   border-bottom: 1px solid var(--foreground);
 
@@ -12,8 +12,9 @@
     font-weight: 300;
   }
   .project-meta-answer {
-    color: var(--foreground);
+    color: var(--foreground-light);
     font-weight: 500;
     text-transform: capitalize;
+    margin-top: .5rem;
   }
 }
