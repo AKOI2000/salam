@@ -1331,6 +1331,7 @@ header nav .nav-links.active:hover::before {
 }
 .selected-works .work:hover .work-img-box {
   border-radius: 1.8rem;
+  border: 0.5px solid var(--light-grey);
 }
 .selected-works .work:hover img,
 .selected-works .work:hover video {
@@ -1339,7 +1340,8 @@ header nav .nav-links.active:hover::before {
 .selected-works .work-img-box {
   overflow: hidden;
   border-radius: 0px;
-  transition: border-radius 0.7s ease-in-out;
+  transition: border-radius 0.7s ease-in-out, border 0.5s ease-in-out 0.2s;
+  border: 0px solid var(--light-grey);
 }
 .selected-works .work-img-box__ratio {
   position: relative;
@@ -1459,17 +1461,6 @@ header nav .nav-links.active:hover::before {
   align-items: end;
   justify-content: space-between;
   margin-top: auto;
-}
-.card-back_info .img-box {
-  width: 7rem;
-  height: 7rem;
-  overflow: hidden;
-  position: relative;
-}
-.card-back_info .img-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 .card-back_info h6 {
   font-size: calc(var(--base-size) * 1.25);

@@ -7,7 +7,7 @@ function TestimonialCard() {
         <div className="card-front">
           <div className="img-box">
             <Image
-              src={"/orijin.png"}
+              src={"/Hennessy.png"}
               alt="hennessy"
               width={150}
               height={150}
@@ -27,15 +27,6 @@ function TestimonialCard() {
             <div className="">
               <h6>Alausa Olayinka</h6>
               <p>Gbogbo nitishe</p>
-            </div>
-
-            <div className="img-box">
-              <Image
-                src={"/Hennessy.png"}
-                alt="hennessy"
-                width={80}
-                height={80}
-              />
             </div>
           </div>
         </div>
