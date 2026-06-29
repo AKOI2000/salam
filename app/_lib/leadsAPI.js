@@ -1,9 +1,14 @@
-import { supabase } from "./supabase";
+// leadsAPI.js
+import { createSupabaseServerClient } from "./supabase/server";
 import { unstable_cache } from "next/cache";
+import { supabaseAdmin } from "./supabase/admin";
 
+// ✅ use anon client for cached reads
 export const getLeadsApi = unstable_cache(
   async () => {
-    let { data: Leads, error } = await supabase.from("Leads").select("*");
+    const { data: Leads, error } = await supabaseAdmin
+      .from("Leads")
+      .select("*");
 
     if (error) throw new Error(error.message);
     return Leads;
@@ -15,7 +20,9 @@ export const getLeadsApi = unstable_cache(
   }
 );
 
+// ✅ use server client for writes
 export async function createLeadApi(leadData) {
+  const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("Leads")
     .insert([leadData])
@@ -26,6 +33,7 @@ export async function createLeadApi(leadData) {
 }
 
 export async function updateLeadApi(id, leadData) {
+  const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("Leads")
     .update(leadData)
@@ -37,6 +45,7 @@ export async function updateLeadApi(id, leadData) {
 }
 
 export async function deleteLeadApi(id) {
+  const supabase = await createSupabaseServerClient();
   const { error } = await supabase.from("Leads").delete().eq("id", id);
 
   if (error) throw new Error(error.message);

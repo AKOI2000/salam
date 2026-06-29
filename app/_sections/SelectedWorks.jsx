@@ -10,7 +10,7 @@ function SelectedWorks() {
       </div>
 
       <Suspense fallback={<SelectedWorksSkeleton />}>
-        <SelectedWorksLayout />
+        <SelectedWorksLayout  />
       </Suspense>
     </section>
   );

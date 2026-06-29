@@ -1,9 +1,9 @@
-import { supabase } from "./supabase";
+import { createSupabaseServerClient } from "./supabase/server";
+import { supabase } from "./supabase"; // keep for public reads
 import { unstable_cache } from "next/cache";
 
 export async function createProjectApi(newProject) {
-  console.log(newProject);
-
+  const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("Projects")
     .insert([newProject])
@@ -18,6 +18,7 @@ export async function createProjectApi(newProject) {
 }
 
 export async function updateProjectChecklist(id, field, value) {
+  const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("Projects")
     .update({ [field]: value })
@@ -29,12 +30,14 @@ export async function updateProjectChecklist(id, field, value) {
   return data;
 }
 
+// public read — anon client is fine
 export const getProjectBySlug = unstable_cache(
   async (slug) => {
-    let { data: Projects, error } = await supabase
+    const { data: Projects, error } = await supabase
       .from("Projects")
       .select("*, project_metadata(*), project_sections(*, section_media(*))")
       .eq("slug", slug)
+      .eq("published", true) // ← only published projects accessible publicly
       .single();
 
     if (error) {
@@ -51,8 +54,32 @@ export const getProjectBySlug = unstable_cache(
   },
 );
 
+// admin only — no published filter
+export const getProjectBySlugAdmin = unstable_cache(
+  async (slug) => {
+    const { data: Projects, error } = await supabase
+      .from("Projects")
+      .select("*, project_metadata(*), project_sections(*, section_media(*))")
+      .eq("slug", slug)
+      .single();
+
+    if (error) {
+      console.error(error);
+      throw new Error("Project could not be fetched... try again...");
+    }
+
+    return Projects;
+  },
+  ["project-by-slug-admin"],
+  {
+    revalidate: false,
+    tags: ["projects"],
+  },
+);
+
+// used in deleteProject — no cache needed
 export async function getProjectByIdApi(id) {
-  let { data: project, error } = await supabase
+  const { data: project, error } = await supabase
     .from("Projects")
     .select("*, project_metadata(*), project_sections(*, section_media(*))")
     .eq("id", id)
@@ -66,9 +93,12 @@ export async function getProjectByIdApi(id) {
   return project;
 }
 
+// public read — anon client is fine
 export const getProjects = unstable_cache(
   async () => {
-    let { data: Projects, error } = await supabase.from("Projects").select("*");
+    const { data: Projects, error } = await supabase
+      .from("Projects")
+      .select("*");
 
     if (error) {
       console.error(error);
@@ -84,7 +114,53 @@ export const getProjects = unstable_cache(
   },
 );
 
+// public portfolio page — only published
+export const getPublishedProjects = unstable_cache(
+  async () => {
+    const { data, error } = await supabase
+      .from("Projects")
+      .select("*")
+      .eq("published", true);
+
+    if (error) {
+      console.error(error);
+      throw new Error("Projects could not be fetched");
+    }
+
+    return data;
+  },
+  ["published-projects"],
+  {
+    revalidate: false,
+    tags: ["projects"],
+  },
+);
+
+// homepage selected works — only show_on_homepage
+export const getHomepageProjects = unstable_cache(
+  async () => {
+    const { data, error } = await supabase
+      .from("Projects")
+      .select("*")
+      .eq("show_on_homepage", true)
+      .eq("published", true);
+
+    if (error) {
+      console.error(error);
+      throw new Error("Projects could not be fetched");
+    }
+
+    return data;
+  },
+  ["homepage-projects"],
+  {
+    revalidate: false,
+    tags: ["projects"],
+  },
+);
+
 export async function updateProjectApi(id, newProject) {
+  const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("Projects")
     .update(newProject)
@@ -100,6 +176,7 @@ export async function updateProjectApi(id, newProject) {
 }
 
 export async function deleteProjectApi(id) {
+  const supabase = await createSupabaseServerClient();
   const { error } = await supabase.from("Projects").delete().eq("id", id);
 
   if (error) {
@@ -109,6 +186,7 @@ export async function deleteProjectApi(id) {
 }
 
 export async function deleteSectionsApi(id) {
+  const supabase = await createSupabaseServerClient();
   const { error } = await supabase
     .from("project_sections")
     .delete()
@@ -121,6 +199,7 @@ export async function deleteSectionsApi(id) {
 }
 
 export async function createMetaDataApi(metaData) {
+  const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("project_metadata")
     .insert([metaData])
@@ -135,6 +214,7 @@ export async function createMetaDataApi(metaData) {
 }
 
 export async function updateMetaDataApi(metaData, id) {
+  const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("project_metadata")
     .update(metaData)
@@ -150,14 +230,14 @@ export async function updateMetaDataApi(metaData, id) {
 }
 
 export async function deleteMetaDataApi(id) {
+  const supabase = await createSupabaseServerClient();
   const { error } = await supabase
     .from("project_metadata")
     .delete()
     .eq("project_id", id);
 
-
-      if (error) {
+  if (error) {
     console.error(error);
-    throw new Error("Project Metadata could not be updated");
+    throw new Error("Project Metadata could not be deleted");
   }
 }

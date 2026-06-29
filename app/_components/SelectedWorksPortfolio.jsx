@@ -1,8 +1,8 @@
 import WorkCard from "./WorkCard";
-import { getHomepageProjects } from "../_lib/projectAPI";
+import { getPublishedProjects } from "../_lib/projectAPI";
 
-async function SelectedWorksLayout() {
-  const projects = await getHomepageProjects();
+async function SelectedWorksPortfolio() {
+  const projects = await getPublishedProjects();
   return (
     <div className="selected-works">
       {projects.map((project, index) => (
@@ -12,4 +12,4 @@ async function SelectedWorksLayout() {
   );
 }
 
-export default SelectedWorksLayout;
+export default SelectedWorksPortfolio;

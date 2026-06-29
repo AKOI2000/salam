@@ -1,4 +1,5 @@
-import { supabase } from "./supabase";
+import { createSupabaseServerClient } from "./supabase/server";
+import { supabase } from "./supabase"; // keep for public reads
 
 export async function createSectionApi({
   section_type,
@@ -7,6 +8,8 @@ export async function createSectionApi({
   media,
   alt_text,
 }) {
+  const supabase = await createSupabaseServerClient();
+
   // Step 1 — create the section
   const { data: section, error: sectionError } = await supabase
     .from("project_sections")
@@ -32,7 +35,7 @@ export async function createSectionApi({
     const mediaRows = media.map(({ url, media_type }) => ({
       section_id: section.id,
       media_url: url,
-      media_type, // now comes from the file itself
+      media_type,
       alt_text: alt_text || null,
     }));
 
@@ -47,6 +50,7 @@ export async function createSectionApi({
 }
 
 export async function deleteSectionApi(sectionId) {
+  const supabase = await createSupabaseServerClient();
   const { error } = await supabase
     .from("project_sections")
     .delete()
@@ -56,6 +60,7 @@ export async function deleteSectionApi(sectionId) {
 }
 
 export async function updateSectionApi(sectionId, { section_type, text }) {
+  const supabase = await createSupabaseServerClient();
   const { error: updateError } = await supabase
     .from("project_sections")
     .update({ section_type, text })
@@ -71,8 +76,7 @@ export async function updateSectionApi(sectionId, { section_type, text }) {
   }
 }
 
-/////////////// Project Media
-
+// public read — anon client is fine
 export async function getSectionMediaApi(sectionId) {
   const { data, error } = await supabase
     .from("section_media")
@@ -84,18 +88,19 @@ export async function getSectionMediaApi(sectionId) {
 }
 
 export async function deleteMediaItemApi(sectionId) {
+  const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("section_media")
     .delete()
     .eq("section_id", sectionId)
-    .select(); // get the deleted row back so we have the url
-  // .single();
+    .select();
 
   if (error) throw new Error(error.message);
-  return data; // we need the url to delete from Cloudinary
+  return data;
 }
 
 export async function createMediaItemApi(mediaRows) {
+  const supabase = await createSupabaseServerClient();
   const { error: mediaError } = await supabase
     .from("section_media")
     .insert(mediaRows);

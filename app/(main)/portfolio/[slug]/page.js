@@ -7,10 +7,10 @@ import Process from "@/app/_sections/Process";
 import FinalFilm from "@/app/_sections/FinalFilm";
 import ResultsImpact from "@/app/_sections/ResultsImpact";
 import LearningReflection from "@/app/_sections/LearningReflection";
-import { getProjectBySlug, getProjects } from "@/app/_lib/projectAPI";
+import { getProjectBySlug, getPublishedProjects } from "@/app/_lib/projectAPI";
 
 export async function generateStaticParams() {
-  const projects = await getProjects();
+  const projects = await getPublishedProjects();
   const ids = projects.map((project) => ({ slug: String(project.slug) }));
   return ids;
 }
@@ -73,7 +73,7 @@ async function page({ params }) {
   const sortedSections = [...(project_sections ?? [])].sort(
     (a, b) =>
       SECTION_ORDER.indexOf(a.section_type) -
-      SECTION_ORDER.indexOf(b.section_type)
+      SECTION_ORDER.indexOf(b.section_type),
   );
 
   return (
