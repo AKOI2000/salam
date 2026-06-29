@@ -14,13 +14,11 @@ function WorkCard({ project }) {
 
   return (
     <div className="work">
-      <div className="work-img-box">
         <HoverVideoCard
           thumbnail={homepage_thumbnail}
           video={homepage_preview_video}
           alt={title}
         />
-      </div>
 
       <div className="work-text-box">
         <div className="work-text-box_flex">

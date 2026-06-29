@@ -24,5 +24,5 @@ export const getRecentActivityApi = unstable_cache(
   {
     revalidate: false,
     tags: ["activity"],
-  }
+  },
 );

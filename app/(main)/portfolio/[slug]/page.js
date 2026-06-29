@@ -15,6 +15,36 @@ export async function generateStaticParams() {
   return ids;
 }
 
+// app/portfolio/[slug]/page.jsx
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const project = await getProjectBySlug(slug);
+
+  return {
+    title: project.title,
+    description: project.short_description,
+    openGraph: {
+      title: project.title,
+      description: project.short_description,
+      url: `https://yoursite.com/portfolio/${slug}`,
+      images: [
+        {
+          url: project.case_study_cover ?? project.homepage_thumbnail,
+          width: 1200,
+          height: 630,
+          alt: project.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: project.title,
+      description: project.short_description,
+      images: [project.case_study_cover ?? project.homepage_thumbnail],
+    },
+  };
+}
+
 const SECTION_COMPONENTS = {
   context: CaseContext,
   "motion language": MotionLanguage,

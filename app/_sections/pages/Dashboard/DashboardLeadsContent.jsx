@@ -5,6 +5,7 @@ import { FaCheck } from "react-icons/fa";
 import DashboardLeadsSummaryBox from "../../DashboardLeadsSummaryBox";
 import LeadsTable from "../../LeadsTable";
 import { getLeadsApi } from "@/app/_lib/leadsAPI";
+import { calcChange } from "@/app/_lib/helpers";
 
 async function DashboardLeadsContent() {
   const leads = await getLeadsApi();
@@ -22,11 +23,6 @@ async function DashboardLeadsContent() {
   const thisMonthLeads = filterByMonth(now);
   const lastMonthLeads = filterByMonth(lastMonth);
 
-  // calculate % change helper
-  const calcChange = (current, previous) => {
-    if (previous === 0) return current > 0 ? 100 : 0;
-    return Math.round(((current - previous) / previous) * 100);
-  };
 
   // this month vs last month counts
   const thisContacted = leads.filter((l) => l.status === "contacted").length;

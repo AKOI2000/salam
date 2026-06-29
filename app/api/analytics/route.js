@@ -1,47 +1,8 @@
 // app/api/analytics/route.js
 
 import { NextResponse } from "next/server";
-import { startOfMonth, endOfMonth, subMonths, format } from "date-fns";
-
-const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST;
-const PROJECT_ID   = process.env.POSTHOG_PROJECT_ID;
-const API_KEY      = process.env.POSTHOG_PERSONAL_API_KEY;
-
-// ─────────────────────────────────────────────
-// HELPER: run a HogQL query
-// ─────────────────────────────────────────────
-async function fetchHogQL(sql) {
-  const res = await fetch(`${POSTHOG_HOST}/api/projects/${PROJECT_ID}/query/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${API_KEY}`,
-    },
-    body: JSON.stringify({ query: { kind: "HogQLQuery", query: sql } }),
-    next: { revalidate: 300 },
-  });
-
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`HogQL error ${res.status}: ${err}`);
-  }
-
-  const data = await res.json();
-  const cols  = data.columns ?? [];
-  return (data.results ?? []).map((row) =>
-    Object.fromEntries(cols.map((col, i) => [col, row[i]]))
-  );
-}
-
-// ─────────────────────────────────────────────
-// HELPER: date range
-// ─────────────────────────────────────────────
-function getMonthRange(date) {
-  return {
-    from: format(startOfMonth(date), "yyyy-MM-dd"),
-    to:   format(endOfMonth(date),   "yyyy-MM-dd"),
-  };
-}
+import { subMonths } from "date-fns";
+import { fetchHogQL, getMonthRange } from "@/app/_lib/helpers";
 
 // ─────────────────────────────────────────────
 // HELPER: overview query

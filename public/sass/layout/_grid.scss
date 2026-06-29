@@ -90,7 +90,6 @@
   }
 }
 
-
 .img-grid {
   display: flex;
   flex-wrap: wrap;
@@ -106,5 +105,20 @@
       height: 100%;
       object-fit: cover;
     }
+  }
+}
+
+.section-flex {
+  display: flex;
+  gap: 2rem 1rem;
+  flex-wrap: wrap;
+  margin-top: 4rem;
+
+  @include respond(mdl) {
+    flex-direction: column;
+  }
+
+  &.no-margin {
+    margin-top: 0;
   }
 }

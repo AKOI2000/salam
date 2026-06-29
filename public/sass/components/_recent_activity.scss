@@ -1,0 +1,59 @@
+.recent_activity {
+  max-height: 34rem;
+  display: grid;
+  grid-template-rows: auto auto;
+  overflow: hidden;
+
+  .activities {
+    overflow-y: scroll;
+    scrollbar-width: none;
+    .activity {
+      display: flex;
+      justify-content: space-between;
+      padding: 1.5rem 0;
+      align-items: center;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid var(--light-grey);
+      }
+
+      &_group {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        max-width: 75%;
+      }
+
+      &_icon {
+        width: 4rem;
+        height: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 2rem;
+
+        &.created {
+          background: #dcfce7;
+          color: #16a34a;
+        }
+
+        &.updated {
+          background: #dbeafe;
+          color: #2563eb;
+        }
+
+        &.deleted {
+          background: #fee2e2;
+          color: #dc2626;
+        }
+      }
+
+      &_text {
+        max-width: 80%;
+      }
+      &_time {
+      }
+    }
+  }
+}

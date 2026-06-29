@@ -15,14 +15,45 @@ const inter = Inter({
   display: "swap",
 });
 
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
-
 export const metadata = {
-  title: "Salam Portfolio",
-  description: "Salam Portfolio ",
+  metadataBase: new URL("https://yoursite.com"), // ← replace with your actual URL
+  title: {
+    template: "%s | Salam", // ← page titles become "About | Salam" etc
+    default: "Salam — Motion Designer",
+  },
+  description:
+    "Motion designer crafting compelling visual stories through film, animation, and digital experiences.",
+  keywords: ["motion designer", "animation", "film", "visual storytelling"],
+  authors: [{ name: "Salam" }],
+  creator: "Salam",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://yoursite.com",
+    siteName: "Salam Portfolio",
+    title: "Salam — Motion Designer",
+    description:
+      "Motion designer crafting compelling visual stories through film, animation, and digital experiences.",
+    images: [
+      {
+        // url: "/og-image.jpg", // put this in your public folder
+        width: 1200,
+        height: 630,
+        alt: "Salam Portfolio",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Salam — Motion Designer",
+    description:
+      "Motion designer crafting compelling visual stories through film, animation, and digital experiences.",
+    // images: ["/og-image.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({ children }) {
