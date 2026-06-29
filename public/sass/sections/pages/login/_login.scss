@@ -4,4 +4,49 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .login-box {
+    .input-box {
+      grid-template-columns: 100%;
+      gap: 1rem;
+
+      input {
+        border: none;
+        border-bottom: 1px solid var(--darkest-grey);
+        outline: none;
+      }
+
+      span {
+        padding-left: 0;
+      }
+
+      .input-password {
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        input {
+          width: 100%;
+          padding-right: 4rem; // space for the toggle button
+        }
+
+        &__toggle {
+          width: fit-content;
+          position: absolute;
+          right: 1.2rem;
+          background: none;
+          border: none;
+          cursor: pointer;
+          color: var(--grey);
+          font-size: 1.8rem;
+          display: flex;
+          align-items: center;
+
+          &:hover {
+            color: var(--foreground);
+          }
+        }
+      }
+    }
+  }
 }

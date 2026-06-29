@@ -1,10 +1,10 @@
-// app/_components/LoginForm.jsx
 "use client";
 
 import { useForm } from "react-hook-form";
-import { useTransition } from "react";
+import { useTransition, useState } from "react";
 import { login } from "@/app/_lib/auth-actions";
 import toast from "react-hot-toast";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function LoginForm() {
   const {
@@ -13,11 +13,14 @@ function LoginForm() {
     formState: { errors },
   } = useForm();
   const [isPending, startTransition] = useTransition();
+  const [showPassword, setShowPassword] = useState(false); // ← toggle state
 
   const onSubmit = (data) => {
     startTransition(async () => {
       const result = await login(data);
-      if (!result.success) {
+      // Fix 1 — result is undefined when redirect fires (success case)
+      // only show error if result exists and has an error
+      if (result?.error) {
         toast.error(result.error);
       }
     });
@@ -38,11 +41,21 @@ function LoginForm() {
         </div>
 
         <div className="input-box">
-          <input
-            type="password"
-            placeholder="Password"
-            {...register("password", { required: "Password is required" })}
-          />
+          {/* Fix 2 — password toggle */}
+          <div className="input-password">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              {...register("password", { required: "Password is required" })}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="input-password__toggle"
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </div>
           {errors.password && <span>{errors.password.message}</span>}
         </div>
 

@@ -1436,6 +1436,42 @@ header nav .nav-links.active:hover::before {
   justify-content: center;
   align-items: center;
 }
+.login-page .login-box .input-box {
+  grid-template-columns: 100%;
+  gap: 1rem;
+}
+.login-page .login-box .input-box input {
+  border: none;
+  border-bottom: 1px solid var(--darkest-grey);
+  outline: none;
+}
+.login-page .login-box .input-box span {
+  padding-left: 0;
+}
+.login-page .login-box .input-box .input-password {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.login-page .login-box .input-box .input-password input {
+  width: 100%;
+  padding-right: 4rem;
+}
+.login-page .login-box .input-box .input-password__toggle {
+  width: fit-content;
+  position: absolute;
+  right: 1.2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--grey);
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+}
+.login-page .login-box .input-box .input-password__toggle:hover {
+  color: var(--foreground);
+}
 
 .hero {
   display: flex;
