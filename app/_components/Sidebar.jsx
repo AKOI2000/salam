@@ -11,6 +11,7 @@ import { useDashboard } from "../_context/DashboardContext";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import LogoutButton from "./LogoutButton";
 
 const sideLinks = [
   {
@@ -100,7 +101,7 @@ function Sidebar() {
           ))}
         </nav>
 
-        <button className="btn-dashboard-primary">Logout</button>
+        <LogoutButton />
       </aside>
     </>
   );

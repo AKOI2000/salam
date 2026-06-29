@@ -4,18 +4,12 @@ const nextConfig = {
     serverActions: {
       bodySizeLimit: "100mb",
       allowedOrigins: ["*"],
+      timeout: 120,
     },
   },
-  serverExternalPackages: ["cloudinary"], // run cloudinary in Node.js runtime
+  serverExternalPackages: ["cloudinary", "@supabase/ssr"], // ← added @supabase/ssr
   httpAgentOptions: {
     keepAlive: true,
-  },
-  // increase timeout
-  experimental: {
-    serverActions: {
-      bodySizeLimit: "100mb",
-      timeout: 120, // 120 seconds
-    },
   },
   reactCompiler: true,
   images: {
@@ -31,6 +25,5 @@ const nextConfig = {
     ],
   },
 };
-
 
 export default nextConfig;
