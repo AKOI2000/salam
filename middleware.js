@@ -30,18 +30,20 @@ export async function middleware(request) {
     },
   );
 
+  // middleware.js
+
   // check session
   const {
-    data: { user },
-  } = await supabase.auth.getUser();
+    data: { session },
+  } = await supabase.auth.getSession(); // ← faster
 
   // if no user and trying to access admin — redirect to login
-  if (!user && request.nextUrl.pathname.startsWith("/admin")) {
+  if (!session && request.nextUrl.pathname.startsWith("/admin")) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
   // if user is logged in and tries to visit login — redirect to admin
-  if (user && request.nextUrl.pathname === "/login") {
+  if (session && request.nextUrl.pathname === "/login") {
     return NextResponse.redirect(new URL("/admin", request.url));
   }
 

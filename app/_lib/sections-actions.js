@@ -12,16 +12,20 @@ import {
   deleteSectionApi,
 } from "./sectionApi";
 import { logActivityApi } from "./activityAPI";
+import { createSupabaseServerClient } from "./supabase/server";
 
 export async function createSection(formData) {
   try {
+    const supabase = await createSupabaseServerClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error("Unauthorized");
+
     const section_type = formData.get("section_type");
     const text = formData.get("text");
     const project_id = formData.get("project_id");
     const alt_text = formData.get("media_alt") || "";
     const slug = formData.get("slug");
 
-    // URLs already uploaded from client — just parse them
     const mediaItems = JSON.parse(formData.get("media_items") || "[]");
 
     await createSectionApi({
@@ -51,6 +55,10 @@ export async function createSection(formData) {
 export async function deleteSection(sectionId, slug) {
   try {
     if (!sectionId) throw new Error("No section ID provided");
+
+    const supabase = await createSupabaseServerClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error("Unauthorized");
 
     const mediaItems = await getSectionMediaApi(sectionId);
 
@@ -82,6 +90,10 @@ export async function editSection(sectionId, formData, params) {
   try {
     if (!sectionId) throw new Error("No section ID provided");
 
+    const supabase = await createSupabaseServerClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error("Unauthorized");
+
     const section_type = formData.get("section_type");
     const text = formData.get("section_text");
     const alt_text = formData.get("alt_text");
@@ -101,7 +113,6 @@ export async function editSection(sectionId, formData, params) {
       await deleteMediaItemApi(sectionId);
     }
 
-    // URLs already uploaded from client — just parse them
     const mediaItems = JSON.parse(formData.get("media_items") || "[]");
 
     if (mediaItems.length > 0) {

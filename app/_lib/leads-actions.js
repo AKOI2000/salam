@@ -3,6 +3,7 @@
 import { revalidatePath, revalidateTag } from "next/cache";
 import { createLeadApi, deleteLeadApi, updateLeadApi } from "./leadsAPI";
 import { logActivityApi } from "./activityAPI";
+import { createSupabaseServerClient } from "./supabase/server";
 
 export async function sendLead(formData) {
   try {
@@ -35,6 +36,10 @@ export async function updateLeadStatus(id, status) {
   try {
     if (!id) throw new Error("No lead ID provided");
 
+    const supabase = await createSupabaseServerClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error("Unauthorized");
+
     await updateLeadApi(id, { status });
 
     await logActivityApi({
@@ -56,6 +61,10 @@ export async function updateLeadStatus(id, status) {
 export async function deleteLead(id) {
   try {
     if (!id) throw new Error("No lead ID provided");
+
+    const supabase = await createSupabaseServerClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error("Unauthorized");
 
     await deleteLeadApi(id);
 
