@@ -1594,12 +1594,12 @@ header nav .nav-links.active:hover::before {
   gap: 0.1rem;
   background-color: var(--background);
 }
-@media (max-width: 1024px) {
+@media (max-width: 1025px) {
   .testimonial-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-@media (max-width: 608px) {
+@media (max-width: 650px) {
   .testimonial-grid {
     grid-template-columns: 1fr;
   }
@@ -1608,7 +1608,7 @@ header nav .nav-links.active:hover::before {
 .card {
   perspective: 5000px;
   width: 100%;
-  min-height: 35rem;
+  min-height: 38rem;
 }
 .card:hover .card-inner {
   transform: rotateY(-180deg);
@@ -1644,11 +1644,12 @@ header nav .nav-links.active:hover::before {
   flex-direction: column;
   transform: rotateY(180deg);
   border-radius: 1.8rem;
-  padding: 4rem 3rem;
+  padding: 3rem;
+  gap: 2rem;
 }
 @media (max-width: 1024px) {
   .card-back {
-    padding: 3rem 2rem;
+    padding: 2.5rem 1.5rem;
   }
 }
 @media (max-width: 768px) {

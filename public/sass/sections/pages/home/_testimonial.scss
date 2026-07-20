@@ -4,11 +4,11 @@
   gap: 0.1rem;
   background-color: var(--background);
 
-  @include respond(lg) {
+  @include respond(lgl) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @include respond(mds) {
+  @include respond(mdm) {
     grid-template-columns: 1fr;
   }
 }
@@ -16,7 +16,7 @@
 .card {
   perspective: 5000px;
   width: 100%;
-  min-height: 35rem;
+  min-height: 38rem;
 
   &:hover &-inner {
     transform: rotateY(-180deg);
@@ -50,6 +50,7 @@
     align-items: center;
     justify-content: center;
   }
+
   &-back {
     background: var(--background);
     border: 2px solid var(--whiter-smoke);
@@ -57,15 +58,20 @@
     flex-direction: column;
     transform: rotateY(180deg);
     border-radius: 1.8rem;
-    padding: 4rem 3rem;
+    padding: 3rem;
+    gap: 2rem;
 
     @include respond(lg) {
-      padding: 3rem 2rem;
+      padding: 2.5rem 1.5rem;
     }
 
     @include respond(md) {
       padding: 3rem;
     }
+
+    // p{
+    //   font-size: 1.4rem;
+    // }
 
     p,
     h6 {
