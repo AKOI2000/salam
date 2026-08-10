@@ -5,6 +5,8 @@ import MetaDataForm from "@/app/_sections/MetaDataForm";
 async function DashboardProjectContent({ slug }) {
   const project = await getProjectBySlugAdmin(slug);
   const { project_metadata, id, project_sections, title } = project;
+  console.log({project_metadata, id, project_sections, title});
+
   return (
     <>
       <DashboardSection params={slug} sections={project_sections} />

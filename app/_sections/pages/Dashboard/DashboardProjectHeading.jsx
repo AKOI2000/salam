@@ -5,6 +5,7 @@ import { IoAdd } from "react-icons/io5";
 
 async function DashboardProjectHeading({ slug }) {
   const { id } = await getProjectBySlugAdmin(slug);
+  console.log(id);
   return (
     <>
       <DashboardHeading
