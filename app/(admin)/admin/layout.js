@@ -3,7 +3,7 @@ import { Toaster } from "react-hot-toast";
 import "@/app/index.css";
 import Sidebar from "@/app/_components/Sidebar";
 import DashboardHead from "@/app/_components/DashboardHead";
-import { DashboardProvider } from "@/app/_context/DashboardContext";
+import { DashboardProvider } from "@/app/context/DashboardContext";
 
 export const metadata = {
   title: {

@@ -1,7 +1,7 @@
 "use client";
 
 // import { useEffect, useState } from "react";
-import { useDashboard } from "../_context/DashboardContext";
+import { useDashboard } from "../context/DashboardContext";
 
 function DashboardHead() {
     const { openSidebar } = useDashboard();

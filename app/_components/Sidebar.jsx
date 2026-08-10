@@ -7,7 +7,7 @@ import {
 import { GrProjects } from "react-icons/gr";
 import { CgWebsite } from "react-icons/cg";
 import { useEffect } from "react";
-import { useDashboard } from "../_context/DashboardContext";
+import { useDashboard } from "../context/DashboardContext";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";

@@ -1637,6 +1637,13 @@ header nav .nav-links.active:hover::before {
   align-items: center;
   justify-content: center;
 }
+.card-front .img-box {
+  display: flex;
+  justify-content: center;
+}
+.card-front .img-box img {
+  max-width: 60%;
+}
 .card-back {
   background: var(--background);
   border: 2px solid var(--whiter-smoke);

@@ -41,6 +41,7 @@ function FAQItem({ faq, isOpen, onToggle }) {
       </button>
 
       <motion.div
+      initial={{ maxHeight: 0, opacity: 0, visibility: "hidden", padding: 0 }}
         animate={
           isOpen
             ? { maxHeight: 500, opacity: 1, visibility: "visible" }
