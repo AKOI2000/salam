@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useTransition } from "react";
-import { updateProject } from "../_lib/products-actions";
+import { updateProject } from "../_lib/projects-actions";
 import { useForm } from "react-hook-form";
 import { uploadToCloudinaryClient } from "@/app/_lib/uploadToCloudinaryClient";
 import toast from "react-hot-toast";

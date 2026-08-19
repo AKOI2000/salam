@@ -1,7 +1,8 @@
 function ProjectMeta({ project = {} }) {
-  const { project_metadata } = project;
-  const metaData = project_metadata[0];
-  const { client, role, timeline, tools, deliverables } = metaData;
+  const { metadata } = project;
+  if (!metadata) return null;
+
+  const { client, role, timeline, tools, deliverables } = metadata;
 
   return (
     <div className="col-5-by-1">

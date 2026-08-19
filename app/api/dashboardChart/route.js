@@ -1,6 +1,6 @@
 import { fetchHogQL, groupByMonth } from "@/app/_lib/helpers";
 import { getLeadsApi } from "@/app/_lib/leadsAPI";
-import { getProjects } from "@/app/_lib/projectAPI";
+import { getProjects } from "@/app/_lib/projectsAPI";
 import { format, parse } from "date-fns";
 import { NextResponse } from "next/server";
 
@@ -25,8 +25,15 @@ export async function GET() {
       getLeadsApi(),
     ]);
 
+    console.log(projects);
     const leadsByMonth = groupByMonth(leads);
     const projectsByMonth = groupByMonth(projects);
+
+    // console.log("Projects by month:", projectsByMonth);
+    console.log(
+      "Visitor keys:",
+      visitors.map((item) => item.key),
+    );
 
     const chartData = visitors.map((item) => ({
       Date: format(parse(item.key, "yyyy-MM", new Date()), "MMM yyyy"),

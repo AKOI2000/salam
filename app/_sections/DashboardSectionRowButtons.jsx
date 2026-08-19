@@ -5,7 +5,7 @@ import { MdDeleteForever } from "react-icons/md";
 import Modal from "../_components/Modal";
 import ConfirmDelete from "../_components/ConfirmDelete";
 import EditSectionForm from "../_components/EditSectionForm";
-import { deleteSection } from "../_lib/sections-actions";
+import { deleteSection } from "../_lib/block-actions";
 
 function DashboardSectionRowButtons({section, params}) {
   

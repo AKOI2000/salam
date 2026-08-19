@@ -1,5 +1,5 @@
 import WorkCard from "./WorkCard";
-import { getHomepageProjects } from "../_lib/projectAPI";
+import { getHomepageProjects } from "../_lib/projectsAPI";
 
 async function SelectedWorksLayout() {
   const projects = await getHomepageProjects();

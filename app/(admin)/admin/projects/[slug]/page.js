@@ -11,7 +11,6 @@ async function page({ params }) {
     <Suspense fallback={<ProjectPageSkeleton />}>
       <DashboardProjectHeading slug={slug} />
       <DashboardProjectContent slug={slug} />
-      <DashboardSectionCheckList params={slug} />
     </Suspense>
   );
 }

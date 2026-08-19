@@ -19,5 +19,10 @@ export async function uploadToCloudinaryClient(file) {
 
   const data = await response.json();
   if (data.error) throw new Error(data.error.message);
-  return data.secure_url;
+
+  return {
+    url: data.secure_url,
+    publicId: data.public_id,
+    resourceType: data.resource_type, // "image" | "video"
+  };
 }

@@ -1,5 +1,5 @@
 import DashboardChecklist from "../_components/DashboardChecklist";
-import { getProjectBySlugAdmin } from "../_lib/projectAPI";
+import { getProjectBySlugAdmin } from "../_lib/projectsAPI";
 
 async function DashboardSectionCheckList({ params }) {
   const { show_on_homepage, published, id } = await getProjectBySlugAdmin(params);

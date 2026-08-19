@@ -1,31 +1,20 @@
-import Image from "next/image";
 import { Link } from "next-view-transitions";
 import { FaArrowRightLong } from "react-icons/fa6";
 import HoverVideoCard from "./HoverVideoCard";
 
 function WorkCard({ project }) {
-  const {
-    title, 
-    short_description,
-    homepage_thumbnail,
-    slug,
-    homepage_preview_video,
-  } = project;
+  const { title, excerpt, thumbnail, slug, previewVideoUrl } = project;
 
   return (
     <div className="work">
-        <HoverVideoCard
-          thumbnail={homepage_thumbnail}
-          video={homepage_preview_video}
-          alt={title}
-        />
+      <HoverVideoCard thumbnail={thumbnail} video={previewVideoUrl} alt={title} />
 
       <div className="work-text-box">
         <div className="work-text-box_flex">
-          <h6>{project.title}</h6>
+          <h6>{title}</h6>
         </div>
 
-        <p>{short_description}</p>
+        <p>{excerpt}</p>
 
         <Link
           prefetch={true}

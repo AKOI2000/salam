@@ -2,22 +2,22 @@ import Image from "next/image";
 import DashboardProductCardButtons from "./DashboardProductCardButtons";
 
 function DashboadrdProductCard({ product }) {
-  const shortDescription =
-    product.short_description.length > 50
-      ? product.short_description.substring(0, 42) + " ......."
-      : product.short_description;
+const shortDescription =
+  product.excerpt?.length > 50
+    ? product.excerpt.substring(0, 42) + " ......."
+    : product.excerpt ?? "";
   return (
     <div className="products-table-row">
       <Image
         alt={product.title}
-        src={product.homepage_thumbnail}
+        src={product.thumbnail}
         width={300}
         height={200}
       />
       <p className="title">{product.title}</p>
       <p>{shortDescription}</p>
-      <p className={product.show_on_homepage ? "active" : "inactive"}>
-        {product.show_on_homepage ? "Active" : "Inactive"}
+      <p className={product.featured ? "active" : "inactive"}>
+        {product.featured ? "Active" : "Inactive"}
       </p>
       <p className={product.published ? "published" : "draft"}>
         {product.published ? "Published" : "Draft"}

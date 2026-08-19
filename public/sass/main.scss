@@ -21,6 +21,7 @@
 @import "./components//skeleton";
 @import "./components/recent_activity";
 @import "./components/quick_action";
+@import "./components/block-editor";
 
 @import "./sections/pages/login/login";
 
@@ -34,13 +35,9 @@
 @import "./sections/pages/about/faq";
 
 @import "./sections/pages/work/case-study-hero";
-@import "./sections/pages/work/case-study-process";
-@import "./sections/pages/work/case-study-context";
-@import "./sections/pages/work/case-study-ff";
-@import "./sections/pages/work/case-study-ml";
 @import "./sections/pages/work/project-meta";
-@import "./sections/pages/work/case-study-ns";
-@import "./sections/pages/work/case-study-lr";
+@import "./sections/pages/work/block-rendering";
+
 
 @import "./sections/pages/dashboard/dashboard-head";
 @import "./sections/pages/dashboard/dashboard-table";

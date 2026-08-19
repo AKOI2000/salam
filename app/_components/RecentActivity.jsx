@@ -13,31 +13,31 @@ async function RecentActivity() {
 
       <div className="activities">
         {recentActivity.map((activity) => (
-          <div className="activity" key={activity.id}>
+          <div className="activity" key={activity?.id}>
             <div className="activity_group">
               <p
                 className={`activity_icon ${
-                  activity.action === "created"
+                  activity?.action === "created"
                     ? "created"
-                    : activity.action === "updated"
+                    : activity?.action === "updated"
                       ? "updated"
-                      : activity.action === "deleted"
+                      : activity?.action === "deleted"
                         ? "deleted"
                         : ""
                 }`}
               >
-                {activity.type === "section" ? (
+                {activity?.type === "section" ? (
                   <FaRegFolderOpen />
-                ) : activity.type === "project" ? (
+                ) : activity?.type === "project" ? (
                   <FiBriefcase />
-                ) : activity.type === "lead" ? (
+                ) : activity?.type === "lead" ? (
                   <MdOutlinePeople />
                 ) : null}
               </p>
-              <p className="activity_text">{activity.message}</p>
+              <p className="activity_text">{activity?.message}</p>
             </div>
             <p className="activity_time">
-              {formatDistanceToNow(new Date(activity.created_at), {
+              {formatDistanceToNow(new Date(activity?.createdAt), {
                 addSuffix: true,
               })}
             </p>

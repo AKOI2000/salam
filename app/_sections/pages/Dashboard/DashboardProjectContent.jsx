@@ -1,16 +1,33 @@
-import { getProjectBySlugAdmin } from "@/app/_lib/projectAPI";
-import DashboardSection from "@/app/_sections/DashboardSection";
+import { getProjectBySlugAdmin } from "@/app/_lib/projectsAPI";
+import BlockEditor from "@/app/_sections/BlockEditor";
 import MetaDataForm from "@/app/_sections/MetaDataForm";
+import DashboardChecklist from "@/app/_components/DashboardChecklist";
 
 async function DashboardProjectContent({ slug }) {
   const project = await getProjectBySlugAdmin(slug);
-  const { project_metadata, id, project_sections, title } = project;
-  console.log({project_metadata, id, project_sections, title});
+  const { metadata, id, blocks, title, featured, published } = project;
 
   return (
     <>
-      <DashboardSection params={slug} sections={project_sections} />
-      <MetaDataForm params={slug} metadata={project_metadata[0]} id={id} />
+      <BlockEditor projectId={id} slug={slug} initialBlocks={blocks} />
+      <MetaDataForm params={slug} metadata={metadata} id={id} />
+
+      <div className="section-checklist-box">
+        <DashboardChecklist
+          text={"Do you want the project on the homepage?"}
+          confirmed={featured}
+          projectId={id}
+          field="featured"
+          slug={slug}
+        />
+        <DashboardChecklist
+          text={"Is the project done and can be published?"}
+          confirmed={published}
+          projectId={id}
+          field="published"
+          slug={slug}
+        />
+      </div>
     </>
   );
 }

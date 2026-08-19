@@ -1,31 +1,23 @@
-// import { supabase } from "./supabase";
-import { supabaseAdmin } from "./supabase/admin";
-import { createSupabaseServerClient } from "./supabase/server";
+// activityAPI.js
+import { prisma } from "@/lib/prisma";
 import { unstable_cache } from "next/cache";
 
 export async function logActivityApi({ type, action, message }) {
-  const supabase = await createSupabaseServerClient();
-  const { error } = await supabase
-    .from("activity_log")
-    .insert({ type, action, message });
-
-  if (error) throw new Error(error.message);
+  await prisma.activityLog.create({
+    data: { type, action, message },
+  });
 }
 
 export const getRecentActivityApi = unstable_cache(
   async () => {
-    const { data, error } = await supabaseAdmin // ← anon client
-      .from("activity_log")
-      .select("*")
-      .order("created_at", { ascending: false })
-      .limit(10);
-
-    if (error) throw new Error(error.message);
-    return data;
+    return prisma.activityLog.findMany({
+      orderBy: { createdAt: "desc" },
+      take: 10,
+    });
   },
   ["activity"],
   {
     revalidate: false,
     tags: ["activity"],
-  },
+  }
 );

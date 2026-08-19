@@ -24,7 +24,12 @@
   }
 
   h1 {
-    text-transform: uppercase;
+    // text-transform: capitalize;
+
+    span{
+      color: var(--grey);
+      font-weight: 400;
+    }
   }
 
   h1,

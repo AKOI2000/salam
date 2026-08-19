@@ -1,7 +1,7 @@
 "use client";
 
 import { useTransition, useState } from "react";
-import { updateCheckList } from "../_lib/products-actions";
+import { updateCheckList } from "../_lib/projects-actions";
 
 function DashboardChecklist({ text, confirmed = false, projectId, field, slug }) {
   // local state tracks the checkbox before the user hits confirm

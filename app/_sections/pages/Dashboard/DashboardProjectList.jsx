@@ -1,4 +1,4 @@
-import { getProjects } from "@/app/_lib/projectAPI";
+import { getProjects } from "@/app/_lib/projectsAPI";
 import DashboardProducts from "@/app/_sections/DashboardProducts";
 
 async function DashboardProjectList() {

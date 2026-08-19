@@ -2,5 +2,11 @@
 import ProjectPageSkeleton from "@/app/_components/ProjectPageSkeleton";
 
 export default function Loading() {
-  return <ProjectPageSkeleton />;
+  return (
+    <>
+      <div className="container">
+        <ProjectPageSkeleton />
+      </div>
+    </>
+  );
 }

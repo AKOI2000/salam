@@ -3,7 +3,7 @@ import { formatDistanceToNow } from 'date-fns'
 
 
 function LeadsTableRow({ data }) {
-const date = new Date(data?.created_at);
+const date = new Date(data?.createdAt);
 const formattedDate = formatDistanceToNow(date, { addSuffix: true });
 
   return (

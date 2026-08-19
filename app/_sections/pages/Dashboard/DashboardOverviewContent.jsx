@@ -1,4 +1,4 @@
-import { getProjects } from "@/app/_lib/projectAPI";
+import { getProjects } from "@/app/_lib/projectsAPI";
 import DashboardOverviewSummaryBox from "../../DashboardOverviewSummaryBox";
 import { getLeadsApi } from "@/app/_lib/leadsAPI";
 import { isSameMonth, isSameYear, subMonths } from "date-fns";
@@ -12,7 +12,7 @@ async function DashboardOverviewContent() {
   const lastMonth = subMonths(now, 1);
 
   const lastMonthLeads = leads.filter((lead) => {
-    const createdAt = new Date(lead.created_at);
+   const createdAt = new Date(lead.createdAt);
     return (
       isSameMonth(createdAt, lastMonth) && isSameYear(createdAt, lastMonth)
     );

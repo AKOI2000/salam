@@ -1,21 +1,10 @@
-import AddSectionForm from "@/app/_components/AddSectionForm";
 import DashboardHeading from "@/app/_components/DashboardHeading";
-import { getProjectBySlugAdmin } from "@/app/_lib/projectAPI";
-import { IoAdd } from "react-icons/io5";
+import { getProjectBySlugAdmin } from "@/app/_lib/projectsAPI";
 
 async function DashboardProjectHeading({ slug }) {
-  const { id } = await getProjectBySlugAdmin(slug);
-  console.log(id);
+  const project = await getProjectBySlugAdmin(slug);
   return (
-    <>
-      <DashboardHeading
-        title={`More about the project: ${slug}`}
-        action={"Add Section"}
-        icon={<IoAdd />}
-      >
-        <AddSectionForm id={id} slug={slug} />
-      </DashboardHeading>
-    </>
+    <DashboardHeading title={`Editing: ${project.title}`} />
   );
 }
 

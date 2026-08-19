@@ -1,42 +1,25 @@
-import { createMetaData, updateMetaData } from "../_lib/project-metadata-actions";
+import { saveMetaData } from "@/app/_lib/project-metadata-actions";
 
 async function MetaDataForm({ params, metadata, id }) {
-
   return (
     <div className="dashboard-metadata-box">
       <h3>The Project Metadata</h3>
-      <form action={!metadata ? createMetaData : updateMetaData}>
+      <form action={saveMetaData}>
         <div className="input-box">
-          <input
-            type="text"
-            name="client"
-            placeholder="Client Name"
-            defaultValue={metadata?.client || ""}
-          />
+          <input type="text" name="client" placeholder="Client Name" defaultValue={metadata?.client || ""} />
         </div>
         <div className="input-box">
-          <input
-            type="text"
-            name="role"
-            placeholder="What was your role?"
-            defaultValue={metadata?.role || ""}
-          />
+          <input type="text" name="role" placeholder="What was your role?" defaultValue={metadata?.role || ""} />
         </div>
         <div className="input-box">
-          <input
-            type="text"
-            name="timeline"
-            placeholder="The Timeline [in weeks]"
-            defaultValue={metadata?.timeline || ""}
-          />
+          <input type="text" name="timeline" placeholder="The Timeline [in weeks]" defaultValue={metadata?.timeline || ""} />
         </div>
-
         <div className="input-box">
           <input
             type="text"
             name="deliverables"
             placeholder="What are the deliverables? [separate with comma]"
-            defaultValue={metadata?.deliverables || ""}
+            defaultValue={metadata?.deliverables?.join(", ") || ""}
           />
         </div>
         <div className="input-box">
@@ -44,7 +27,7 @@ async function MetaDataForm({ params, metadata, id }) {
             type="text"
             name="tools"
             placeholder="What are the tools used? [separate with comma]"
-            defaultValue={metadata?.tools || ""}
+            defaultValue={metadata?.tools?.join(", ") || ""}
           />
         </div>
 

@@ -53,7 +53,7 @@ html {
   scroll-behavior: smooth;
 
   @include lgrespond(xxxl) {
-    font-size: 125%;
+    font-size: 93.75%;
   }
 
   @include respond(md) {

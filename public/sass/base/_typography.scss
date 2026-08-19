@@ -76,18 +76,18 @@ h1 {
   }
 }
 
-.case-study {
-  p {
-    width: 70%;
-    line-height: 1.5;
-    // margin: auto;
+// .case-study {
+//   p {
+//     width: 70%;
+//     line-height: 1.5;
+//     // margin: auto;
 
-    @include respond(md) {
-      width: 75%;
-    }
+//     @include respond(md) {
+//       width: 75%;
+//     }
 
-    @include respond(mds) {
-      width: 100%;
-    }
-  }
-}
+//     @include respond(mds) {
+//       width: 100%;
+//     }
+//   }
+// }

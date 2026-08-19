@@ -6,36 +6,38 @@ const PROJECT_ID = process.env.POSTHOG_PROJECT_ID;
 const API_KEY = process.env.POSTHOG_PERSONAL_API_KEY;
 
 export async function uploadToCloudinary(file) {
-  // Step 1: File → ArrayBuffer → Buffer (what Node.js/Cloudinary understands)
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
 
-  // Step 2: Wrap in a Promise because Cloudinary's SDK uses callbacks
   return new Promise((resolve, reject) => {
     cloudinary.uploader
       .upload_stream(
         { folder: "Salam_Project", resource_type: "auto" },
         (error, result) => {
           if (error || !result) return reject(error);
-          resolve(result.secure_url); // this is the URL we save to Supabase
+          resolve({
+            url: result.secure_url,
+            publicId: result.public_id,
+            resourceType: result.resource_type, // "image" | "video"
+          });
         },
       )
-      .end(buffer); // .end() is what actually triggers the upload
+      .end(buffer);
   });
 }
 
+// kept for any legacy URLs saved before this change — new uploads
+// should always use the publicId stored at upload time instead
 export function getPublicIdFromUrl(url) {
   const afterUpload = url.split("/upload/")[1];
   const withoutVersion = afterUpload.replace(/v\d+\//, "");
   const publicId = withoutVersion.replace(/\.[^.]+$/, "");
-  return publicId; // "Salam_Project/qjetdnm8g7k2zefpmref"
+  return publicId;
 }
 
-export async function deleteFromCloudinary(url, media_type) {
-  const publicId = getPublicIdFromUrl(url);
-
+export async function deleteFromCloudinary(publicId, resourceType) {
   return cloudinary.uploader.destroy(publicId, {
-    resource_type: media_type === "video" ? "video" : "image",
+    resource_type: resourceType === "video" ? "video" : "image",
   });
 }
 
@@ -84,7 +86,7 @@ export function getMonthRange(date) {
 
 export function groupByMonth(items) {
   return items.reduce((acc, item) => {
-    const key = format(new Date(item.created_at), "yyyy-MM");
+    const key = format(new Date(item?.createdAt), "yyyy-MM");
 
     acc[key] = (acc[key] || 0) + 1;
 

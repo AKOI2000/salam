@@ -5,47 +5,46 @@ import videojs from "video.js";
 import "video.js/dist/video-js.css";
 
 function VideoPlayer({ src, poster }) {
-  const videoRef = useRef(null);
+  const containerRef = useRef(null);
   const playerRef = useRef(null);
 
   useEffect(() => {
-    // only initialize once
+    if (!containerRef.current) return;
+
     if (!playerRef.current) {
-      playerRef.current = videojs(videoRef.current, {
+      // video.js creates and owns this <video> element itself —
+      // React never renders or touches it directly
+      const videoElement = document.createElement("video-js");
+      videoElement.classList.add("vjs-big-play-centered");
+      containerRef.current.appendChild(videoElement);
+
+      playerRef.current = videojs(videoElement, {
         controls: true,
         autoplay: false,
         preload: "auto",
-        fluid: true, // makes it responsive
+        fluid: true,
         poster: poster ?? "",
         aspectRatio: "16:9",
-        sources: [
-          {
-            src,
-            // type: "video/mp4",
-          },
-        ],
+        sources: [{ src }],
       });
+    } else {
+      playerRef.current.src({ src, type: "video/mp4" });
     }
+  }, [src, poster]);
 
-    // cleanup on unmount
+  // separate cleanup effect — runs only on true unmount
+  useEffect(() => {
     return () => {
       if (playerRef.current) {
         playerRef.current.dispose();
         playerRef.current = null;
       }
     };
-  }, [poster, src]);
-
-  // update src if it changes
-  useEffect(() => {
-    if (playerRef.current && src) {
-      playerRef.current.src({ src, type: "video/mp4" });
-    }
-  }, [src]);
+  }, []);
 
   return (
     <div data-vjs-player>
-      <video ref={videoRef} className="video-js vjs-big-play-centered" />
+      <div ref={containerRef} />
     </div>
   );
 }

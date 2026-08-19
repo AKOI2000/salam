@@ -1,0 +1,103 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  excerpt     String?
+
+  // homepage grid card
+  thumbnail             String?
+  thumbnailPublicId     String?
+  thumbnailResourceType String?
+
+  previewVideoUrl           String?
+  previewVideoPublicId      String?
+  previewVideoResourceType  String?
+
+  // case study hero
+  coverImage             String?
+  coverImagePublicId     String?
+  coverImageResourceType String?
+
+  published Boolean  @default(false)
+  featured  Boolean  @default(false)
+  order     Int      @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  blocks   Block[]
+  leads    Lead[]
+  metadata ProjectMetadata?
+}
+
+model ProjectMetadata {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  client       String?
+  role         String?
+  timeline     String?
+  deliverables Json?
+  tools        Json?
+
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String  @unique
+}
+
+model Block {
+  id        String    @id @default(cuid())
+  type      BlockType
+  order     Int
+  content   Json
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String
+
+  @@index([projectId, order])
+}
+
+enum BlockType {
+  heading
+  subheading
+  paragraph
+  quote
+  list
+  image
+  video
+  link
+}
+
+model Lead {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  name      String?
+  email     String?  @unique
+  phone     String?
+  status    String   @default("new")
+  message   String?
+
+  project   Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  projectId String?
+
+  @@index([projectId])
+}
+
+model ActivityLog {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  type      String?
+  action    String?
+  message   String?
+
+  @@map("activity_log")
+}
