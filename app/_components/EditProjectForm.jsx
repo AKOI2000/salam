@@ -40,7 +40,7 @@ function EditProjectForm({ product, onCloseModal }) {
 
         const result = await updateProject(formData);
         if (result.success) {
-          toast.success("Projecte edited successfully");
+          toast.success("Project edited successfully");
           reset();
           onCloseModal?.();
         } else {
@@ -67,51 +67,42 @@ function EditProjectForm({ product, onCloseModal }) {
             defaultValue={product.title}
           />
         </div>
-
         <div className="input-box">
           <textarea
-            name="short_description"
+            name="excerpt"
             placeholder="Short Description..."
-            defaultValue={product.short_description}
+            defaultValue={product.excerpt}
           />
         </div>
-
         <div className="input-group">
-          <label htmlFor="homepage_thumbnail">Homepage Thumbnail</label>
-          <input
-            type="file"
-            name="homepage_thumbnail"
-            id="homepage_thumbnail"
-            accept="image/*"
-          />
+          <label htmlFor="thumbnail">Homepage Thumbnail</label>
+          <input type="file" name="thumbnail" id="thumbnail" accept="image/*" />
         </div>
-
         <div className="input-group">
           <label htmlFor="homepage_preview_video">Homepage Preview Video</label>
           <input
             type="file"
-            name="homepage_preview_video"
-            id="homepage_preview_video"
+            name="preview_video"
+            id="preview_video"
             accept="video/*"
           />
         </div>
-
         <div className="input-group">
           <label htmlFor="case_study_cover">Case Study Cover</label>
           <input
             type="file"
-            name="case_study_cover"
-            id="case_study_cover"
+            name="cover_image"
+            id="cover_image"
             accept="image/*"
           />
         </div>
-
+        
+        {/* existing product */}
         <input
           type="hidden"
           name="existing_product"
           value={JSON.stringify(product)}
         />
-
         <div className="input-box">
           <button className="btn-dashboard-primary" disabled={isPending}>
             {isPending ? "Updating Project..." : "Update Project"}
