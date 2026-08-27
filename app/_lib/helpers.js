@@ -5,7 +5,21 @@ const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST;
 const PROJECT_ID = process.env.POSTHOG_PROJECT_ID;
 const API_KEY = process.env.POSTHOG_PERSONAL_API_KEY;
 
+// helpers.js
+const MAX_IMAGE_SIZE = 10 * 1024 * 1024; // 10MB
+const MAX_VIDEO_SIZE = 100 * 1024 * 1024; // 100MB
+
 export async function uploadToCloudinary(file) {
+  const isVideo = file.type?.startsWith("video/");
+  const maxSize = isVideo ? MAX_VIDEO_SIZE : MAX_IMAGE_SIZE;
+
+  if (file.size > maxSize) {
+    const limitMb = maxSize / (1024 * 1024);
+    throw new Error(
+      `File is too large (${(file.size / (1024 * 1024)).toFixed(1)}MB). Maximum allowed is ${limitMb}MB.`
+    );
+  }
+
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
 
@@ -14,16 +28,44 @@ export async function uploadToCloudinary(file) {
       .upload_stream(
         { folder: "Salam_Project", resource_type: "auto" },
         (error, result) => {
-          if (error || !result) return reject(error);
+          if (error || !result) {
+            reject(new Error(translateCloudinaryError(error)));
+            return;
+          }
           resolve({
             url: result.secure_url,
             publicId: result.public_id,
-            resourceType: result.resource_type, // "image" | "video"
+            resourceType: result.resource_type,
           });
-        },
+        }
       )
       .end(buffer);
   });
+}
+
+function translateCloudinaryError(error) {
+  if (!error) return "Upload failed for an unknown reason. Please try again.";
+
+  // Cloudinary's own file-size rejection (in case it slips past our own check)
+  if (error.http_code === 400 && /too large|exceeds/i.test(error.message ?? "")) {
+    return "File is too large for upload. Please use a smaller image or video.";
+  }
+
+  // network-level failures (fetch/stream aborted, DNS, etc.)
+  if (error.message?.includes("ECONNRESET") || error.message?.includes("ETIMEDOUT")) {
+    return "The upload was interrupted, likely due to a network issue. Please check your connection and try again.";
+  }
+
+  if (error.http_code === 401 || error.http_code === 403) {
+    return "Upload was rejected — there may be a configuration issue. Please contact support.";
+  }
+
+  if (error.http_code === 420 || error.http_code === 429) {
+    return "Too many uploads at once. Please wait a moment and try again.";
+  }
+
+  // fallback — still readable, not raw SDK internals
+  return error.message || "Upload failed. Please try again.";
 }
 
 // kept for any legacy URLs saved before this change — new uploads

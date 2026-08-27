@@ -25,9 +25,9 @@ export async function GET() {
       getLeadsApi(),
     ]);
 
-    console.log(projects);
-    const leadsByMonth = groupByMonth(leads);
-    const projectsByMonth = groupByMonth(projects);
+    // console.log(projects);
+    // const leadsByMonth = groupByMonth(leads);
+    // const projectsByMonth = groupByMonth(projects);
 
     // console.log("Projects by month:", projectsByMonth);
     console.log(

@@ -11,11 +11,14 @@ import {
   updateProjectChecklist,
   deleteMetaDataApi,
 } from "./projectsAPI";
+import { translatePrismaError } from "./errorMessage";
 
 // TODO: swap for real Neon Auth session check once auth is wired back up
 async function requireAuth() {
   return true;
 }
+
+
 
 export async function createNewProject(formData) {
   try {
@@ -27,11 +30,36 @@ export async function createNewProject(formData) {
     const previewVideo = formData.get("preview_video");
     const coverImage = formData.get("cover_image");
 
-    const [thumbnailUpload, previewVideoUpload, coverUpload] = await Promise.all([
-      thumbnail?.size > 0 ? uploadToCloudinary(thumbnail) : null,
-      previewVideo?.size > 0 ? uploadToCloudinary(previewVideo) : null,
-      coverImage?.size > 0 ? uploadToCloudinary(coverImage) : null,
-    ]);
+    if (!title) {
+      return { success: false, error: "Project title is required." };
+    }
+
+    let thumbnailUpload = null;
+    if (thumbnail?.size > 0) {
+      try {
+        thumbnailUpload = await uploadToCloudinary(thumbnail);
+      } catch (error) {
+        return { success: false, error: `Thumbnail upload failed: ${error.message}` };
+      }
+    }
+
+    let previewVideoUpload = null;
+    if (previewVideo?.size > 0) {
+      try {
+        previewVideoUpload = await uploadToCloudinary(previewVideo);
+      } catch (error) {
+        return { success: false, error: `Preview video upload failed: ${error.message}` };
+      }
+    }
+
+    let coverUpload = null;
+    if (coverImage?.size > 0) {
+      try {
+        coverUpload = await uploadToCloudinary(coverImage);
+      } catch (error) {
+        return { success: false, error: `Cover image upload failed: ${error.message}` };
+      }
+    }
 
     const slug = slugify(title, { lower: true, strict: true });
 
@@ -50,7 +78,11 @@ export async function createNewProject(formData) {
       coverImageResourceType: coverUpload?.resourceType ?? null,
     };
 
-    await createProjectApi(project);
+    try {
+      await createProjectApi(project);
+    } catch (error) {
+      return { success: false, error: translatePrismaError(error) };
+    }
 
     await logActivityApi({
       type: "project",
@@ -63,9 +95,10 @@ export async function createNewProject(formData) {
     revalidatePath("/admin/projects");
     return { success: true };
   } catch (error) {
-    return { success: false, error: error.message };
+    return { success: false, error: error.message || "Something went wrong. Please try again." };
   }
 }
+
 
 export async function updateProject(formData) {
   try {
@@ -84,36 +117,52 @@ export async function updateProject(formData) {
     if (excerpt !== existingProject.excerpt) updatedData.excerpt = excerpt;
 
     if (thumbnail?.size > 0) {
-      if (existingProject.thumbnailPublicId) {
-        await deleteFromCloudinary(existingProject.thumbnailPublicId, "image");
+      try {
+        if (existingProject.thumbnailPublicId) {
+          await deleteFromCloudinary(existingProject.thumbnailPublicId, "image");
+        }
+        const upload = await uploadToCloudinary(thumbnail);
+        updatedData.thumbnail = upload.url;
+        updatedData.thumbnailPublicId = upload.publicId;
+        updatedData.thumbnailResourceType = upload.resourceType;
+      } catch (error) {
+        return { success: false, error: `Thumbnail upload failed: ${error.message}` };
       }
-      const upload = await uploadToCloudinary(thumbnail);
-      updatedData.thumbnail = upload.url;
-      updatedData.thumbnailPublicId = upload.publicId;
-      updatedData.thumbnailResourceType = upload.resourceType;
     }
 
     if (previewVideo?.size > 0) {
-      if (existingProject.previewVideoPublicId) {
-        await deleteFromCloudinary(existingProject.previewVideoPublicId, "video");
+      try {
+        if (existingProject.previewVideoPublicId) {
+          await deleteFromCloudinary(existingProject.previewVideoPublicId, "video");
+        }
+        const upload = await uploadToCloudinary(previewVideo);
+        updatedData.previewVideoUrl = upload.url;
+        updatedData.previewVideoPublicId = upload.publicId;
+        updatedData.previewVideoResourceType = upload.resourceType;
+      } catch (error) {
+        return { success: false, error: `Preview video upload failed: ${error.message}` };
       }
-      const upload = await uploadToCloudinary(previewVideo);
-      updatedData.previewVideoUrl = upload.url;
-      updatedData.previewVideoPublicId = upload.publicId;
-      updatedData.previewVideoResourceType = upload.resourceType;
     }
 
     if (coverImage?.size > 0) {
-      if (existingProject.coverImagePublicId) {
-        await deleteFromCloudinary(existingProject.coverImagePublicId, "image");
+      try {
+        if (existingProject.coverImagePublicId) {
+          await deleteFromCloudinary(existingProject.coverImagePublicId, "image");
+        }
+        const upload = await uploadToCloudinary(coverImage);
+        updatedData.coverImage = upload.url;
+        updatedData.coverImagePublicId = upload.publicId;
+        updatedData.coverImageResourceType = upload.resourceType;
+      } catch (error) {
+        return { success: false, error: `Cover image upload failed: ${error.message}` };
       }
-      const upload = await uploadToCloudinary(coverImage);
-      updatedData.coverImage = upload.url;
-      updatedData.coverImagePublicId = upload.publicId;
-      updatedData.coverImageResourceType = upload.resourceType;
     }
 
-    await updateProjectApi(existingProject.id, updatedData);
+    try {
+      await updateProjectApi(existingProject.id, updatedData);
+    } catch (error) {
+      return { success: false, error: translatePrismaError(error) };
+    }
 
     await logActivityApi({
       type: "project",
@@ -127,7 +176,7 @@ export async function updateProject(formData) {
     revalidatePath(`/admin/projects/${existingProject.slug}`);
     return { success: true };
   } catch (error) {
-    return { success: false, error: error.message };
+    return { success: false, error: error.message || "Something went wrong. Please try again." };
   }
 }
 
