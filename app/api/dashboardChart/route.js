@@ -25,11 +25,8 @@ export async function GET() {
       getLeadsApi(),
     ]);
 
-    // console.log(projects);
-    // const leadsByMonth = groupByMonth(leads);
-    // const projectsByMonth = groupByMonth(projects);
-
-    // console.log("Projects by month:", projectsByMonth);
+    const leadsByMonth = groupByMonth(leads);
+    const projectsByMonth = groupByMonth(projects);
     console.log(
       "Visitor keys:",
       visitors.map((item) => item.key),

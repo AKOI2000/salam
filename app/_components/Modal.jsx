@@ -1,21 +1,17 @@
 "use client";
 
-import {
-  cloneElement,
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { createContext, useContext, useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
 
 const ModalContext = createContext();
 
+export function useModal() {
+  return useContext(ModalContext);
+}
+
 function Modal({ children }) {
   const [openName, setOpenName] = useState("");
-
   const close = () => setOpenName("");
   const open = setOpenName;
 
@@ -28,10 +24,7 @@ function Modal({ children }) {
 
 function Open({ children, opens: opensWindowName }) {
   const { open } = useContext(ModalContext);
-
-  return cloneElement(children, {
-    onClick: () => open(opensWindowName),
-  });
+  return children(() => open(opensWindowName));
 }
 
 function Window({ children, name: windowName }) {
@@ -44,31 +37,23 @@ function Window({ children, name: windowName }) {
         close();
       }
     }
-
     document.addEventListener("click", handleClick, true);
-
     return () => document.removeEventListener("click", handleClick, true);
   }, [close]);
 
   if (windowName !== openName) return null;
 
+  // no cloneElement — children render as-is, and can call useModal() themselves
   return createPortal(
     <div className="modal-bg">
       <div className="modal-window" ref={containerRef}>
         <button className="modal-btn" onClick={close}>
           <HiXMark />
         </button>
-
-        <div>
-          {cloneElement(children, {
-            onCloseModal: close,
-          })}
-        </div>
-
-        {/* <>{children}</> */}
+        <div>{children}</div>
       </div>
     </div>,
-    document.body,
+    document.body
   );
 }
 

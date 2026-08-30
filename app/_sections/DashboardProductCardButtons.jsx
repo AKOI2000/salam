@@ -15,27 +15,35 @@ function DashboardProductCardButtons({ product }) {
     <div className="products-table-row-buttons">
       <Modal>
         <Modal.Open opens="product-edit-modal">
-          <button className="btn-dashboard-secondary">
-            <FaEdit />
-          </button>
+          {(openModal) => (
+            <button className="btn-dashboard-secondary" onClick={openModal}>
+              <FaEdit />
+            </button>
+          )}
         </Modal.Open>
-
         <Modal.Window name="product-edit-modal">
-          <EditProjectForm product={product}/>
+          <EditProjectForm product={product} />
         </Modal.Window>
 
         <Modal.Open opens="product-delete-modal">
-          <button className="btn-dashboard-secondary">
-            <MdDeleteForever />
-          </button>
+          {(openModal) => (
+            <button className="btn-dashboard-secondary" onClick={openModal}>
+              <MdDeleteForever />
+            </button>
+          )}
         </Modal.Open>
-
         <Modal.Window name="product-delete-modal">
-        <ConfirmDelete resourceName={product.title} onConfirm={() => deleteProject(product.id)}/>
+          <ConfirmDelete
+            resourceName={product.title}
+            onConfirm={() => deleteProject(product.id)}
+          />
         </Modal.Window>
       </Modal>
 
-      <Link href={`/admin/projects/${product.slug}`} className="btn-dashboard-secondary">
+      <Link
+        href={`/admin/projects/${product.slug}`}
+        className="btn-dashboard-secondary"
+      >
         <IoMdMore />
       </Link>
     </div>

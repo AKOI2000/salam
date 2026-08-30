@@ -12,13 +12,12 @@ import {
   deleteMetaDataApi,
 } from "./projectsAPI";
 import { translatePrismaError } from "./errorMessage";
+import { redirect } from "next/navigation";
 
 // TODO: swap for real Neon Auth session check once auth is wired back up
 async function requireAuth() {
   return true;
 }
-
-
 
 export async function createNewProject(formData) {
   try {
@@ -39,7 +38,10 @@ export async function createNewProject(formData) {
       try {
         thumbnailUpload = await uploadToCloudinary(thumbnail);
       } catch (error) {
-        return { success: false, error: `Thumbnail upload failed: ${error.message}` };
+        return {
+          success: false,
+          error: `Thumbnail upload failed: ${error.message}`,
+        };
       }
     }
 
@@ -48,7 +50,10 @@ export async function createNewProject(formData) {
       try {
         previewVideoUpload = await uploadToCloudinary(previewVideo);
       } catch (error) {
-        return { success: false, error: `Preview video upload failed: ${error.message}` };
+        return {
+          success: false,
+          error: `Preview video upload failed: ${error.message}`,
+        };
       }
     }
 
@@ -57,7 +62,10 @@ export async function createNewProject(formData) {
       try {
         coverUpload = await uploadToCloudinary(coverImage);
       } catch (error) {
-        return { success: false, error: `Cover image upload failed: ${error.message}` };
+        return {
+          success: false,
+          error: `Cover image upload failed: ${error.message}`,
+        };
       }
     }
 
@@ -93,12 +101,14 @@ export async function createNewProject(formData) {
     revalidateTag("projects");
     revalidateTag("activity");
     revalidatePath("/admin/projects");
-    return { success: true };
+    return { success: true, slug };
   } catch (error) {
-    return { success: false, error: error.message || "Something went wrong. Please try again." };
+    return {
+      success: false,
+      error: error.message || "Something went wrong. Please try again.",
+    };
   }
 }
-
 
 export async function updateProject(formData) {
   try {
@@ -119,42 +129,60 @@ export async function updateProject(formData) {
     if (thumbnail?.size > 0) {
       try {
         if (existingProject.thumbnailPublicId) {
-          await deleteFromCloudinary(existingProject.thumbnailPublicId, "image");
+          await deleteFromCloudinary(
+            existingProject.thumbnailPublicId,
+            "image",
+          );
         }
         const upload = await uploadToCloudinary(thumbnail);
         updatedData.thumbnail = upload.url;
         updatedData.thumbnailPublicId = upload.publicId;
         updatedData.thumbnailResourceType = upload.resourceType;
       } catch (error) {
-        return { success: false, error: `Thumbnail upload failed: ${error.message}` };
+        return {
+          success: false,
+          error: `Thumbnail upload failed: ${error.message}`,
+        };
       }
     }
 
     if (previewVideo?.size > 0) {
       try {
         if (existingProject.previewVideoPublicId) {
-          await deleteFromCloudinary(existingProject.previewVideoPublicId, "video");
+          await deleteFromCloudinary(
+            existingProject.previewVideoPublicId,
+            "video",
+          );
         }
         const upload = await uploadToCloudinary(previewVideo);
         updatedData.previewVideoUrl = upload.url;
         updatedData.previewVideoPublicId = upload.publicId;
         updatedData.previewVideoResourceType = upload.resourceType;
       } catch (error) {
-        return { success: false, error: `Preview video upload failed: ${error.message}` };
+        return {
+          success: false,
+          error: `Preview video upload failed: ${error.message}`,
+        };
       }
     }
 
     if (coverImage?.size > 0) {
       try {
         if (existingProject.coverImagePublicId) {
-          await deleteFromCloudinary(existingProject.coverImagePublicId, "image");
+          await deleteFromCloudinary(
+            existingProject.coverImagePublicId,
+            "image",
+          );
         }
         const upload = await uploadToCloudinary(coverImage);
         updatedData.coverImage = upload.url;
         updatedData.coverImagePublicId = upload.publicId;
         updatedData.coverImageResourceType = upload.resourceType;
       } catch (error) {
-        return { success: false, error: `Cover image upload failed: ${error.message}` };
+        return {
+          success: false,
+          error: `Cover image upload failed: ${error.message}`,
+        };
       }
     }
 
@@ -176,7 +204,10 @@ export async function updateProject(formData) {
     revalidatePath(`/admin/projects/${existingProject.slug}`);
     return { success: true };
   } catch (error) {
-    return { success: false, error: error.message || "Something went wrong. Please try again." };
+    return {
+      success: false,
+      error: error.message || "Something went wrong. Please try again.",
+    };
   }
 }
 
@@ -188,7 +219,7 @@ export async function deleteProject(id) {
     const project = await getProjectByIdApi(id);
 
     const imageOrVideoBlocks = project.blocks.filter(
-      (b) => (b.type === "image" || b.type === "video") && b.content?.publicId
+      (b) => (b.type === "image" || b.type === "video") && b.content?.publicId,
     );
 
     await Promise.all([
@@ -199,7 +230,10 @@ export async function deleteProject(id) {
       project.coverImagePublicId &&
         deleteFromCloudinary(project.coverImagePublicId, "image"),
       ...imageOrVideoBlocks.map((b) =>
-        deleteFromCloudinary(b.content.publicId, b.content.resourceType ?? "image")
+        deleteFromCloudinary(
+          b.content.publicId,
+          b.content.resourceType ?? "image",
+        ),
       ),
     ]);
 

@@ -9,21 +9,23 @@ function QuickActionClient() {
   return (
     <Modal>
       <Modal.Open opens="addProject">
-        <div className="action">
-          <div className="action_group">
-            <p className="action_icon updated">
-              <FaPlus />
-            </p>
-            <div className="action_text">
-              <p className="action_text-main">Add New Project</p>
-              <p className="action_text-sub">Create a new project</p>
+        {(openModal) => (
+          <div className="action" onClick={openModal}>
+            <div className="action_group">
+              <p className="action_icon updated">
+                <FaPlus />
+              </p>
+              <div className="action_text">
+                <p className="action_text-main">Add New Project</p>
+                <p className="action_text-sub">Create a new project</p>
+              </div>
             </div>
-          </div>
 
-          <p className="action_btn">
-            <MdKeyboardArrowRight />
-          </p>
-        </div>
+            <p className="action_btn">
+              <MdKeyboardArrowRight />
+            </p>
+          </div>
+        )}
       </Modal.Open>
 
       <Modal.Window name="addProject">

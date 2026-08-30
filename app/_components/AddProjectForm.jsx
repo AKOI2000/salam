@@ -3,12 +3,15 @@
 import { useForm } from "react-hook-form";
 import { createNewProject } from "../_lib/projects-actions";
 import { useRef, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { useModal } from "./Modal";
 
-function AddProjectForm({ onCloseModal }) {
+function AddProjectForm() {
   const [isPending, startTransition] = useTransition();
   const formRef = useRef(null);
-
+  const router = useRouter();
+  const { close: onCloseModal } = useModal();
   const {
     register,
     reset,
@@ -18,19 +21,16 @@ function AddProjectForm({ onCloseModal }) {
 
   async function onSubmit() {
     startTransition(async () => {
-      try {
-        const formData = new FormData(formRef.current);
-        const result = await createNewProject(formData);
+      const formData = new FormData(formRef.current);
+      const result = await createNewProject(formData);
 
-        if (result.success) {
-          toast.success("Project added successfully");
-          reset();
-          onCloseModal?.();
-        } else {
-          toast.error(result.error || "Something went wrong");
-        }
-      } catch (error) {
-        toast.error(error.message || "Upload failed");
+      if (result.success) {
+        toast.success("Project added successfully");
+        reset();
+        onCloseModal?.();
+        router.push(`/admin/projects/${result.slug}`);
+      } else {
+        toast.error(result.error || "Something went wrong");
       }
     });
   }

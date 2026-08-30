@@ -1,4 +1,3 @@
-// "use client";
 import { IoAdd } from "react-icons/io5";
 
 import DashboardHeading from "@/app/_components/DashboardHeading";

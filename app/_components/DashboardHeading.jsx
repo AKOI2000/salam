@@ -1,7 +1,7 @@
 "use client";
 
-// import Link from "next/link";
 import Modal from "@/app/_components/Modal";
+
 function DashboardHeading({ title, desc, action, icon, children }) {
   return (
     <div className="dashboard-heading_flex">
@@ -12,9 +12,11 @@ function DashboardHeading({ title, desc, action, icon, children }) {
       {action && (
         <Modal>
           <Modal.Open opens={action}>
-            <button className="btn-dashboard-primary">
-              {icon} {action}
-            </button>
+            {(openModal) => (
+              <button className="btn-dashboard-primary" onClick={openModal}>
+                {icon} {action}
+              </button>
+            )}
           </Modal.Open>
 
           <Modal.Window name={action}>{children}</Modal.Window>
