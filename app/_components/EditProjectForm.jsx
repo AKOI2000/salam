@@ -3,16 +3,17 @@
 import { useRef, useTransition } from "react";
 import { updateProject } from "../_lib/projects-actions";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { useModal } from "@/app/_components/Modal";
 import toast from "react-hot-toast";
 
-function EditProjectForm({ product, onCloseModal }) {
+function EditProjectForm({ product }) {
   const [isPending, startTransition] = useTransition();
   const formRef = useRef(null);
+  const router = useRouter();
+  const { close: onCloseModal } = useModal();
 
-  const {
-    reset,
-    handleSubmit,
-  } = useForm();
+  const { reset, handleSubmit } = useForm();
 
   async function onSubmit() {
     startTransition(async () => {
@@ -23,6 +24,7 @@ function EditProjectForm({ product, onCloseModal }) {
         toast.success("Project updated successfully");
         reset();
         onCloseModal?.();
+        router.push(`/admin/projects/${result.slug}`);
       } else {
         toast.error(result.error || "Something went wrong");
       }

@@ -13,7 +13,7 @@ function CaseStudyHero({ project }) {
           <br />
           <span>by Salam</span>
         </h1>
-        <p>{excerpt}</p>
+        {/* <p>{excerpt}</p> */}
       </div>
     </div>
   );
