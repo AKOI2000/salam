@@ -12,12 +12,7 @@ import {
   deleteMetaDataApi,
 } from "./projectsAPI";
 import { translatePrismaError } from "./errorMessage";
-import { redirect } from "next/navigation";
-
-// TODO: swap for real Neon Auth session check once auth is wired back up
-async function requireAuth() {
-  return true;
-}
+import { requireAuth } from "@/lib/requireAuth";
 
 export async function createNewProject(formData) {
   try {

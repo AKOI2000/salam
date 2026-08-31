@@ -3,11 +3,7 @@
 import { revalidatePath, revalidateTag } from "next/cache";
 import { createLeadApi, deleteLeadApi, updateLeadApi } from "./leadsAPI";
 import { logActivityApi } from "./activityAPI";
-
-// TODO: swap this for a real Neon Auth session check once auth is wired back up
-async function requireAuth() {
-  return true;
-}
+import { requireAuth } from "@/lib/requireAuth";
 
 export async function sendLead(formData) {
   try {

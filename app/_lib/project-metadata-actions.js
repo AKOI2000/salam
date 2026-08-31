@@ -3,10 +3,7 @@
 import { revalidatePath, revalidateTag } from "next/cache";
 import { upsertMetaDataApi } from "./projectsAPI";
 import { logActivityApi } from "./activityAPI";
-
-async function requireAuth() {
-  return true;
-}
+import { requireAuth } from "@/lib/requireAuth";
 
 export async function saveMetaData(formData) {
   try {

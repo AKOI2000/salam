@@ -4,10 +4,7 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { deleteFromCloudinary } from "./helpers";
 import { saveProjectBlocksApi, getBlocksApi } from "./blocksApi";
 import { logActivityApi } from "./activityAPI";
-
-async function requireAuth() {
-  return true;
-}
+import { requireAuth } from "@/lib/requireAuth";
 
 // called by the dnd-kit editor's Save button — sends the full current block array
 export async function saveBlocks(projectId, slug, blocks) {
