@@ -8,11 +8,11 @@ function CaseStudyHero({ project }) {
       <Image src={coverImage} alt={`Salam for ${title}`} fill />
 
       <div className="case-study_hero-text-box">
-        <h1>
+        <h2>
           {title}
           <br />
           <span>by Salam</span>
-        </h1>
+        </h2>
         {/* <p>{excerpt}</p> */}
       </div>
     </div>

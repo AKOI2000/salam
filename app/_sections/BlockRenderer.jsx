@@ -65,10 +65,10 @@ function BlockItem({ block }) {
 
   switch (type) {
     case "heading":
-      return <h2 className="block-heading">{content.text}</h2>;
+      return <h3 className="block-heading">{content.text}</h3>;
 
     case "subheading":
-      return <h3 className="block-subheading">{content.text}</h3>;
+      return <h5 className="block-subheading">{content.text}</h5>;
 
     case "paragraph":
       return <p className="block-paragraph">{content.text}</p>;

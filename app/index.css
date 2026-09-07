@@ -2094,11 +2094,11 @@ header nav .nav-links.active:hover::before {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.9) 100%);
   z-index: 1;
 }
-.case-study_hero h1 span {
+.case-study_hero h2 span {
   color: var(--grey);
   font-weight: 400;
 }
-.case-study_hero h1,
+.case-study_hero h2,
 .case-study_hero p {
   color: var(--background);
   position: relative;
