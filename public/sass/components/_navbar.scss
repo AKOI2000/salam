@@ -3,7 +3,7 @@ header {
   justify-content: space-between;
   align-items: center;
 
-  padding: 1rem 7rem;
+  padding: .5rem 7rem;
 
   width: 100%;
 
@@ -12,6 +12,7 @@ header {
   left: 0;
 
   z-index: 100;
+  border-bottom: 0.5px solid var(--foreground-light);
 
   background: var(--background);
 
@@ -30,7 +31,7 @@ header {
   .logo {
     position: relative;
     z-index: 101;
-    max-width: 11.7rem;
+    max-width: 11rem;
 
     img {
       width: 100%;
@@ -60,11 +61,11 @@ header {
 
       &::before {
         position: absolute;
-        height: 3px;
+        height: 1px;
         width: 0;
         left: 0;
         bottom: -3px;
-        background: var(--color-accent);
+        background: var(--foreground);
         content: "";
         transition: all 0.7s ease-in-out;
       }
@@ -95,8 +96,9 @@ header {
       height: 100dvh;
       opacity: 0;
       visibility: hidden;
+      background-color: var(--background);
 
-      background: var(--background);
+      // background: var(--foreground);
 
       flex-direction: column;
       justify-content: center;
@@ -110,6 +112,12 @@ header {
       .nav-links {
         transform: translateX(100%);
         font-size: 4rem;
+        // color: var(--background);
+        
+
+        &:not(:last-child) {
+          border-bottom: 1px solid var(--background);
+        }
       }
 
       &.show {
@@ -151,7 +159,7 @@ header {
   position: relative;
   cursor: pointer;
   z-index: 101;
-  background-color: white;
+  background-color: var(--background);
 
   span {
     width: 1rem;
@@ -162,5 +170,11 @@ header {
     top: 40%;
     left: 40%;
     transform: translate(-50%, -50%);
+
+    @include respond (mds) {
+      // background-color: var(--background);
+      width: 1.2rem;
+      height: 1.2rem;
+    }
   }
 }
