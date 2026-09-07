@@ -56,7 +56,7 @@ body {
   overflow-x: hidden;
   cursor: none;
   position: relative;
-  background: var(--color-accent-light);
+  background: var(--foreground-light);
 }
 
 * {
