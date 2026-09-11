@@ -3,7 +3,7 @@ header {
   justify-content: space-between;
   align-items: center;
 
-  padding: .5rem 7rem;
+  padding: 0.5rem 7rem;
 
   width: 100%;
 
@@ -162,11 +162,19 @@ header {
       &.show {
         opacity: 1;
         visibility: visible;
-        transform: translateY(0);
+        // transform: translateY(0);
+        transition: all 0.3s ease-in-out;
 
         .nav-links {
           opacity: 1;
           transform: translateY(0);
+
+          &:hover,
+          &:focus-visible {
+            color: var(--background);
+            background-color: var(--foreground);
+            transform: scale(1.01) translateX(.7rem);
+          }
         }
       }
     }

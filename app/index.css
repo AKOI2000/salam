@@ -999,11 +999,16 @@ header nav .nav-links.active:hover::before {
   header nav.show {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transition: all 0.3s ease-in-out;
   }
   header nav.show .nav-links {
     opacity: 1;
     transform: translateY(0);
+  }
+  header nav.show .nav-links:hover, header nav.show .nav-links:focus-visible {
+    color: var(--background);
+    background-color: var(--foreground);
+    transform: scale(1.01) translateX(0.7rem);
   }
 }
 header .test {
