@@ -1968,10 +1968,15 @@ header .test span {
 
 .services {
   position: relative;
-  min-height: 80vh;
+  min-height: 80dvh;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+@media (max-width: 608px) {
+  .services {
+    min-height: 60dvh;
+  }
 }
 .services .card-stage {
   position: absolute;
