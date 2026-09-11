@@ -12,14 +12,36 @@ function Navbar() {
   const [responsive, setResponsive] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
+  const [heroHeight, setHeroHeight] = useState(0);
   const isNavigating = useRef(false);
   const pathname = usePathname();
 
-  // reset on every new page
+  const isProjectDetailPage =
+    pathname.startsWith("/portfolio/") && pathname !== "/portfolio";
+
   useEffect(() => {
     isNavigating.current = false;
-    setHidden(false);
   }, [pathname]);
+
+  useEffect(() => {
+    if (!isProjectDetailPage) return;
+
+    const updateHeaderState = () => {
+      const hero = document.querySelector(".case-study_hero");
+      setHeroHeight(hero ? hero.offsetHeight : window.innerHeight);
+      setScrollY(window.scrollY);
+    };
+
+    updateHeaderState();
+    window.addEventListener("scroll", updateHeaderState, { passive: true });
+    window.addEventListener("resize", updateHeaderState);
+
+    return () => {
+      window.removeEventListener("scroll", updateHeaderState);
+      window.removeEventListener("resize", updateHeaderState);
+    };
+  }, [isProjectDetailPage, pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,12 +76,15 @@ function Navbar() {
     },
   };
 
+  const isTransparentHeader = isProjectDetailPage && scrollY < heroHeight;
+
   return (
     <motion.header
+      className={isTransparentHeader ? "is-light" : ""}
       animate={{ y: hidden ? "-100%" : 0 }}
       transition={{ duration: 0.7, ease: "easeInOut" }}
     >
-      <LogoLink />
+      <LogoLink isLight={isTransparentHeader} />
 
       <div className="text-box">
         <motion.nav
@@ -74,7 +99,12 @@ function Navbar() {
           />
         </motion.nav>
 
-        <div className="test" onClick={() => setResponsive((prev) => !prev)}>
+        <div
+          className={`test ${isTransparentHeader ? "is-light" : ""} ${
+            responsive ? "is-open" : ""
+          }`}
+          onClick={() => setResponsive((prev) => !prev)}
+        >
           <MenuButton isOpen={responsive} />
         </div>
       </div>

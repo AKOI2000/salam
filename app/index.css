@@ -98,7 +98,7 @@ body {
 body .background {
   position: absolute;
   inset: 0;
-  opacity: 0.05;
+  opacity: 0.07;
   z-index: 0;
   pointer-events: none;
 }
@@ -880,6 +880,24 @@ header {
   border-bottom: 0.5px solid var(--foreground-light);
   background: var(--background);
 }
+header.is-light {
+  background: transparent;
+  border-bottom: 0;
+}
+@media (min-width: 609px) {
+  header.is-light .nav-links {
+    color: var(--background);
+  }
+  header.is-light .nav-links::before {
+    background: var(--background);
+  }
+  header.is-light .test {
+    background: transparent;
+  }
+  header.is-light .test span {
+    background-color: var(--background);
+  }
+}
 @media (max-width: 1024px) {
   header {
     padding: 1rem 5rem;
@@ -888,6 +906,15 @@ header {
 @media (max-width: 608px) {
   header {
     padding: 1rem 3rem;
+  }
+  header .test {
+    background: transparent;
+  }
+  header .test.is-light span {
+    background-color: var(--background);
+  }
+  header .test:not(.is-light) span, header .test.is-open span {
+    background-color: var(--foreground);
   }
 }
 @media (max-width: 360px) {
@@ -948,8 +975,9 @@ header nav .nav-links.active:hover::before {
     visibility: hidden;
     background-color: var(--background);
     flex-direction: column;
+    justify-content: center;
     gap: 0;
-    padding: 20rem 2rem 4rem;
+    padding: 10rem 2rem 4rem;
     transform: translateY(-3rem);
     z-index: 90;
     border-top: 0.5px solid rgba(17, 17, 17, 0.14);
@@ -964,25 +992,18 @@ header nav .nav-links.active:hover::before {
     line-height: 1.1;
     letter-spacing: -0.06em;
     border-bottom: 1px solid rgba(17, 17, 17, 0.12);
-    transition: all 0.3s ease-in-out;
   }
   header nav .nav-links::before {
     display: none;
   }
-  header nav .nav-links:hover, header nav .nav-links:focus-visible {
-    background: var(--foreground);
-    color: var(--background);
-  }
   header nav.show {
     opacity: 1;
     visibility: visible;
+    transform: translateY(0);
   }
   header nav.show .nav-links {
     opacity: 1;
     transform: translateY(0);
-  }
-  header nav.show .nav-links:hover, header nav.show .nav-links:focus-visible {
-    transform: scale(1.02) translateX(8px);
   }
 }
 header .test {
@@ -991,7 +1012,7 @@ header .test {
   position: relative;
   cursor: pointer;
   z-index: 101;
-  background-color: var(--background);
+  background-color: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2133,7 +2154,7 @@ header .test span {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.9) 100%);
+  background: linear-gradient(rgba(0, 0, 0, 0.65));
   z-index: 1;
 }
 .case-study_hero h2 span {

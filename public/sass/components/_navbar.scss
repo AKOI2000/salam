@@ -3,7 +3,7 @@ header {
   justify-content: space-between;
   align-items: center;
 
-  padding: 0.5rem 7rem;
+  padding: .5rem 7rem;
 
   width: 100%;
 
@@ -16,12 +16,53 @@ header {
 
   background: var(--background);
 
+  &.is-light {
+    background: transparent;
+    // border-bottom-color: rgba(255, 255, 255, 0.22);
+    border-bottom: 0;
+
+    @media (min-width: 609px) {
+      .nav-links {
+        color: var(--background);
+
+        &::before {
+          background: var(--background);
+        }
+      }
+
+      .test {
+        background: transparent;
+
+        span {
+          background-color: var(--background);
+        }
+      }
+    }
+  }
+
   @include respond(lg) {
     padding: 1rem 5rem;
   }
 
   @include respond(mds) {
     padding: 1rem 3rem;
+
+    .test {
+      background: transparent;
+
+      &.is-light {
+        span {
+          background-color: var(--background);
+        }
+      }
+
+      &:not(.is-light),
+      &.is-open {
+        span {
+          background-color: var(--foreground);
+        }
+      }
+    }
   }
 
   @include respond(xs) {
@@ -95,10 +136,9 @@ header {
       visibility: hidden;
       background-color: var(--background);
       flex-direction: column;
-      // justify-content: center;
-      // align-items: center;
+      justify-content: center;
       gap: 0;
-      padding: 20rem 2rem 4rem;
+      padding: 10rem 2rem 4rem;
       transform: translateY(-3rem);
       z-index: 90;
       border-top: 0.5px solid rgba(17, 17, 17, 0.14);
@@ -113,32 +153,20 @@ header {
         line-height: 1.1;
         letter-spacing: -0.06em;
         border-bottom: 1px solid rgba(17, 17, 17, 0.12);
-        transition: all 0.3s ease-in-out;
 
         &::before {
           display: none;
-        }
-
-        &:hover,
-        &:focus-visible {
-          background: var(--foreground);
-          color: var(--background);
         }
       }
 
       &.show {
         opacity: 1;
         visibility: visible;
-        // transform: translateY(0);
+        transform: translateY(0);
 
         .nav-links {
           opacity: 1;
           transform: translateY(0);
-
-          &:hover,
-          &:focus-visible {
-            transform: scale(1.02) translateX(8px);
-          }
         }
       }
     }
@@ -150,7 +178,7 @@ header {
     position: relative;
     cursor: pointer;
     z-index: 101;
-    background-color: var(--background);
+    background-color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
