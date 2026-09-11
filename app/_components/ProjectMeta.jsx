@@ -1,46 +1,39 @@
 function ProjectMeta({ project = {} }) {
-  const { metadata } = project;
+  const { title, excerpt, metadata } = project;
+
   if (!metadata) return null;
 
   const { client, role, timeline, tools, deliverables } = metadata;
 
+  const metaItems = [
+    { label: "Client", value: client },
+    { label: "Role", value: role },
+    { label: "Timeline", value: timeline ? `${timeline} week(s)` : "—" },
+    {
+      label: "Tools",
+      value: tools?.length ? tools.join(", ") : "—",
+    },
+    {
+      label: "Deliverables",
+      value: deliverables?.length ? deliverables.join(", ") : "—",
+    },
+  ];
+
   return (
-    <div className="col-5-by-1">
-      <div className="project-meta-group item">
-        <div className="project-meta-question">Client</div>
-        <div className="project-meta-answer">{client}</div>
-      </div>
-
-      <div className="project-meta-group item">
-        <div className="project-meta-question">Role</div>
-        <div className="project-meta-answer">{role}</div>
-      </div>
-
-      <div className="project-meta-group item">
-        <div className="project-meta-question">Deliverables</div>
-        <div className="project-meta-answer">
-          {deliverables?.map((item, index) => (
-            <span key={index}>
-              {item}
-              {index < deliverables.length - 1 ? ", " : ""}
-            </span>
-          ))}
+    <div className="container none">
+      <div className="project-meta">
+        <div className="project-meta__overview">
+          {/* <span className="project-meta__eyebrow">Selected project</span> */}
+          <h2>{title}</h2>
+          {/* {excerpt && <p>{excerpt}</p>} */}
         </div>
-      </div>
 
-      <div className="project-meta-group item">
-        <div className="project-meta-question">Timeline</div>
-        <div className="project-meta-answer">{timeline} weeks</div>
-      </div>
-
-      <div className="project-meta-group item">
-        <div className="project-meta-question">Tools</div>
-        <div className="project-meta-answer">
-          {tools?.map((tool, index) => (
-            <span key={index}>
-              {tool}
-              {index < tools.length - 1 ? ", " : ""}
-            </span>
+        <div className="project-meta__details">
+          {metaItems.map((item) => (
+            <div key={item.label} className="project-meta__item">
+              <div className="project-meta__label">{item.label}</div>
+              <div className="project-meta__value">{item.value}</div>
+            </div>
           ))}
         </div>
       </div>

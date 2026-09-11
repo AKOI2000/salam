@@ -93,29 +93,6 @@ export default function RootLayout({ children }) {
         />
 
         <ViewTransitions>
-          <Toaster
-            position="top-center"
-            toastOptions={{
-              duration: 4000,
-              style: {
-                fontSize: "1.6rem",
-                padding: "1.2rem 2rem",
-                minWidth: "300px",
-              },
-              success: {
-                style: {
-                  background: "var(--white-smoke)",
-                  color: "var(--foreground-light)",
-                },
-              },
-              error: {
-                style: {
-                  background: "var(--color-red)",
-                  color: "#fff",
-                },
-              },
-            }}
-          />
           {children}
         </ViewTransitions>
       </body>

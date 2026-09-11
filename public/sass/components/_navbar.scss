@@ -139,7 +139,7 @@ header {
       justify-content: center;
       gap: 0;
       padding: 10rem 2rem 4rem;
-      transform: translateY(-3rem);
+      // transform: translateY(-3rem);
       z-index: 90;
       border-top: 0.5px solid rgba(17, 17, 17, 0.14);
 
@@ -173,7 +173,7 @@ header {
           &:focus-visible {
             color: var(--background);
             background-color: var(--foreground);
-            transform: scale(1.01) translateX(.7rem);
+            transform: scale(1.01) translateX(0.7rem);
           }
         }
       }
