@@ -40,6 +40,10 @@ body {
   cursor: none;
   position: relative;
   background: var(--foreground-light);
+
+  @include respond (mds) {
+    cursor: auto;
+  }
 }
 
 * {

@@ -58,6 +58,12 @@ body {
   position: relative;
   background: var(--foreground-light);
 }
+@media (max-width: 608px) {
+  html,
+  body {
+    cursor: auto;
+  }
+}
 
 * {
   padding: 0;
@@ -744,6 +750,7 @@ h1 {
   .cursor {
     width: 2.5rem;
     height: 2.5rem;
+    display: none;
   }
 }
 
