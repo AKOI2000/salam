@@ -1,18 +1,7 @@
 .about-section {
-  h5 {
-    width: 55%;
-
-    @include respond(lg) {
-      width: 65%;
-    }
-
-    @include respond(mdl) {
-      width: 70%;
-    }
-
-    @include respond(mds) {
-      width: 100%;
-    }
+  h6 {
+    max-width: 80rem;
+    font-weight: 400;
   }
 
   a {

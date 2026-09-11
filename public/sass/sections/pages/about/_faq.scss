@@ -18,8 +18,8 @@
   .faq-list {
     grid-column: 2/-1;
 
-    @include respond (mds) {
-        grid-template-columns: 1/-1;
+    @include respond(mds) {
+      grid-template-columns: 1/-1;
     }
     .faq-item {
       // height: auto;
@@ -31,8 +31,10 @@
         align-items: center;
         width: 100%;
         padding: 3rem;
+        background: var(--background);
+        border-bottom: 1px solid var(--foreground-light);
 
-        @include respond (mds) {
+        @include respond(mds) {
           padding: 3rem 1rem;
         }
 
@@ -47,12 +49,12 @@
       }
 
       .faq-answer {
-        background-color: var(--white-smoke);
+        background-color: var(--whiter-smoke);
         padding: 3rem;
         overflow: hidden;
         font-size: var(--base-size);
 
-        @include respond (mds) {
+        @include respond(mds) {
           padding: 3rem 1rem;
         }
       }

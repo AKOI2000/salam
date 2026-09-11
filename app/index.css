@@ -42,11 +42,11 @@
   --foreground: #000000;
   --color-accent: #765223;
   --color-accent-light: #ffecaf;
-  --color-blue: #00008B;
+  --color-blue: #00008b;
   --color-yellow: #e2a624;
   --color-green: #22c55e;
   --color-orange: #f8920a;
-  --color-red:#ef4444;
+  --color-red: #ef4444;
   --base-size: 1.6rem;
 }
 
@@ -87,6 +87,14 @@ body {
   font-family: var(--font-inter);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+body .background {
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  z-index: 0;
+  pointer-events: none;
 }
 
 img {
@@ -683,9 +691,10 @@ h1 {
   height: 100%;
 }
 .btn-tertiary {
-  color: var(--grey);
+  color: var(--foreground);
   background-color: transparent;
-  padding: 1rem 0.5rem;
+  padding: 0.5rem 0.5rem 1rem;
+  font-weight: 400;
   transition: all 0.7s ease-in-out;
   position: relative;
   display: inline-flex;
@@ -704,7 +713,7 @@ h1 {
 }
 .btn-tertiary:hover {
   gap: 1.5rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 .btn-tertiary:hover::before {
   width: 100%;
@@ -1880,23 +1889,9 @@ header nav .nav-links.active:hover::before {
   font-size: 1.6rem;
 }
 
-.about-section h5 {
-  width: 55%;
-}
-@media (max-width: 1024px) {
-  .about-section h5 {
-    width: 65%;
-  }
-}
-@media (max-width: 880px) {
-  .about-section h5 {
-    width: 70%;
-  }
-}
-@media (max-width: 608px) {
-  .about-section h5 {
-    width: 100%;
-  }
+.about-section h6 {
+  max-width: 80rem;
+  font-weight: 400;
 }
 .about-section a {
   margin-top: 2rem;
@@ -1954,16 +1949,16 @@ header nav .nav-links.active:hover::before {
   z-index: 2;
 }
 .services .card-stage .image-card {
-  width: 48.3rem;
-  height: 56.2rem;
+  width: 34rem;
+  height: 39rem;
   overflow: hidden;
   box-shadow: 0 3.2rem 8rem rgba(0, 0, 0, 0.18);
   position: relative;
 }
 @media (max-width: 608px) {
   .services .card-stage .image-card {
-    width: 40rem;
-    height: 46.5rem;
+    width: 28rem;
+    height: 32rem;
   }
 }
 .services .card-stage .image-card img {
@@ -2060,6 +2055,8 @@ header nav .nav-links.active:hover::before {
   align-items: center;
   width: 100%;
   padding: 3rem;
+  background: var(--background);
+  border-bottom: 1px solid var(--foreground-light);
 }
 @media (max-width: 608px) {
   .faq-section .faq-list .faq-item .faq-trigger {
@@ -2074,7 +2071,7 @@ header nav .nav-links.active:hover::before {
   font-size: 3rem;
 }
 .faq-section .faq-list .faq-item .faq-answer {
-  background-color: var(--white-smoke);
+  background-color: var(--whiter-smoke);
   padding: 3rem;
   overflow: hidden;
   font-size: var(--base-size);

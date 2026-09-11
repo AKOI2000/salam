@@ -10,11 +10,11 @@
   --foreground: #000000;
   --color-accent: #765223;
   --color-accent-light: #ffecaf;
-  --color-blue: #00008B;
+  --color-blue: #00008b;
   --color-yellow: #e2a624;
-  --color-green: #22c55e; 
+  --color-green: #22c55e;
   --color-orange: #f8920a;
-  --color-red:#ef4444;
+  --color-red: #ef4444;
   --base-size: 1.6rem;
 
   // @include respond(mds) {
@@ -71,6 +71,15 @@ body {
   //   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+
+  .background {
+    position: absolute;
+    inset: 0;
+    opacity: 0.05;
+    z-index: 0;
+    pointer-events: none;
+  }
 }
 
 img {
@@ -103,12 +112,12 @@ button {
 
 input,
 textarea {
-    font-family: var(--font-inter);
+  font-family: var(--font-inter);
 
-    &:placeholder-shown{
-      font-family: var(--font-inter);
-      // text-transform: capitalize;
-    }
+  &:placeholder-shown {
+    font-family: var(--font-inter);
+    // text-transform: capitalize;
+  }
 }
 
 // @media (prefers-color-scheme: dark) {

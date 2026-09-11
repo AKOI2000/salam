@@ -1,65 +1,80 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 
 const faqs = [
   {
     id: 1,
-    question: "What is your return policy?",
+    question: "What type of motion design work do you create?",
     answer:
-      "You can return any item within 30 days of purchase for a full refund, provided it is in its original condition.",
+      "I create brand animations, title sequences, social motion assets, launch videos, product explainers, and campaign visuals designed to elevate a brand’s digital presence.",
   },
   {
     id: 2,
-    question: "How long does shipping take?",
+    question: "Do you work on both branding and animation?",
     answer:
-      "Standard shipping takes 5–7 business days. Express options are available at checkout.",
+      "Yes. I often build the visual direction and then extend it into motion systems, ensuring the brand feels consistent across video, digital experiences, and social content.",
   },
   {
     id: 3,
-    question: "Do you offer customer support?",
+    question: "Can you help with a website motion experience?",
     answer:
-      "Yes, our support team is available Monday through Friday, 9am–5pm. You can reach us via email or live chat.",
+      "Absolutely. I can design animated transitions, hero sequences, micro-interactions, and scroll-driven motion that add energy and clarity to a website or landing page.",
   },
   {
     id: 4,
-    question: "Can I change or cancel my order?",
+    question: "What does your process look like?",
     answer:
-      "Orders can be modified or cancelled within 24 hours of placement. After that, they may already be in fulfillment.",
+      "The process usually starts with creative direction and reference research, followed by concept development, animation design, refinement, and final delivery with feedback built into each stage.",
+  },
+  {
+    id: 5,
+    question: "How do you approach collaboration with clients?",
+    answer:
+      "I like to keep the process collaborative and clear, with regular reviews, open communication, and a focus on aligning the motion with the brand story and campaign goals.",
   },
 ];
 
 function FAQItem({ faq, isOpen, onToggle }) {
   return (
     <div className="faq-item">
-      <button className="faq-trigger" onClick={onToggle} aria-expanded={isOpen}>
+      <button
+        className={`faq-trigger ${isOpen ? "open" : ""}`}
+        onClick={onToggle}
+        aria-expanded={isOpen}
+        type="button"
+      >
         <span className="faq-question">{faq.question}</span>
-        <span className="faq-icon" aria-hidden="true">
+        <span
+          className={`faq-icon ${isOpen ? "open" : ""}`}
+          aria-hidden="true"
+        >
           {isOpen ? "−" : "+"}
         </span>
       </button>
 
-      <motion.div
-      initial={{ maxHeight: 0, opacity: 0, visibility: "hidden", padding: 0 }}
-        animate={
-          isOpen
-            ? { maxHeight: 500, opacity: 1, visibility: "visible" }
-            : {
-                opacity: 0,
-                maxHeight: 0,
-                overflow: "hidden",
-                visibility: "hidden",
-                padding: 0,
-              }
-        }
-        transition={{
-          duration: 0.2,
-        }}
-        className="faq-answer"
-      >
-        <motion.p>{faq.answer}</motion.p>
-      </motion.div>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="faq-answer"
+          >
+            <motion.div
+              initial={{ y: -8, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -8, opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="faq-answer-inner"
+            >
+              <p>{faq.answer}</p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

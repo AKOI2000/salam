@@ -23,6 +23,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable}`} data-scroll-behavior="smooth">
       <body>
+    
         <ViewTransitions>
           <Toaster
             position="top-center"

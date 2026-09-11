@@ -6,24 +6,16 @@ import Image from "next/image";
 
 const services = [
   {
-    label: ["BRAND DESIGN"],
-    img: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=700&q=80",
-  },
-  {
-    label: ["WEBSITE DESIGN"],
-    img: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=700&q=80",
+    label: ["MOTION DESIGN"],
+    img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=700&q=80",
   },
   {
     label: ["GRAPHIC DESIGN"],
-    img: "https://images.unsplash.com/photo-1636955816868-fcb881e57954?w=700&q=80",
+    img: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=700&q=80",
   },
   {
-    label: ["ILLUSTRATIONS"],
-    img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80",
-  },
-  {
-    label: ["FRAMER DESIGN"],
-    img: "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=700&q=80",
+    label: ["WEB DESIGN"],
+    img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&q=80",
   },
 ];
 
@@ -32,8 +24,8 @@ const services = [
 const total = services.length;
 function getCardTop(index) {
   // spread from -160px (top item) to +160px (bottom item)
-  const min = -180;
-  const max = 180;
+  const min = -110;
+  const max = 110;
   return min + (index / (total - 1)) * (max - min);
 }
 
@@ -41,6 +33,7 @@ function ServicesList() {
   const [active, setActive] = useState(null);
 
   const cardTop = active !== null ? getCardTop(active) : 0;
+  const previewOffset = 110;
   // odd index = tilt left (-), even index = tilt right (+)
   const rotation = active !== null ? (active % 2 === 0 ? 6 : -6) : 0;
   return (
@@ -50,8 +43,8 @@ function ServicesList() {
         {active !== null && (
           <motion.div
             className="card-stage"
-            style={{ top: "40%" }}
-            animate={{ y: cardTop - 180 }} // offset so card center aligns nicely
+            style={{ top: "42%" }}
+            animate={{ y: cardTop - previewOffset }}
             transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
           >
             <AnimatePresence mode="wait">

@@ -10,7 +10,7 @@ function AboutSection() {
       </div>
 
       <RevealText
-        as="h5"
+        as="h6"
         text="I’m a curious designer based in Lagos, Nigeria. Driven by a deep desire to solve problems and create meaningful connections. I use design thinking to link ideas, art to speak to the eyes, and strategy to engage the mind. When I’m not designing, you will find me doomscrolling the motion space, exploring new challenges, or simply enjoying good food. Away from the spotlight, I dabble.. I enjoy playing football, playing FIFA and chess with friends, movies etc."
         animateInView={true}
         animateOnLoad={false}
