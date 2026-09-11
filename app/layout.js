@@ -1,15 +1,46 @@
 // app/layout.jsx
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import Script from "next/script";
 import "@/app/globals.css";
 import "@/app/index.css";
-import { Toaster } from "react-hot-toast";
 import { ViewTransitions } from "next-view-transitions";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
+const monumentGrotesk = localFont({
+  variable: "--font-monument-grotesk",
   display: "swap",
+  fallback: ["Arial", "sans-serif"],
+  src: [
+    {
+      path: "../fonts/MonumentGrotesk-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../fonts/MonumentGrotesk-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../fonts/MonumentGrotesk-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../fonts/MonumentGrotesk-Italic.woff2",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "../fonts/MonumentGrotesk-MediumItalic.woff2",
+      weight: "500",
+      style: "italic",
+    },
+    {
+      path: "../fonts/MonumentGrotesk-BoldItalic.woff2",
+      weight: "700",
+      style: "italic",
+    },
+  ],
 });
 
 const businessSchema = {
@@ -84,7 +115,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.variable}`} data-scroll-behavior="smooth">
+    <html
+      lang="en"
+      className={`${monumentGrotesk.variable}`}
+      data-scroll-behavior="smooth"
+    >
       <body>
         <Script
           id="business-schema"

@@ -21,6 +21,18 @@
     padding: 5rem 2rem;
   }
 
+  &.small {
+    padding: 3rem 1rem 2rem;
+
+    @include respond(md) {
+      padding: 3rem 2rem 2rem;
+    }
+
+    @include respond(mds) {
+      padding: 3rem 1.5rem 2rem;
+    }
+  }
+
   &.none {
     padding: 0;
   }

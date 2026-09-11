@@ -4,10 +4,10 @@ import SelectedWorksSkeleton from "../_components/SelectedWorksSkeleton";
 
 function SelectedWorks() {
   return (
-    <section className="container">
-      <div className="section-heading">
+    <section className="container none">
+      {/* <div className="section-heading">
         <h3>work.</h3>
-      </div>
+      </div> */}
 
       <Suspense fallback={<SelectedWorksSkeleton />}>
         <SelectedWorksLayout  />

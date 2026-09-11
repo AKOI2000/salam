@@ -1,10 +1,11 @@
 .project-meta {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 6rem;
-  // max-width: 130rem;
+  // display: flex;
+  // align-items: flex-start;
+  // justify-content: space-between;
+  // gap: 3rem;
+  max-width: 90rem;
   margin: auto;
+  padding: 3rem 0;
 
   @include respond(mds) {
     flex-direction: column;
@@ -13,8 +14,9 @@
 
   &__overview {
     flex: 1;
-    max-width: 44rem;
+    // max-width: 40rem;
     padding: 1rem 2rem;
+    text-align: center;
 
     @include respond (mds) {
       padding: 1rem;
@@ -48,7 +50,7 @@
   &__details {
     flex: 1.2;
     // display: grid;
-     border-left: 0.5px solid var(--foreground-light);
+    //  border-left: 0.5px solid var(--foreground-light);
   }
 
   &__item {
@@ -57,7 +59,7 @@
     display: flex;
     align-items: center;
     gap: 3rem;
-    padding: 2rem 4rem;
+    padding: 2rem;
     justify-content: space-between;
 
     @include respond(mds) {

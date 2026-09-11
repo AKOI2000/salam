@@ -3,10 +3,15 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 
-function HoverVideoCard({ thumbnail, video, alt }) {
+function HoverVideoCard({ thumbnail, video, alt, title, excerpt }) {
   const videoRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
+
+  const words = excerpt ? excerpt.trim().split(/\s+/) : [];
+  
+  const displayExcerpt =
+    words.length > 30 ? `${words.slice(0, 30).join(" ")}...` : excerpt;
 
   const handleMouseEnter = async () => {
     setIsHovered(true);
@@ -34,7 +39,6 @@ function HoverVideoCard({ thumbnail, video, alt }) {
       onMouseLeave={handleMouseLeave}
     >
       <div className="work-img-box__ratio">
-        {/* natural dimensions — no fill */}
         <Image
           src={thumbnail}
           alt={alt}
@@ -54,6 +58,13 @@ function HoverVideoCard({ thumbnail, video, alt }) {
           onCanPlay={() => setVideoReady(true)}
           className={isHovered && videoReady ? "visible" : ""}
         />
+
+        <div className="work-img-box__overlay">
+          <div className="work-img-box__content">
+            <h6>{title}</h6>
+            {displayExcerpt ? <p>{displayExcerpt}</p> : null}
+          </div>
+        </div>
       </div>
     </div>
   );

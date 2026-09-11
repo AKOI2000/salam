@@ -18,15 +18,14 @@ header {
 
   &.is-light {
     background: transparent;
-    // border-bottom-color: rgba(255, 255, 255, 0.22);
     border-bottom: 0;
 
     @media (min-width: 609px) {
       .nav-links {
-        color: var(--background);
+        color: var(--foreground);
 
         &::before {
-          background: var(--background);
+          background: var(--foreground);
         }
       }
 
@@ -34,7 +33,7 @@ header {
         background: transparent;
 
         span {
-          background-color: var(--background);
+          background-color: var(--foreground);
         }
       }
     }
@@ -50,17 +49,8 @@ header {
     .test {
       background: transparent;
 
-      &.is-light {
-        span {
-          background-color: var(--background);
-        }
-      }
-
-      &:not(.is-light),
-      &.is-open {
-        span {
-          background-color: var(--foreground);
-        }
+      span {
+        background-color: var(--foreground);
       }
     }
   }
@@ -139,7 +129,6 @@ header {
       justify-content: center;
       gap: 0;
       padding: 10rem 2rem 4rem;
-      // transform: translateY(-3rem);
       z-index: 90;
       border-top: 0.5px solid rgba(17, 17, 17, 0.14);
 
@@ -153,6 +142,7 @@ header {
         line-height: 1.1;
         letter-spacing: -0.06em;
         border-bottom: 1px solid rgba(17, 17, 17, 0.12);
+        color: var(--foreground);
 
         &::before {
           display: none;
@@ -162,7 +152,6 @@ header {
       &.show {
         opacity: 1;
         visibility: visible;
-        // transform: translateY(0);
         transition: all 0.3s ease-in-out;
 
         .nav-links {
@@ -171,8 +160,8 @@ header {
 
           &:hover,
           &:focus-visible {
-            color: var(--background);
-            background-color: var(--foreground);
+            color: var(--foreground);
+            background-color: rgba(255, 255, 255, 0.08);
             transform: scale(1.01) translateX(0.7rem);
           }
         }

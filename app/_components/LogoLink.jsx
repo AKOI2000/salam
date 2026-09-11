@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 
-function LogoLink({ isLight = false }) {
+function LogoLink() {
   const pathname = usePathname();
 
   return (
@@ -19,7 +19,7 @@ function LogoLink({ isLight = false }) {
     >
       <Image
         alt="Salam's Logo"
-        src={isLight ? "/MO SALAM-02.png" : "/MO SALAM-01.png"}
+        src="/MO SALAM-02.png"
         width={117}
         height={70}
         priority

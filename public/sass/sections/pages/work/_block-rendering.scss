@@ -18,6 +18,13 @@
   text-transform: capitalize;
 }
 
+.block-heading,
+.block-subheading,
+.block-paragraph {
+  max-width: 100rem;
+  margin: auto auto 3rem;
+}
+
 .block-heading {
   // inherits h2 — no override needed
   text-align: center;
@@ -29,8 +36,7 @@
 }
 
 .block-paragraph {
-  max-width: 90rem;
-  margin: auto;
+  text-align: center;
   margin-bottom: 3rem;
   // inherits p — width constraint only, for readable line length
 }
@@ -66,8 +72,12 @@
 .block-image-group {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: .5rem;
   margin-bottom: 3rem;
+
+  @include respond (mds) {
+    flex-direction: column;
+  }
 
   .block-image {
     flex: 1 1 calc(50% - 1rem);

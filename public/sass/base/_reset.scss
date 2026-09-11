@@ -1,13 +1,13 @@
 :root {
-  --background: #ffffff;
-  --white-smoke: #f5f5f5;
-  --whiter-smoke: #f8f8f8;
-  --light-grey: #efefee;
-  --grey: #8d8d8d;
-  --darker-grey: #646464;
-  --darkest-grey: #00000080;
-  --foreground-light: #000000cc;
-  --foreground: #000000;
+  --background: #0b0b0b;
+  --white-smoke: #121212;
+  --whiter-smoke: #1a1a1a;
+  --light-grey: #d7d7d7;
+  --grey: #9a9a9a;
+  --darker-grey: #b9b9b9;
+  --darkest-grey: rgba(255, 255, 255, 0.08);
+  --foreground-light: #f2f2f2;
+  --foreground: #ffffff;
   --color-accent: #765223;
   --color-accent-light: #ffecaf;
   --color-blue: #00008b;
@@ -71,7 +71,7 @@ body {
   //   flex-direction: column;
   color: var(--foreground-light);
   background: var(--background);
-  font-family: var(--font-inter);
+  font-family: var(--font-monument-grotesk);
   //   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -83,6 +83,7 @@ body {
     opacity: 0.07;
     z-index: 0;
     pointer-events: none;
+    display: none;
   }
 }
 
@@ -110,16 +111,16 @@ a {
 button {
   border: none;
   cursor: none;
-  font-family: var(--font-inter);
+  font-family: var(--font-monument-grotesk);
   font-weight: 500;
 }
 
 input,
 textarea {
-  font-family: var(--font-inter);
+  font-family: var(--font-monument-grotesk);
 
   &:placeholder-shown {
-    font-family: var(--font-inter);
+    font-family: var(--font-monument-grotesk);
     // text-transform: capitalize;
   }
 }
