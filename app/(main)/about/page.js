@@ -7,9 +7,10 @@ import FAQs from "@/app/_sections/FAQs";
 export const metadata = {
   title: "About",
   description:
-    "Learn more about Salam — a motion designer with a passion for visual storytelling.",
+    "Learn more about Salam, a motion designer crafting bold visual stories and brand-driven digital experiences.",
   openGraph: {
-    url: "https://yoursite.com/about",
+    url: "https://www.moosalam.com/about",
+    images: [{ url: "/Salam.png", width: 1200, height: 630, alt: "Salam logo" }],
   },
 };
 

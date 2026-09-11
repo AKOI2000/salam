@@ -941,38 +941,61 @@ header nav .nav-links.active:hover::before {
     visibility: hidden;
     background-color: var(--background);
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 3rem;
-    transform: translateY(100%);
+    gap: 0;
+    padding: 20rem 2rem 4rem;
+    transform: translateY(-3rem);
     z-index: 90;
+    border-top: 0.5px solid rgba(17, 17, 17, 0.14);
   }
   header nav .nav-links {
-    transform: translateX(100%);
-    font-size: 4rem;
+    display: block;
+    width: 100%;
+    padding: 1.2rem 0;
+    transform: translateY(1.5rem);
+    opacity: 0;
+    font-size: clamp(4rem, 8vw, 6rem);
+    line-height: 1.1;
+    letter-spacing: -0.06em;
+    border-bottom: 1px solid rgba(17, 17, 17, 0.12);
+    transition: all 0.3s ease-in-out;
   }
-  header nav .nav-links:not(:last-child) {
-    border-bottom: 1px solid var(--background);
+  header nav .nav-links::before {
+    display: none;
+  }
+  header nav .nav-links:hover, header nav .nav-links:focus-visible {
+    background: var(--foreground);
+    color: var(--background);
   }
   header nav.show {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
   }
   header nav.show .nav-links {
-    transform: translateX(0);
+    opacity: 1;
+    transform: translateY(0);
+  }
+  header nav.show .nav-links:hover, header nav.show .nav-links:focus-visible {
+    transform: scale(1.02) translateX(8px);
   }
 }
-
-.test {
+header .test {
   width: 4rem;
   height: 4rem;
   position: relative;
   cursor: pointer;
   z-index: 101;
   background-color: var(--background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.test span {
+@media (max-width: 608px) {
+  header .test {
+    width: 4.8rem;
+    height: 4.8rem;
+  }
+}
+header .test span {
   width: 1rem;
   height: 1rem;
   background-color: var(--foreground);
@@ -982,7 +1005,7 @@ header nav .nav-links.active:hover::before {
   transform: translate(-50%, -50%);
 }
 @media (max-width: 608px) {
-  .test span {
+  header .test span {
     width: 1.2rem;
     height: 1.2rem;
   }
