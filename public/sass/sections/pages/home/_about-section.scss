@@ -1,10 +1,18 @@
 .about-section {
+  margin-left: auto;
+  max-width: 80rem;
+  .section-heading {
+    h3 {
+      text-align: right;
+    }
+  }
+
   h6 {
-    max-width: 80rem;
     font-weight: 400;
+    // text-align: right;
   }
 
   a {
-    margin-top: 2rem;
+    margin-top: 3rem;
   }
 }

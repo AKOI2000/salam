@@ -714,32 +714,23 @@ h1 {
   height: 100%;
 }
 .btn-tertiary {
-  color: var(--foreground);
-  background-color: transparent;
-  padding: 0.5rem 0.5rem 1rem;
-  font-weight: 400;
-  transition: all 0.7s ease-in-out;
-  position: relative;
+  color: var(--darker-grey);
+  background-color: var(--white-smoke);
+  border: 1px solid var(--darker-grey);
+  padding: 1.5rem;
+  font-weight: 300;
+  text-transform: uppercase;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
-}
-.btn-tertiary::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 1px;
-  width: 0;
-  background-color: var(--grey);
-  transition: all 0.7s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 .btn-tertiary:hover {
-  gap: 1.5rem;
-  font-weight: 500;
-}
-.btn-tertiary:hover::before {
-  width: 100%;
+  background-color: var(--whiter-smoke);
+  border-color: var(--foreground-light);
+  color: var(--foreground-light);
+  transform: translateY(-1px);
 }
 
 .products-table-row-buttons {
@@ -2011,12 +2002,18 @@ header .test span {
   font-size: 1.6rem;
 }
 
-.about-section h6 {
+.about-section {
+  margin-left: auto;
   max-width: 80rem;
+}
+.about-section .section-heading h3 {
+  text-align: right;
+}
+.about-section h6 {
   font-weight: 400;
 }
 .about-section a {
-  margin-top: 2rem;
+  margin-top: 3rem;
 }
 
 .about-hero h1 {

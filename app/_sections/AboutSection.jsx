@@ -5,9 +5,9 @@ import { FaArrowRightLong } from "react-icons/fa6";
 function AboutSection() {
   return (
     <section className="container about-section">
-      <div className="section-heading">
+      {/* <div className="section-heading">
         <h3>about.</h3>
-      </div>
+      </div> */}
 
       <RevealText
         as="h6"
@@ -17,8 +17,8 @@ function AboutSection() {
       />
 
       <Link href="/about" className="btn-tertiary">
-        Show more
-        <FaArrowRightLong />
+        more about me
+        {/* <FaArrowRightLong /> */}
       </Link>
     </section>
   );
