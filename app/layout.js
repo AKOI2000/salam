@@ -120,6 +120,9 @@ export default function RootLayout({ children }) {
       className={`${monumentGrotesk.variable}`}
       data-scroll-behavior="smooth"
     >
+      <head>
+        <meta name="google-site-verification" content="RKvnBxKGROf5oLtHyvyie-KgqNww05sodY3Z7d7zQ7w" />
+      </head>
       <body>
         <Script
           id="business-schema"

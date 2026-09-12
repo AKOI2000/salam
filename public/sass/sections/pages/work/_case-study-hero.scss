@@ -4,6 +4,8 @@
   // display: flex;
   // align-items: flex-end;
   // // justify-content: center;
+  border-radius: 0 0 3rem 3rem;
+  overflow: hidden;
 
   @include respond(mds) {
     display: block;

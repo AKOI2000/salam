@@ -8,7 +8,7 @@ const logos = [
   { src: "/Hennessy.png", alt: "Hennessy" },
   { src: "/hook.png", alt: "Hook" },
   { src: "/indomie.png", alt: "Indomie" },
-  { src: "/Leadwayy.png", alt: "Leadway" },
+  { src: "/leadwayy.png", alt: "Leadway" },
   { src: "/lushHair.png", alt: "Lush Hair" },
   { src: "/maltaGuiness.png", alt: "Malta Guinness" },
   { src: "/orijin.png", alt: "Orijin Bitters" },

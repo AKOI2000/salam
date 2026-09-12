@@ -400,6 +400,9 @@ h1 {
 .container.none {
   padding: 0;
 }
+.container.medium {
+  padding: 0rem 3rem 0rem;
+}
 
 :root {
   --sidebar-width: 27rem;
@@ -1099,7 +1102,7 @@ header .test span {
   display: inline-flex;
   align-items: center;
   padding: 0 3rem;
-  font-size: 5rem;
+  font-size: 2rem;
   font-weight: 300;
   white-space: nowrap;
   transition: all 0.2s ease;
@@ -2195,6 +2198,8 @@ header .test span {
 .case-study_hero {
   position: relative;
   max-height: auto;
+  border-radius: 0 0 3rem 3rem;
+  overflow: hidden;
 }
 @media (max-width: 608px) {
   .case-study_hero {
@@ -2354,8 +2359,6 @@ header .test span {
 }
 
 .block-renderer {
-  display: flex;
-  flex-direction: column;
   padding: 6rem 0;
 }
 @media (max-width: 608px) {
@@ -2366,28 +2369,18 @@ header .test span {
 
 .block-heading,
 .block-subheading {
-  margin-bottom: 2rem;
-  text-transform: capitalize;
-}
-
-.block-heading,
-.block-subheading,
-.block-paragraph {
-  max-width: 100rem;
-  margin: auto auto 3rem;
-}
-
-.block-heading {
+  margin: auto auto 2rem;
   text-align: center;
 }
 
 .block-subheading {
-  text-align: center;
+  font-weight: 400;
 }
 
 .block-paragraph {
-  text-align: center;
-  margin-bottom: 3rem;
+  margin: 3rem 0 3rem auto;
+  max-width: 60rem;
+  font-weight: 300;
 }
 
 .block-quote {
@@ -2421,11 +2414,6 @@ header .test span {
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 3rem;
-}
-@media (max-width: 608px) {
-  .block-image-group {
-    flex-direction: column;
-  }
 }
 .block-image-group .block-image {
   flex: 1 1 calc(50% - 1rem);

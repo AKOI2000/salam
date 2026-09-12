@@ -9,14 +9,16 @@ function BlockRenderer({ blocks }) {
     <div className="block-renderer">
       {groups.map((group, i) =>
         group.type === "image-group" ? (
-          <div key={i} className="block-image-group" data-count={group.blocks.length}>
-            {group.blocks.map((block) => (
-              <BlockImage key={block.id} block={block} />
-            ))}
+          <div className="container none" key={i}>
+            <div className="block-image-group" data-count={group.blocks.length}>
+              {group.blocks.map((block) => (
+                <BlockImage key={block.id} block={block} />
+              ))}
+            </div>
           </div>
         ) : (
           <BlockItem key={group.block.id} block={group.block} />
-        )
+        ),
       )}
     </div>
   );
@@ -65,34 +67,58 @@ function BlockItem({ block }) {
 
   switch (type) {
     case "heading":
-      return <h3 className="block-heading">{content.text}</h3>;
+      return (
+        <div className="container medium">
+          <h2 className="block-heading">{content.text}</h2>
+        </div>
+      );
 
     case "subheading":
-      return <h5 className="block-subheading">{content.text}</h5>;
+      return (
+        <div className="container medium">
+          <h4 className="block-subheading">{content.text}</h4>
+        </div>
+      );
 
     case "paragraph":
-      return <p className="block-paragraph">{content.text}</p>;
+      return (
+        <div className="container medium">
+          <p className="block-paragraph">{content.text}</p>
+        </div>
+      );
 
     case "quote":
-      return <blockquote className="block-quote">{content.text}</blockquote>;
+      return (
+        <div className="container medium">
+          <blockquote className="block-quote">{content.text}</blockquote>
+        </div>
+      );
 
     case "list":
-      return content.style === "numbered" ? (
-        <ol className="block-list">
-          {content.items.map((item, i) => (
-            <li key={i}>{item}</li>
-          ))}
-        </ol>
-      ) : (
-        <ul className="block-list">
-          {content.items.map((item, i) => (
-            <li key={i}>{item}</li>
-          ))}
-        </ul>
+      return (
+        <div className="container medium">
+          {content.style === "numbered" ? (
+            <ol className="block-list">
+              {content.items.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ol>
+          ) : (
+            <ul className="block-list">
+              {content.items.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
+          )}
+        </div>
       );
 
     case "image":
-      return <BlockImage block={block} />;
+      return (
+        <div className="container none">
+          <BlockImage block={block} />
+        </div>
+      );
 
     case "video":
       return (
@@ -103,14 +129,16 @@ function BlockItem({ block }) {
 
     case "link":
       return (
-        <a
-          href={content.url}
-          className="block-link"
-          target={content.external ? "_blank" : undefined}
-          rel={content.external ? "noopener noreferrer" : undefined}
-        >
-          {content.label}
-        </a>
+        <div className="container medium">
+          <a
+            href={content.url}
+            className="block-link"
+            target={content.external ? "_blank" : undefined}
+            rel={content.external ? "noopener noreferrer" : undefined}
+          >
+            {content.label}
+          </a>
+        </div>
       );
 
     default:
