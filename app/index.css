@@ -4,29 +4,32 @@
 .page-start.works-hero h1 {
   margin-bottom: 4rem;
 }
+.page-start.small {
+  padding: 15rem 7rem 7rem;
+}
 @media (max-width: 1024px) {
-  .page-start {
-    padding: 15rem 5rem;
+  .page-start.small {
+    padding: 15rem 5rem 12rem;
   }
 }
 @media (max-width: 880px) {
-  .page-start {
-    padding: 15rem 4rem;
+  .page-start.small {
+    padding: 15rem 4rem 12rem;
   }
 }
 @media (max-width: 608px) {
-  .page-start {
-    padding: 16rem 3rem 14rem;
+  .page-start.small {
+    padding: 16rem 3rem 10rem;
   }
 }
 @media (max-width: 480px) {
-  .page-start {
-    padding: 16rem 3rem 14rem;
+  .page-start.small {
+    padding: 16rem 3rem 10rem;
   }
 }
 @media (max-width: 360px) {
-  .page-start {
-    padding: 16rem 2rem 14rem;
+  .page-start.small {
+    padding: 16rem 2rem 10rem;
   }
 }
 
@@ -199,14 +202,28 @@ h6,
 h5,
 h4 {
   line-height: 1.4;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.05rem;
+}
+@media (max-width: 608px) {
+  h6,
+  h5,
+  h4 {
+    letter-spacing: -0.025rem;
+  }
 }
 
 h3,
 h2,
 h1 {
   line-height: 1.2;
-  letter-spacing: -2px;
+  letter-spacing: -0.2rem;
+}
+@media (max-width: 608px) {
+  h3,
+  h2,
+  h1 {
+    letter-spacing: -0.1rem;
+  }
 }
 
 h4,
@@ -2042,7 +2059,6 @@ header .test span {
   object-fit: cover;
   width: 100%;
   height: auto;
-  max-height: 1000px;
 }
 
 .services {
@@ -2357,7 +2373,7 @@ header .test span {
 
 .block-subheading {
   font-weight: 500;
-  max-width: 120rem;
+  max-width: 100rem;
   margin: 0 0 1.5rem 0;
   text-align: left;
 }

@@ -40,14 +40,22 @@ h6,
 h5,
 h4 {
   line-height: 1.4;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.05rem;
+
+  @include respond(mds) {
+    letter-spacing: -0.025rem;
+  }
 }
 
 h3,
 h2,
 h1 {
   line-height: 1.2;
-  letter-spacing: -2px;
+  letter-spacing: -0.2rem;
+
+  @include respond(mds) {
+    letter-spacing: -0.1rem;
+  }
 }
 
 h4,

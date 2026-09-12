@@ -69,14 +69,14 @@ function BlockItem({ block }) {
     case "heading":
       return (
         <div className="container medium">
-          <h3 className="block-heading">{content.text}</h3>
+          <h2 className="block-heading">{content.text}</h2>
         </div>
       );
 
     case "subheading":
       return (
         <div className="container medium">
-          <h6 className="block-subheading">{content.text}</h6>
+          <h5 className="block-subheading">{content.text}</h5>
         </div>
       );
 
