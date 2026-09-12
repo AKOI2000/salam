@@ -8,7 +8,7 @@ const logos = [
   { src: "/Hennessy.png", alt: "Hennessy" },
   { src: "/hook.png", alt: "Hook" },
   { src: "/indomie.png", alt: "Indomie" },
-  { src: "/leadwayy.png", alt: "Leadway" },
+  { src: "/Leadwayy.png", alt: "Leadway" },
   { src: "/lushHair.png", alt: "Lush Hair" },
   { src: "/maltaGuiness.png", alt: "Malta Guinness" },
   { src: "/orijin.png", alt: "Orijin Bitters" },
@@ -21,7 +21,7 @@ const repeat = 4;
 const logoList = Array.from({ length: repeat }).flatMap((_, r) =>
   logos.map((logo, i) => (
     <span className="marquee__item" key={`${r}-${i}`}>
-      <Image src={logo.src} alt={logo.alt} className="marquee__logo" width={4} height={3}sizes="(max-width: 763px) 100vw, (max-width: 1200px) 50vw, 33vw" />
+      <Image src={logo.src} alt={logo.alt} className="marquee__logo" width={40} height={30}sizes="(max-width: 763px) 100vw, (max-width: 1200px) 50vw, 33vw" />
     </span>
   )),
 );

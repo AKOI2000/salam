@@ -33,6 +33,7 @@
         padding: 3rem;
         background: var(--background);
         border-bottom: 1px solid var(--foreground-light);
+        color: var(--foreground-light);
 
         @include respond(mds) {
           padding: 3rem 1rem;

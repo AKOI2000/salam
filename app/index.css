@@ -725,6 +725,7 @@ h1 {
   justify-content: center;
   gap: 1rem;
   transition: all 0.3s ease-in-out;
+  border-radius: 0.8rem;
 }
 .btn-tertiary:hover {
   background-color: var(--whiter-smoke);
@@ -775,7 +776,7 @@ h1 {
 
 .footer {
   background-color: var(--white-smoke);
-  color: var(--foreground);
+  color: var(--foreground-light);
 }
 .footer-cta {
   display: grid;
@@ -824,7 +825,7 @@ h1 {
 .footer-cta form textarea :hover {
   border: none;
   outline: none;
-  border-bottom: 2px solid var(--grey);
+  border-bottom: 2px solid var(--darker-grey);
 }
 .footer-cta form input:placeholder-shown,
 .footer-cta form textarea:placeholder-shown {
@@ -1067,7 +1068,8 @@ header .test span {
   pointer-events: none;
   grid-row: 1/-1;
   grid-column: 1/-1;
-  background: linear-gradient(to right, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0.5) 6%, rgba(255, 255, 255, 0) 15%, rgba(255, 255, 255, 0) 85%, rgba(255, 255, 255, 0.5) 94%, rgb(255, 255, 255) 100%);
+  background: linear-gradient(to right, rgba(11, 11, 11, 0.96) 0%, rgba(11, 11, 11, 0.7) 7%, rgba(11, 11, 11, 0) 18%, rgba(11, 11, 11, 0) 82%, rgba(11, 11, 11, 0.7) 93%, rgba(11, 11, 11, 0.96) 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
 }
 
 .marquee {
@@ -1075,6 +1077,7 @@ header .test span {
   overflow: hidden;
   grid-row: 1/-1;
   grid-column: 1/-1;
+  padding: 2rem 5rem;
 }
 
 /* two groups side by side, total width = 2x one group */
@@ -1096,14 +1099,10 @@ header .test span {
   display: inline-flex;
   align-items: center;
   padding: 0 3rem;
-  font-size: 3rem;
+  font-size: 5rem;
   font-weight: 300;
   white-space: nowrap;
-  filter: grayscale(100);
   transition: all 0.2s ease;
-}
-.marquee__item:hover {
-  filter: grayscale(0);
 }
 
 /* -50% = exactly one group width, loop is seamless */
@@ -1116,8 +1115,8 @@ header .test span {
   }
 }
 .marquee__logo {
-  height: 28px; /* adjust to taste */
   width: auto;
+  height: 4rem;
 }
 
 .hover-video-card {
@@ -1319,7 +1318,7 @@ header .test span {
 
 .skeleton-group {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
   gap: 1rem;
   margin-bottom: 24px;
 }
@@ -1329,16 +1328,11 @@ header .test span {
   }
 }
 .skeleton-group .skeleton-card {
-  height: 40vh;
+  height: 40rem;
   background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
   border-radius: 8px;
-}
-@media (max-width: 608px) {
-  .skeleton-group .skeleton-card {
-    height: 20vh;
-  }
 }
 .skeleton-group .skeleton-card:nth-child(1) {
   animation-delay: 0s;
@@ -1788,11 +1782,6 @@ header .test span {
   grid-auto-flow: dense;
   gap: 1rem;
 }
-@media (max-width: 768px) {
-  .selected-works {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
 @media (max-width: 608px) {
   .selected-works {
     grid-template-columns: 1fr;
@@ -1948,9 +1937,6 @@ header .test span {
   backface-visibility: hidden;
   overflow: hidden;
 }
-.card-front img, .card-back img {
-  filter: grayscale(100);
-}
 .card-front {
   background: var(--whiter-smoke);
   display: flex;
@@ -2010,7 +1996,7 @@ header .test span {
   text-align: right;
 }
 .about-section h6 {
-  font-weight: 400;
+  font-weight: 100;
 }
 .about-section a {
   margin-top: 3rem;
@@ -2100,14 +2086,14 @@ header .test span {
   gap: 2;
 }
 .services .list.has-hover .list-item {
-  color: var(--grey);
-  opacity: 0.2;
-  z-index: 1; /* behind card (z-index: 2) */
+  color: rgba(255, 255, 255, 0.28);
+  opacity: 0.25;
+  z-index: 1;
 }
 .services .list.has-hover .list-item.active {
-  color: #111;
+  color: var(--foreground);
   opacity: 1;
-  z-index: 3; /* in front of card */
+  z-index: 3;
 }
 .services .list .list-item {
   font-style: italic;
@@ -2117,10 +2103,9 @@ header .test span {
   text-transform: uppercase;
   user-select: none;
   position: relative;
-  /* default: in front of card */
   z-index: 3;
   transition: color 0.3s ease, z-index 0s;
-  color: #111;
+  color: var(--foreground-light);
 }
 @media (max-width: 608px) {
   .services .list .list-item {
@@ -2181,6 +2166,7 @@ header .test span {
   padding: 3rem;
   background: var(--background);
   border-bottom: 1px solid var(--foreground-light);
+  color: var(--foreground-light);
 }
 @media (max-width: 608px) {
   .faq-section .faq-list .faq-item .faq-trigger {

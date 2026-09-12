@@ -4,10 +4,6 @@
   grid-auto-flow: dense;
   gap: 1rem;
 
-  @include respond(md) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   @include respond(mds) {
     grid-template-columns: 1fr;
   }

@@ -7,6 +7,7 @@
   grid-template-rows: 1fr;
   overflow: hidden;
   padding: 5rem 0;
+  // background: var(--whiter-smoke);
 }
 
 .white-gradient {
@@ -18,13 +19,14 @@
   grid-column: 1 / -1;
   background: linear-gradient(
     to right,
-    rgba(255,255,255,1)   0%,
-    rgba(255,255,255,0.5) 6%,
-    rgba(255,255,255,0)   15%,
-    rgba(255,255,255,0)   85%,
-    rgba(255,255,255,0.5) 94%,
-    rgba(255,255,255,1)   100%
+    rgba(11, 11, 11, 0.96) 0%,
+    rgba(11, 11, 11, 0.7) 7%,
+    rgba(11, 11, 11, 0) 18%,
+    rgba(11, 11, 11, 0) 82%,
+    rgba(11, 11, 11, 0.7) 93%,
+    rgba(11, 11, 11, 0.96) 100%
   );
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
 }
 
 .marquee {
@@ -32,6 +34,8 @@
   overflow: hidden;
   grid-row: 1 / -1;
   grid-column: 1 / -1;
+  // background-color: white;
+  padding: 2rem 5rem;
 }
 
 /* two groups side by side, total width = 2x one group */
@@ -53,25 +57,37 @@
   display: inline-flex;
   align-items: center;
   padding: 0 3rem;
-  font-size: 3rem;
+  font-size: 5rem;
   font-weight: 300;
   white-space: nowrap;
 
-  filter: grayscale(100);
-  transition: all .2s ease;
+  // filter: grayscale(100);
+  transition: all 0.2s ease;
 
-  &:hover{
-    filter: grayscale(0);
-  }
+  // img {
+  //   width: 5rem;
+  //   height: auto;
+  // }
+
+  // &:hover {
+  //   // filter: grayscale(0);
+  // }
 }
 
 /* -50% = exactly one group width, loop is seamless */
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .marquee__logo {
-  height: 28px; /* adjust to taste */
-  width: auto;
+  // height: 28px; /* adjust to taste */
+  // width: auto;
+
+    width: auto;
+    height: 4rem;
 }
