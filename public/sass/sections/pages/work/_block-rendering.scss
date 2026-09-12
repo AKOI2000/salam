@@ -7,44 +7,41 @@
   }
 }
 
-.block-heading,
-.block-subheading {
-  margin: auto auto 2rem;
-  // max-width: 130rem;
-  text-align: center;
-
-}
-
 .block-heading {
   // inherits h2 — no override needed
+  max-width: 60rem;
+  margin: 0 auto 1.5rem 0; /* keep on the left */
+  text-align: left;
 }
 
 .block-subheading {
   // inherits h3 — no override needed
-  font-weight: 400;
+  font-weight: 500;
+  // color: var(--light-grey);
+  max-width: 120rem;
+  margin: 0 0 1.5rem 0;
+  text-align: left;
 }
 
 .block-paragraph {
-  // text-align: center;
   margin: 3rem 0 3rem auto;
-  // margin-bottom: 3rem;
-  max-width: 60rem;
   font-weight: 300;
-  // margin-left: auto;
-  // padding: 0 2rem 0 0 ;
-  // inherits p — width constraint only, for readable line length
+  color: var(--light-grey);
+  max-width: 60rem;
+  /* pushes it to the right */
+  text-align: left;
 }
 
 .block-quote {
   max-width: 70rem;
   padding-left: 2rem;
-  border-left: 2px solid var(--foreground);
+  border-left: 2px solid var(--color-accent-light);
   //   font-size: calc(var(--base-size) * 1.25);
   font-size: 2rem;
   font-weight: 300;
   font-style: italic;
   line-height: 1.5;
-  color: var(--foreground-light);
+  color: var(--light-grey);
   margin: auto;
   margin-bottom: 3rem;
 }
@@ -67,62 +64,15 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 
   .block-image {
     flex: 1 1 calc(50% - 1rem);
     min-width: 30rem;
+    margin: auto;
   }
 
   &[data-count="1"] .block-image {
     flex: 1 1 100%;
-  }
-}
-
-.block-image {
-  max-width: 110rem;
-  margin-bottom: 3rem;
-  margin: auto;
-
-  .block-image-el {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  figcaption {
-    margin-top: 1rem;
-    // font-size: calc(var(--base-size) * 0.85);
-    font-size: 1.4rem;
-    color: var(--grey);
-    text-align: center;
-  }
-}
-
-.block-video {
-  width: 100%;
-  margin-bottom: 3rem;
-
-  video {
-    width: 100%;
-    display: block;
-  }
-}
-
-.block-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-  font-size: var(--base-size);
-  font-weight: 500;
-  color: var(--color-accent);
-  text-decoration: underline;
-  text-underline-offset: 0.3rem;
-  transition: all 0.2s;
-  margin: auto;
-  margin-bottom: 3rem;
-
-  &:hover {
-    color: var(--foreground);
   }
 }

@@ -166,7 +166,7 @@ p {
   font-size: var(--base-size);
   font-weight: 400;
   white-space: pre-wrap;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 h6 {
@@ -198,14 +198,15 @@ h1 {
 h6,
 h5,
 h4 {
-  line-height: 1.3;
+  line-height: 1.4;
+  letter-spacing: -0.5px;
 }
 
 h3,
 h2,
 h1 {
   line-height: 1.2;
-  letter-spacing: -0.03em;
+  letter-spacing: -2px;
 }
 
 h4,
@@ -2262,38 +2263,14 @@ header .test span {
 }
 
 .project-meta {
-  max-width: 90rem;
   margin: auto;
-  padding: 3rem 0;
-}
-@media (max-width: 608px) {
-  .project-meta {
-    flex-direction: column;
-    gap: 2rem;
-  }
+  padding: 1rem 0;
+  width: 100%;
+  /* overview (title) is shown in the hero; leave this block empty intentionally */
+  /* labels removed per new layout */
 }
 .project-meta__overview {
-  flex: 1;
-  padding: 1rem 2rem;
-  text-align: center;
-}
-@media (max-width: 608px) {
-  .project-meta__overview {
-    padding: 1rem;
-  }
-}
-.project-meta__overview h2 {
-  margin: 1rem 0 1.5rem;
-  line-height: 1;
-  letter-spacing: -0.06em;
-  text-transform: none;
-}
-.project-meta__overview p {
-  margin: 0;
-  max-width: 52rem;
-  color: var(--foreground-light);
-  font-size: var(--base-size);
-  line-height: 1.8;
+  display: none;
 }
 .project-meta__eyebrow {
   display: inline-block;
@@ -2303,38 +2280,43 @@ header .test span {
   text-transform: uppercase;
 }
 .project-meta__details {
-  flex: 1.2;
-}
-.project-meta__item {
-  border-bottom: 0.5px solid var(--foreground-light);
   display: flex;
-  align-items: center;
-  gap: 3rem;
-  padding: 2rem;
+  gap: 1rem;
+  align-items: stretch;
   justify-content: space-between;
 }
 @media (max-width: 608px) {
-  .project-meta__item {
-    padding: 2rem 1rem;
+  .project-meta__details {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 1.5rem;
+  }
+}
+.project-meta__item {
+  flex: 1 1 calc(50% - 1rem);
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.03);
+}
+@media (max-width: 768px) {
+  .project-meta__item {
+    flex: 1 1 100%;
+    padding: 1rem 0.5rem;
   }
 }
 .project-meta__label {
-  color: var(--grey);
-  font-size: 1.2rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  display: none;
 }
 .project-meta__value {
   color: var(--foreground-light);
   font-size: var(--base-size);
   line-height: 1.6;
-  text-transform: capitalize;
-  text-align: right;
+  white-space: pre-wrap;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
-@media (max-width: 608px) {
+@media (max-width: 768px) {
   .project-meta__value {
     text-align: left;
   }
@@ -2367,31 +2349,37 @@ header .test span {
   }
 }
 
-.block-heading,
-.block-subheading {
-  margin: auto auto 2rem;
-  text-align: center;
+.block-heading {
+  max-width: 60rem;
+  margin: 0 auto 1.5rem 0; /* keep on the left */
+  text-align: left;
 }
 
 .block-subheading {
-  font-weight: 400;
+  font-weight: 500;
+  max-width: 120rem;
+  margin: 0 0 1.5rem 0;
+  text-align: left;
 }
 
 .block-paragraph {
   margin: 3rem 0 3rem auto;
-  max-width: 60rem;
   font-weight: 300;
+  color: var(--light-grey);
+  max-width: 60rem;
+  /* pushes it to the right */
+  text-align: left;
 }
 
 .block-quote {
   max-width: 70rem;
   padding-left: 2rem;
-  border-left: 2px solid var(--foreground);
+  border-left: 2px solid var(--color-accent-light);
   font-size: 2rem;
   font-weight: 300;
   font-style: italic;
   line-height: 1.5;
-  color: var(--foreground-light);
+  color: var(--light-grey);
   margin: auto;
   margin-bottom: 3rem;
 }
@@ -2413,57 +2401,15 @@ header .test span {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 .block-image-group .block-image {
   flex: 1 1 calc(50% - 1rem);
   min-width: 30rem;
+  margin: auto;
 }
 .block-image-group[data-count="1"] .block-image {
   flex: 1 1 100%;
-}
-
-.block-image {
-  max-width: 110rem;
-  margin-bottom: 3rem;
-  margin: auto;
-}
-.block-image .block-image-el {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-.block-image figcaption {
-  margin-top: 1rem;
-  font-size: 1.4rem;
-  color: var(--grey);
-  text-align: center;
-}
-
-.block-video {
-  width: 100%;
-  margin-bottom: 3rem;
-}
-.block-video video {
-  width: 100%;
-  display: block;
-}
-
-.block-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-  font-size: var(--base-size);
-  font-weight: 500;
-  color: var(--color-accent);
-  text-decoration: underline;
-  text-underline-offset: 0.3rem;
-  transition: all 0.2s;
-  margin: auto;
-  margin-bottom: 3rem;
-}
-.block-link:hover {
-  color: var(--foreground);
 }
 
 .dashboard-heading_flex {

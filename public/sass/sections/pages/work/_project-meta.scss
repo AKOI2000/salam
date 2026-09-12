@@ -1,42 +1,11 @@
 .project-meta {
-  // display: flex;
-  // align-items: flex-start;
-  // justify-content: space-between;
-  // gap: 3rem;
-  max-width: 90rem;
   margin: auto;
-  padding: 3rem 0;
+  padding: 1rem 0;
+  width: 100%;
 
-  @include respond(mds) {
-    flex-direction: column;
-    gap: 2rem;
-  }
-
+  /* overview (title) is shown in the hero; leave this block empty intentionally */
   &__overview {
-    flex: 1;
-    // max-width: 40rem;
-    padding: 1rem 2rem;
-    text-align: center;
-
-    @include respond (mds) {
-      padding: 1rem;
-    }
-
-    h2 {
-      margin: 1rem 0 1.5rem;
-      // font-size: clamp(3rem, 3vw, 5rem);
-      line-height: 1;
-      letter-spacing: -0.06em;
-      text-transform: none;
-    }
-
-    p {
-      margin: 0;
-      max-width: 52rem;
-      color: var(--foreground-light);
-      font-size: var(--base-size);
-      line-height: 1.8;
-    }
+    display: none;
   }
 
   &__eyebrow {
@@ -48,45 +17,46 @@
   }
 
   &__details {
-    flex: 1.2;
-    // display: grid;
-    //  border-left: 0.5px solid var(--foreground-light);
-  }
-
-  &__item {
-    // padding-bottom: 1.8rem;
-    border-bottom: 0.5px solid var(--foreground-light);
     display: flex;
-    align-items: center;
-    gap: 3rem;
-    padding: 2rem;
+    // flex-wrap: wrap;
+    gap: 1rem;
+    align-items: stretch;
     justify-content: space-between;
 
-    @include respond(mds) {
-      padding: 2rem 1rem;
+    @include respond (mds) {
       flex-direction: column;
-      align-items: flex-start;
-      gap: 1.5rem;
     }
   }
 
-  &__label {
-    color: var(--grey);
-    font-size: 1.2rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    // background-color: var(--foreground);
-    // padding: 0.5rem 1rem;
+  &__item {
+    flex: 1 1 calc(50% - 1rem);
+    padding: .5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.03);
+
+    @include respond(md) {
+      flex: 1 1 100%;
+      padding: 1rem 0.5rem;
+    }
   }
+
+  /* labels removed per new layout */
+  &__label { display: none; }
 
   &__value {
     color: var(--foreground-light);
     font-size: var(--base-size);
     line-height: 1.6;
-    text-transform: capitalize;
-    text-align: right;
+    // text-transform: capitalize;
+    // text-align: center;
+    white-space: pre-wrap;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 
-    @include respond (mds) {
+    @include respond (md) {
       text-align: left;
     }
   }

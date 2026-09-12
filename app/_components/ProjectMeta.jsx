@@ -11,7 +11,7 @@ function ProjectMeta({ project = {} }) {
     { label: "Timeline", value: timeline ? `${timeline} week(s)` : "—" },
     {
       label: "Tools",
-      value: tools?.length ? tools.join(", ") : "—",
+      value: tools?.length ? tools.join(",  ") : "—",
     },
     {
       label: "Deliverables",
@@ -22,16 +22,9 @@ function ProjectMeta({ project = {} }) {
   return (
     <div className="container none">
       <div className="project-meta">
-        <div className="project-meta__overview">
-          {/* <span className="project-meta__eyebrow">Selected project</span> */}
-          <h2>{title}</h2>
-          {/* {excerpt && <p>{excerpt}</p>} */}
-        </div>
-
         <div className="project-meta__details">
           {metaItems.map((item) => (
             <div key={item.label} className="project-meta__item">
-              <div className="project-meta__label">{item.label}</div>
               <div className="project-meta__value">{item.value}</div>
             </div>
           ))}

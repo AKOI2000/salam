@@ -51,7 +51,7 @@ const businessSchema = {
   url: "https://www.moosalam.com",
   telephone: "+2348162074132",
   description:
-    "Salam is a motion designer and creative professional creating brand motion, animation, graphic design, and digital experiences for businesses and modern brands.",
+    "Mohammed AbdulSalam is a motion designer and creative professional creating brand motion, animation, graphic design, and digital experiences for businesses and modern brands.",
   areaServed: "Worldwide",
   sameAs: [
     "https://www.instagram.com/og.salam/",
@@ -84,7 +84,7 @@ export const metadata = {
     "Salam",
   ],
   openGraph: {
-    siteName: "Salam",
+    siteName: "Mohammed AbdulSalam",
     type: "website",
     locale: "en_US",
     title: "Salam | Motion Designer",

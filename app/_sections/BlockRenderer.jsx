@@ -9,7 +9,7 @@ function BlockRenderer({ blocks }) {
     <div className="block-renderer">
       {groups.map((group, i) =>
         group.type === "image-group" ? (
-          <div className="container none" key={i}>
+          <div className="container small" key={i}>
             <div className="block-image-group" data-count={group.blocks.length}>
               {group.blocks.map((block) => (
                 <BlockImage key={block.id} block={block} />
@@ -69,14 +69,14 @@ function BlockItem({ block }) {
     case "heading":
       return (
         <div className="container medium">
-          <h2 className="block-heading">{content.text}</h2>
+          <h3 className="block-heading">{content.text}</h3>
         </div>
       );
 
     case "subheading":
       return (
         <div className="container medium">
-          <h4 className="block-subheading">{content.text}</h4>
+          <h6 className="block-subheading">{content.text}</h6>
         </div>
       );
 
@@ -115,16 +115,18 @@ function BlockItem({ block }) {
 
     case "image":
       return (
-        <div className="container none">
+        <div className="container small">
           <BlockImage block={block} />
         </div>
       );
 
     case "video":
       return (
-        <div className="block-video">
+       <div className="container small">
+         <div className="block-video">
           <VideoPlayer src={content.url} />
         </div>
+       </div>
       );
 
     case "link":

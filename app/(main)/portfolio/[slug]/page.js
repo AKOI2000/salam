@@ -46,7 +46,7 @@ async function page({ params }) {
     <>
       <CaseStudyHero project={project} />
       <ProjectMeta project={project} />
-      <div className="container small">
+      <div className="container none">
         <BlockRenderer blocks={project.blocks} />
       </div>
     </>
