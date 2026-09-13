@@ -1,21 +1,21 @@
 .analytics-dashboard {
   // background-color: #0f0f1a;
   min-height: 100vh;
-  padding: 4rem 0;
-  color: var(--white-smoke);
+  // padding: 4rem 0;
+  color: var(--background);
   // min-width: 76rem;
   width: 100%;
   margin: 0 auto;
 
   @include respond(mds) {
-    padding: 4rem 1rem;
+    padding: 3rem 1rem;
   }
 
   .section-box {
     margin-bottom: 4rem;
     h2 {
       font-size: 1.3rem;
-      font-weight: 600;
+      font-weight: 500;
       color: var(--grey);
       text-transform: uppercase;
       letter-spacing: 1.5;
@@ -35,7 +35,7 @@
     flex-wrap: wrap;
 
     .stat-card {
-      background-color: var(--foreground);
+      background-color: var(--background);
       border-radius: 1.2rem;
       padding: 3rem 2.4rem;
       flex: 1;
@@ -75,7 +75,7 @@
   }
 
   .custom-tool_tip {
-    background-color: var(--foreground);
+    background-color: var(--background);
     // border: 1px solid #2d2d3f;
     border-radius: .8rem;
     padding: 1rem 1.4rem;
@@ -104,7 +104,7 @@
     &-head {
       text-align: left;
       padding: 0.8rem 1.2rem;
-      color: var(--grey);
+      color: var(--darker-grey);
       font-weight: 600;
       font-size: 1.2rem;
       text-transform: uppercase;
@@ -118,12 +118,12 @@
       .body-data {
         padding: 1.1rem 1.2rem;
         &-1 {
-          color: var(--foreground);
+          color: var(--background);
           font-size: 1.3rem;
         }
 
         &-2{
-           color: var(--darker-grey);
+           color: var(--background);
         }
       }
     }

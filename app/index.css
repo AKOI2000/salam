@@ -2992,14 +2992,13 @@ form button {
 
 .analytics-dashboard {
   min-height: 100vh;
-  padding: 4rem 0;
-  color: var(--white-smoke);
+  color: var(--background);
   width: 100%;
   margin: 0 auto;
 }
 @media (max-width: 608px) {
   .analytics-dashboard {
-    padding: 4rem 1rem;
+    padding: 3rem 1rem;
   }
 }
 .analytics-dashboard .section-box {
@@ -3007,7 +3006,7 @@ form button {
 }
 .analytics-dashboard .section-box h2 {
   font-size: 1.3rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--grey);
   text-transform: uppercase;
   letter-spacing: 1.5;
@@ -3024,7 +3023,7 @@ form button {
   flex-wrap: wrap;
 }
 .analytics-dashboard .statcard-container .stat-card {
-  background-color: var(--foreground);
+  background-color: var(--background);
   border-radius: 1.2rem;
   padding: 3rem 2.4rem;
   flex: 1;
@@ -3057,7 +3056,7 @@ form button {
   color: var(--color-red);
 }
 .analytics-dashboard .custom-tool_tip {
-  background-color: var(--foreground);
+  background-color: var(--background);
   border-radius: 0.8rem;
   padding: 1rem 1.4rem;
   font-size: 1.3rem;
@@ -3081,7 +3080,7 @@ form button {
 .analytics-dashboard .top-pages-table-head {
   text-align: left;
   padding: 0.8rem 1.2rem;
-  color: var(--grey);
+  color: var(--darker-grey);
   font-weight: 600;
   font-size: 1.2rem;
   text-transform: uppercase;
@@ -3095,11 +3094,11 @@ form button {
   padding: 1.1rem 1.2rem;
 }
 .analytics-dashboard .top-pages-table-body .body-data-1 {
-  color: var(--foreground);
+  color: var(--background);
   font-size: 1.3rem;
 }
 .analytics-dashboard .top-pages-table-body .body-data-2 {
-  color: var(--darker-grey);
+  color: var(--background);
 }
 
 /*# sourceMappingURL=index.css.map */

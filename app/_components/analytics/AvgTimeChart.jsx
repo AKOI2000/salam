@@ -35,7 +35,7 @@ export default function AvgTimeChart({ data }) {
         <XAxis
           type="category"
           dataKey="page"
-          tick={{ fill: '#6b7280', fontSize: 11 }}
+          tick={{ fill: 'var(--background)', fontSize: 11 }}
           axisLine={false}
           tickLine={false}
           tickFormatter={(value) =>
@@ -46,7 +46,7 @@ export default function AvgTimeChart({ data }) {
         {/* Fix 1 — YAxis is now number (seconds) */}
         <YAxis
           type="number"
-          tick={{ fill: '#9ca3af', fontSize: 11 }}
+          tick={{ fill: 'var(--background)', fontSize: 11 }}
           tickFormatter={fmtSeconds}
           axisLine={false}
           tickLine={false}
@@ -56,7 +56,7 @@ export default function AvgTimeChart({ data }) {
         <Tooltip content={<CustomTooltip />} />
 
         {/* Fix 1 — radius flipped to top corners */}
-        <Bar dataKey="avgSeconds" fill="var(--foreground)" radius={[4, 4, 0, 0]} />
+        <Bar dataKey="avgSeconds" fill="var(--background)" radius={[4, 4, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
   )

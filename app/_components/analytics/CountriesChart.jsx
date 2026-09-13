@@ -24,7 +24,7 @@ export default function CountriesChart({ data }) {
         <XAxis
           type="category"
           dataKey="country"
-          tick={{ fill: "var(--foreground)", fontSize: "1.1rem" }}
+          tick={{ fill: "var(--background)", fontSize: "1.1rem" }}
           axisLine={false}
           tickLine={false}
           // truncate long country names on small screens
@@ -35,7 +35,7 @@ export default function CountriesChart({ data }) {
 
         <YAxis
           type="number"
-          tick={{ fill: "var(--foreground)", fontSize: "1.1rem" }}
+          tick={{ fill: "var(--background)", fontSize: "1.1rem" }}
           axisLine={false}
           tickLine={false}
           width={40}

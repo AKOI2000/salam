@@ -40,7 +40,7 @@ export default function StatCard({ label, value, prev, format }) {
       </div>
 
       {/* Previous month reference */}
-      <div style={{ color: "#4b5563", fontSize: 12, marginTop: 6 }}>
+      <div style={{ color: "var(--grey)", fontSize: 12, marginTop: 6 }}>
         Last month: {prevDisplay}
       </div>
     </div>
