@@ -117,8 +117,13 @@ export async function updateProject(formData) {
     const existingProject = JSON.parse(formData.get("existing_product"));
 
     const updatedData = {};
+    let newSlug = existingProject.slug;
 
-    if (title !== existingProject.title) updatedData.title = title;
+    if (title !== existingProject.title) {
+      updatedData.title = title;
+      newSlug = slugify(title, { lower: true, strict: true });
+      updatedData.slug = newSlug;
+    }
     if (excerpt !== existingProject.excerpt) updatedData.excerpt = excerpt;
 
     if (thumbnail?.size > 0) {
@@ -196,8 +201,8 @@ export async function updateProject(formData) {
     revalidateTag("projects");
     revalidateTag("activity");
     revalidatePath("/admin/projects");
-    revalidatePath(`/admin/projects/${existingProject.slug}`);
-    return { success: true };
+    revalidatePath(`/admin/projects/${newSlug}`);
+    return { success: true, slug: newSlug };
   } catch (error) {
     return {
       success: false,
