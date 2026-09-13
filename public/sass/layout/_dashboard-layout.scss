@@ -9,14 +9,14 @@
   }
 }
 
-
 .dashboard {
   min-height: 100vh;
   background: var(--dashboard-white);
   cursor: default;
   display: flex;
 
-  button, a{
+  button,
+  a {
     cursor: pointer;
   }
 }
@@ -57,8 +57,8 @@
 
   height: 100vh;
 
-  background: var(--dashboard-white);
-  border-right: 1px solid var(--border);
+  background: var(--foreground);
+  border-right: 1px solid var(--light-grey);
 
   padding: 3rem 1.5rem 7rem;
 
@@ -161,13 +161,13 @@
     //   color: var(--background);
     // }
 
-    &.active{
+    &.active {
       background-color: var(--dashboard-white-smoke);
       color: var(--background);
       font-weight: 500;
     }
 
-    svg{
+    svg {
       font-size: 2.5rem;
     }
   }
@@ -196,7 +196,7 @@
 
   padding: 0 2rem;
 
-  background: var(--dashboard-white);
+  background: var(--foreground);
 
   backdrop-filter: blur(12px);
 
@@ -204,6 +204,7 @@
   top: 0;
 
   z-index: 50;
+  border-bottom: 1px solid var(--light-grey);
 
   display: flex;
   align-items: center;
@@ -211,7 +212,6 @@
 
   @include respond(md) {
     padding: 0 1rem;
-    border-bottom: 1px solid var(--light-grey);
   }
 }
 

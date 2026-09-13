@@ -5,7 +5,7 @@ function DashboardLeadsSummaryCard({ heading, data, icon, index }) {
     <div className="leads-summary-card">
       <div className="leads-summary-card_figures">
         <h6>{heading}</h6>
-        <h4>{data.total}</h4>
+        <h3>{data.total}</h3>
       </div>
       <div
         className={`leads-summary-card_icon leads-summary-card_icon--${index}`}

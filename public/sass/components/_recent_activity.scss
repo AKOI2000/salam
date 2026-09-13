@@ -7,6 +7,11 @@
   .activities {
     overflow-y: scroll;
     scrollbar-width: none;
+
+    @include respond (md) {
+      scrollbar-width: thin;
+      scroll-margin-left: 1rem;
+    }
     .activity {
       display: flex;
       justify-content: space-between;

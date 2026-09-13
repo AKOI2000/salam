@@ -18,15 +18,17 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: var(--white-smoke);
+    background-color: var(--dashboard-white-smoke);
     // border-radius: $border-radius-lg;
     // box-shadow: $shadow-lg;
     padding: 3.2rem 4rem;
     transition: all 0.5s;
     cursor: pointer;
 
-
-    @include respond (mds) {
+    h3, p {
+      color: var(--background);
+    }
+    @include respond(mds) {
       padding: 3rem;
     }
 
@@ -64,19 +66,17 @@
       /* Sometimes we need both */
       /* fill: var(--grey-500);
       stroke: var(--grey-500); */
-      color: var(--foreground);
+      color: var(--background);
     }
   }
 }
 
-
-.confirm-delete{
-
-  p{
-    margin-top: .5rem;
+.confirm-delete {
+  p {
+    margin-top: 0.5rem;
   }
 
-  .flex{
+  .flex {
     margin-top: 3rem;
     display: flex;
     gap: 1rem;

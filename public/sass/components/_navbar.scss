@@ -40,11 +40,11 @@ header {
   }
 
   @include respond(lg) {
-    padding: 1rem 5rem;
+    padding: 0.5rem 5rem;
   }
 
   @include respond(mds) {
-    padding: 1rem 3rem;
+    padding: 0.5rem 3rem;
 
     .test {
       background: transparent;
@@ -56,7 +56,7 @@ header {
   }
 
   @include respond(xs) {
-    padding: 1rem 2rem;
+    padding: 0.5rem 2rem;
   }
 
   .logo {

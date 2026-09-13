@@ -46,8 +46,8 @@ function MultipleLineChart() {
       <AreaChart data={data}>
         <defs>
           <linearGradient id="visitorsGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="var(--foreground)" stopOpacity={0.4} />
-            <stop offset="95%" stopColor="var(--foreground)" stopOpacity={0} />
+            <stop offset="5%" stopColor="var(--background)" stopOpacity={0.4} />
+            <stop offset="95%" stopColor="var(--background)" stopOpacity={0} />
           </linearGradient>
 
           <linearGradient id="leadsGrad" x1="0" y1="0" x2="0" y2="1">
@@ -66,10 +66,10 @@ function MultipleLineChart() {
           <linearGradient id="projectsGrad" x1="0" y1="0" x2="0" y2="1">
             <stop
               offset="5%"
-              stopColor="var(--darker-grey)"
+              stopColor="var(--color-orange)"
               stopOpacity={0.4}
             />
-            <stop offset="95%" stopColor="var(--darker-grey)" stopOpacity={0} />
+            <stop offset="95%" stopColor="var(--color-orange)" stopOpacity={0} />
           </linearGradient>
         </defs>
 
@@ -79,26 +79,26 @@ function MultipleLineChart() {
         <YAxis
           axisLine={false}
           tickLine={false}
-          tick={{ fill: "var(--foreground)", fontSize: "1.1rem" }}
+          tick={{ fill: "var(--background)", fontSize: "1.1rem" }}
         />
 
         <Legend iconType="rect" />
 
         <Tooltip
           contentStyle={{
-            background: "var(--foreground)",
+            background: "var(--background)",
             border: "1px solid #2d2d3f",
             borderRadius: ".8rem",
             fontSize: "1.3rem",
           }}
-          labelStyle={{ color: "var(--grey)" }}
-          itemStyle={{ color: "var(--whiter-smoke)" }}
+          labelStyle={{ color: "var(--light-grey)" }}
+          itemStyle={{ color: "var(--foreground-light)" }}
         />
 
         <Area
           type="monotone"
           dataKey="Visitors"
-          stroke="var(--foreground)"
+          stroke="var(--background)"
           fill="url(#visitorsGrad)"
           strokeWidth={2}
         />

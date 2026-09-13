@@ -264,9 +264,14 @@ h1 {
   margin-bottom: 3rem;
   text-transform: lowercase;
 }
+.section-heading h3 {
+  line-height: 1;
+}
 .section-heading p {
   margin-top: 1rem;
   padding: 1rem;
+  font-size: 1.2rem;
+  color: var(--light-grey);
 }
 .section-heading p.no-margin {
   margin-top: 0;
@@ -465,7 +470,8 @@ h1 {
   cursor: default;
   display: flex;
 }
-.dashboard button, .dashboard a {
+.dashboard button,
+.dashboard a {
   cursor: pointer;
 }
 
@@ -494,8 +500,8 @@ h1 {
   width: var(--sidebar-width);
   min-width: var(--sidebar-width);
   height: 100vh;
-  background: var(--dashboard-white);
-  border-right: 1px solid var(--border);
+  background: var(--foreground);
+  border-right: 1px solid var(--light-grey);
   padding: 3rem 1.5rem 7rem;
   position: sticky;
   top: 0;
@@ -605,11 +611,12 @@ h1 {
 .dashboard__header {
   height: var(--header-height);
   padding: 0 2rem;
-  background: var(--dashboard-white);
+  background: var(--foreground);
   backdrop-filter: blur(12px);
   position: sticky;
   top: 0;
   z-index: 50;
+  border-bottom: 1px solid var(--light-grey);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -617,7 +624,6 @@ h1 {
 @media (max-width: 768px) {
   .dashboard__header {
     padding: 0 1rem;
-    border-bottom: 1px solid var(--light-grey);
   }
 }
 
@@ -701,9 +707,9 @@ h1 {
 }
 .btn-dashboard-tertiary {
   background: transparent;
-  color: var(--foreground);
+  color: var(--background);
   padding: 1.5rem 2rem;
-  border: 1px solid var(--foreground);
+  border: 1px solid var(--background);
   transition: all 0.7s ease-in-out;
   cursor: pointer;
   font-size: 1.6rem;
@@ -719,7 +725,7 @@ h1 {
 }
 .btn-dashboard-secondary {
   background: transparent;
-  color: var(--foreground);
+  color: var(--background);
   font-size: 1.5rem;
   transition: all 0.7s ease-in-out;
   border: none;
@@ -731,9 +737,7 @@ h1 {
   width: 1.5em;
 }
 .btn-dashboard-secondary:hover {
-  color: var(--grey);
-  font-weight: 600;
-  transform: scale(1.05);
+  transform: translateY(-2px) scale(1.02);
 }
 .btn-secondary {
   font-size: var(--base-size);
@@ -958,12 +962,12 @@ header.is-light {
 }
 @media (max-width: 1024px) {
   header {
-    padding: 1rem 5rem;
+    padding: 0.5rem 5rem;
   }
 }
 @media (max-width: 608px) {
   header {
-    padding: 1rem 3rem;
+    padding: 0.5rem 3rem;
   }
   header .test {
     background: transparent;
@@ -974,7 +978,7 @@ header.is-light {
 }
 @media (max-width: 360px) {
   header {
-    padding: 1rem 2rem;
+    padding: 0.5rem 2rem;
   }
 }
 header .logo {
@@ -1235,10 +1239,13 @@ header .test span {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: var(--white-smoke);
+  background-color: var(--dashboard-white-smoke);
   padding: 3.2rem 4rem;
   transition: all 0.5s;
   cursor: pointer;
+}
+.modal-window h3, .modal-window p {
+  color: var(--background);
 }
 @media (max-width: 608px) {
   .modal-window {
@@ -1266,7 +1273,7 @@ header .test span {
   /* Sometimes we need both */
   /* fill: var(--grey-500);
   stroke: var(--grey-500); */
-  color: var(--foreground);
+  color: var(--background);
 }
 
 .confirm-delete p {
@@ -1414,6 +1421,12 @@ header .test span {
   overflow-y: scroll;
   scrollbar-width: none;
 }
+@media (max-width: 768px) {
+  .recent_activity .activities {
+    scrollbar-width: thin;
+    scroll-margin-left: 1rem;
+  }
+}
 .recent_activity .activities .activity {
   display: flex;
   justify-content: space-between;
@@ -1457,10 +1470,11 @@ header .test span {
 .recent_activity,
 .overview-graph {
   flex: 1;
-  background: var(--white-smoke);
+  background: var(--foreground);
   box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
   border-radius: 1rem;
   padding: 3rem;
+  color: var(--background);
 }
 .quick_actions h6,
 .recent_activity h6,
@@ -1531,6 +1545,7 @@ header .test span {
 }
 .quick_actions .actions .action_text-main {
   font-weight: 500;
+  color: var(--background);
 }
 .quick_actions .actions .action_text-sub {
   color: var(--grey);
@@ -1538,20 +1553,29 @@ header .test span {
 }
 
 .block-editor {
-  background: var(--white-smoke);
+  background: var(--foreground);
   padding: 4rem;
   margin: 4rem 0;
+  border-radius: 0.5rem;
 }
 .block-editor .block-editor-toolbar {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.5rem;
   margin-bottom: 3rem;
   padding-bottom: 3rem;
-  border-bottom: 2px solid var(--light-grey);
+  border-bottom: 1px solid var(--light-grey);
 }
-.block-editor .block-editor-toolbar button {
-  text-transform: capitalize;
+.block-editor .block-editor-toolbar .btn-dashboard-secondary {
+  padding: 1rem;
+  color: var(--foreground);
+  background-color: var(--background);
+  text-decoration: none;
+  border-radius: 0.5rem;
+}
+.block-editor .block-editor-toolbar .btn-dashboard-secondary:hover {
+  color: var(--foreground-light);
+  background-color: var(--white-smoke);
 }
 .block-editor .block-editor-empty {
   font-size: 1.6rem;
@@ -1570,7 +1594,6 @@ header .test span {
 }
 
 .block-item {
-  background: var(--background);
   border: 1px solid var(--light-grey);
   padding: 2rem;
   transition: opacity 0.2s;
@@ -1587,7 +1610,7 @@ header .test span {
   background: transparent;
   border: none;
   cursor: grab;
-  color: var(--grey);
+  color: var(--darker-grey);
   font-size: 2rem;
   display: flex;
   align-items: center;
@@ -1605,7 +1628,7 @@ header .test span {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--foreground);
+  color: var(--background);
 }
 .block-item .block-item-header .block-remove {
   background: transparent;
@@ -1698,12 +1721,13 @@ header .test span {
 .block-image-editor input[type=file],
 .block-video-editor input[type=file] {
   padding: 0.5rem;
+  color: var(--background);
 }
 .block-image-editor input[type=file]::file-selector-button,
 .block-video-editor input[type=file]::file-selector-button {
   padding: 0.5rem 1rem;
-  background: var(--foreground);
-  color: var(--background);
+  background: var(--background);
+  color: var(--foreground);
   border: none;
   cursor: pointer;
   transition: all 0.2s;
@@ -2325,7 +2349,7 @@ header .test span {
 }
 .project-meta__details {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   align-items: stretch;
   justify-content: space-between;
 }
@@ -2355,17 +2379,12 @@ header .test span {
   color: var(--foreground-light);
   font-size: var(--base-size);
   line-height: 1.6;
+  text-align: center;
   white-space: pre-wrap;
   width: 100%;
   display: flex;
   justify-content: center;
 }
-@media (max-width: 768px) {
-  .project-meta__value {
-    text-align: left;
-  }
-}
-
 .project-meta-group {
   text-align: center;
   padding: 3rem;
@@ -2471,6 +2490,7 @@ header .test span {
 }
 .dashboard-heading_flex .dashboard-head {
   max-width: 70rem;
+  color: var(--background);
 }
 .products-table {
   display: flex;
@@ -2504,7 +2524,7 @@ header .test span {
   display: grid;
   grid-template-columns: 0.5fr 1.5fr 2.5fr 1fr 1fr 1fr;
   padding: 0.75rem;
-  background: var(--dashboard-white);
+  background: var(--foreground);
   color: var(--background);
   align-items: center;
 }
@@ -2617,7 +2637,7 @@ header .test span {
   display: grid;
   grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1fr 1fr;
   padding: 1rem 0.75rem;
-  background: var(--dashboard-white);
+  background: var(--dashboard-white-smoke);
   color: var(--background);
 }
 .leads-table .leads-table-header p {
@@ -2629,7 +2649,7 @@ header .test span {
   display: grid;
   grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1fr 1fr;
   padding: 2rem 0.75rem;
-  background: var(--dashboard-white);
+  background: var(--foreground);
   color: var(--background);
   align-items: center;
 }
@@ -2663,16 +2683,36 @@ header .test span {
 
 .section-checklist-box {
   padding: 4rem 7rem;
-  background-color: var(--dashboard-white-smoke);
+  background-color: var(--foreground);
+  border-radius: 0.5rem;
+}
+@media (max-width: 768px) {
+  .section-checklist-box {
+    padding: 4rem;
+  }
+}
+@media (max-width: 608px) {
+  .section-checklist-box {
+    padding: 4rem 2rem;
+  }
+}
+@media (max-width: 768px) {
+  .section-checklist-box {
+    padding: 4rem 1rem;
+  }
 }
 .section-checklist-box .section-checklist {
   padding: 4rem 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 4rem;
 }
 .section-checklist-box .section-checklist:not(:last-child) {
   border-bottom: 2px solid var(--light-grey);
+}
+.section-checklist-box .section-checklist h5 {
+  color: var(--background);
 }
 .section-checklist-box .section-checklist form {
   display: flex;
@@ -2694,7 +2734,7 @@ header .test span {
 }
 .section-checklist-box .section-checklist form input::after {
   content: "";
-  color: var(--white-smoke);
+  color: var(--background);
   width: 5px;
   height: 10px;
   border: solid var(--white-smoke);
@@ -2709,20 +2749,28 @@ header .test span {
 }
 .section-checklist-box .section-checklist form input:checked {
   appearance: none;
-  background: var(--foreground);
+  background: var(--background);
   outline: 2px solid var(--foreground);
   outline-offset: 2px;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 }
 .section-checklist-box .section-checklist form input:checked::after {
   transform: translate(-50%, -50%) rotate(45deg) scale(1);
   opacity: 1;
+  color: var(--foreground);
+  border-color: var(--foreground);
 }
 
 .dashboard-metadata-box {
   margin: 4rem 0;
-  background: var(--white-smoke);
+  background: var(--foreground);
   padding: 4rem;
+  border-radius: 0.5rem;
+}
+.dashboard-metadata-box h1,
+.dashboard-metadata-box h2,
+.dashboard-metadata-box h3 {
+  color: var(--background);
 }
 
 .add-project-box,
@@ -2762,6 +2810,7 @@ form .input-box {
 form .input-box span {
   padding: 0 2rem;
   font-size: 1.4rem;
+  color: var(--background);
 }
 form .input-group {
   margin-bottom: 2rem;
@@ -2771,14 +2820,17 @@ form .input-group {
 }
 form .input-group label {
   font-size: 1.6rem;
+  color: var(--background);
 }
 form .input-group input[type=file] {
   padding: 0.5rem;
+  outline: none;
+  color: var(--background);
 }
 form .input-group input[type=file]::file-selector-button {
   padding: 0.5rem 1rem;
-  background: var(--foreground);
-  color: var(--background);
+  background: var(--background);
+  color: var(--foreground);
   border: none;
   cursor: pointer;
   transition: all 0.2s;
@@ -2805,11 +2857,11 @@ form .input-flex input {
   width: 3rem;
   cursor: pointer;
   transition: all 0.2s;
-  border: 0.5px solid var(--foreground);
+  border: 0.5px solid var(--background);
   padding: 0;
 }
 form .input-flex input:hover {
-  outline: 1px solid var(--foreground);
+  outline: 1px solid var(--background);
   outline-offset: 1px;
 }
 form .input-flex input::after {
@@ -2844,11 +2896,12 @@ form textarea {
   padding: 2rem;
   border: none;
   font-size: 1.6rem;
+  outline: 0.1px solid var(--grey);
 }
 form input:focus, form input:active,
 form textarea:focus,
 form textarea:active {
-  outline: 1px solid var(--grey);
+  outline: 0.8px solid var(--background);
 }
 form textarea {
   min-height: 20rem;
@@ -2916,16 +2969,16 @@ form button {
 .leads-summary-card_figures h6 {
   margin-bottom: 0.4rem;
   font-weight: 400;
+  color: var(--dashboard-white-smoke);
 }
-.leads-summary-card_figures h4 {
-  font-weight: 500;
+.leads-summary-card_figures h3 {
+  font-weight: 600;
 }
 .leads-summary-card_icon {
-  font-size: 4rem;
+  font-size: 5rem;
   justify-self: center;
   align-self: center;
   color: var(--light-grey);
-  background-color: var(--foreground);
   padding: 1rem 1.5rem;
   display: flex;
   align-items: center;

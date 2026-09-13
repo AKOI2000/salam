@@ -19,7 +19,7 @@
   &__details {
     display: flex;
     // flex-wrap: wrap;
-    gap: 1rem;
+    gap: 0.5rem;
     align-items: stretch;
     justify-content: space-between;
 
@@ -50,14 +50,14 @@
     font-size: var(--base-size);
     line-height: 1.6;
     // text-transform: capitalize;
-    // text-align: center;
+    text-align: center;
     white-space: pre-wrap;
     width: 100%;
     display: flex;
     justify-content: center;
 
     @include respond (md) {
-      text-align: left;
+      // text-align: left;
     }
   }
 }

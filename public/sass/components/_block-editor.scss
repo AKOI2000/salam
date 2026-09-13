@@ -1,19 +1,29 @@
 .block-editor {
-  background: var(--white-smoke);
+  background: var(--foreground);
   padding: 4rem;
   margin: 4rem 0;
+  border-radius: .5rem;
 
   .block-editor-toolbar {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 1.5rem;
     margin-bottom: 3rem;
     padding-bottom: 3rem;
-    border-bottom: 2px solid var(--light-grey);
+    border-bottom: 1px solid var(--light-grey);
 
-    button {
-      text-transform: capitalize;
+   .btn-dashboard-secondary{
+    padding: 1rem;
+    color: var(--foreground);
+    background-color: var(--background);
+    text-decoration: none;
+    border-radius: .5rem;
+
+    &:hover {
+      color: var(--foreground-light);
+      background-color: var(--white-smoke);
     }
+   }
   }
 
   .block-editor-empty {
@@ -35,7 +45,7 @@
 }
 
 .block-item {
-  background: var(--background);
+  // background: var(--background);
   border: 1px solid var(--light-grey);
   padding: 2rem;
   transition: opacity 0.2s;
@@ -52,7 +62,7 @@
       background: transparent;
       border: none;
       cursor: grab;
-      color: var(--grey);
+      color: var(--darker-grey);
       font-size: 2rem;
       display: flex;
       align-items: center;
@@ -73,7 +83,7 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: var(--foreground);
+      color: var(--background);
     }
 
     .block-remove {
@@ -178,11 +188,12 @@
 
   input[type="file"] {
     padding: 0.5rem;
+    color: var(--background);
 
     &::file-selector-button {
       padding: 0.5rem 1rem;
-      background: var(--foreground);
-      color: var(--background);
+      background: var(--background);
+      color: var(--foreground);
       border: none;
       cursor: pointer;
       transition: all 0.2s;

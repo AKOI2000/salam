@@ -1,12 +1,20 @@
 .dashboard-metadata-box {
   margin: 4rem 0;
-  background: var(--white-smoke);
+  background: var(--foreground);
   padding: 4rem;
+  border-radius: .5rem;
+
+  h1,
+  h2,
+  h3 {
+    color: var(--background);
+  }
 }
 
 .add-project-box,
 .add-section-box {
   min-width: 80rem;
+  // background: var(--background);
 
   @include respond(mdl) {
     min-width: 80vw;
@@ -39,6 +47,7 @@ form {
     span {
       padding: 0 2rem;
       font-size: 1.4rem;
+      color: var(--background);
     }
   }
 
@@ -47,21 +56,25 @@ form {
     display: grid;
     grid-template-columns: 30% 70%;
     align-items: center;
+
     label {
       // display: block;
       // margin-bottom: 0.5rem;
       font-size: 1.6rem;
       // font-weight: 500;
+      color: var(--background);
     }
 
     input[type="file"] {
       padding: 0.5rem;
       // color: transparent;
+      outline: none;
+      color: var(--background);
 
       &::file-selector-button {
         padding: 0.5rem 1rem;
-        background: var(--foreground);
-        color: var(--background);
+        background: var(--background);
+        color: var(--foreground);
         border: none;
         cursor: pointer;
         transition: all 0.2s;
@@ -94,11 +107,11 @@ form {
       width: 3rem;
       cursor: pointer;
       transition: all 0.2s;
-      border: 0.5px solid var(--foreground);
+      border: 0.5px solid var(--background);
       padding: 0;
 
       &:hover {
-        outline: 1px solid var(--foreground);
+        outline: 1px solid var(--background);
         outline-offset: 1px;
       }
 
@@ -140,10 +153,13 @@ form {
     padding: 2rem;
     border: none;
     font-size: 1.6rem;
+    outline: 0.1px solid var(--grey);
+
+    // &:not()
 
     &:focus,
     &:active {
-      outline: 1px solid var(--grey);
+      outline: 0.8px solid var(--background);
     }
   }
 

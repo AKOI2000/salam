@@ -69,9 +69,15 @@ h1 {
   margin-bottom: 3rem;
   text-transform: lowercase;
 
+  h3{
+    line-height: 1;
+  }
+
   p {
     margin-top: 1rem;
     padding: 1rem;
+    font-size: 1.2rem;
+    color: var(--light-grey);
 
     &.no-margin {
       margin-top: 0;

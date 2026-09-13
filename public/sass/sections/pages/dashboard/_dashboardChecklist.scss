@@ -1,15 +1,31 @@
 .section-checklist-box {
   padding: 4rem 7rem;
-  background-color: var(--dashboard-white-smoke);
+  background-color: var(--foreground);
+  border-radius: .5rem;
+
+  @include respond(md) {
+    padding: 4rem;
+  }
+  @include respond(mds) {
+    padding: 4rem 2rem;
+  }
+  @include respond(md) {
+    padding: 4rem 1rem;
+  }
 
   .section-checklist {
     padding: 4rem 0;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 4rem;
 
     &:not(:last-child) {
       border-bottom: 2px solid var(--light-grey);
+    }
+
+    h5 {
+      color: var(--background);
     }
 
     form {
@@ -34,7 +50,7 @@
 
         &::after {
           content: "";
-          color: var(--white-smoke);
+          color: var(--background);
           width: 5px;
           height: 10px;
           border: solid var(--white-smoke);
@@ -51,14 +67,16 @@
         &:checked {
           appearance: none;
           // color: var(--color-accent);
-          background: var(--foreground);
+          background: var(--background);
           outline: 2px solid var(--foreground);
           outline-offset: 2px;
-          border-radius: 1rem;
+          border-radius: .5rem;
 
           &::after {
             transform: translate(-50%, -50%) rotate(45deg) scale(1);
             opacity: 1;
+            color: var(--foreground);
+            border-color: var(--foreground);
           }
         }
       }

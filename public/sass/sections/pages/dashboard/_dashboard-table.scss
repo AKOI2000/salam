@@ -30,7 +30,7 @@
     display: grid;
     grid-template-columns: 0.5fr 1.5fr 2.5fr 1fr 1fr 1fr;
     padding: 0.75rem;
-    background: var(--dashboard-white);
+    background: var(--foreground);
     color: var(--background);
 
     align-items: center;
@@ -156,7 +156,7 @@
     display: grid;
     grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1fr 1fr;
     padding: 1rem 0.75rem;
-    background: var(--dashboard-white);
+    background: var(--dashboard-white-smoke);
     color: var(--background);
 
     p {
@@ -170,7 +170,7 @@
     display: grid;
     grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1fr 1fr;
     padding: 2rem 0.75rem;
-    background: var(--dashboard-white);
+    background: var(--foreground);
     color: var(--background);
 
     align-items: center;
