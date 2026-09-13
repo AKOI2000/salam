@@ -1,6 +1,6 @@
 .section-checklist-box {
   padding: 4rem 7rem;
-  background-color: var(--white-smoke);
+  background-color: var(--dashboard-white-smoke);
 
   .section-checklist {
     padding: 4rem 0;
@@ -24,12 +24,12 @@
         width: 6rem;
         cursor: pointer;
         transition: all 0.2s;
-        border: 1px solid var(--foreground);
+        border: 1px solid var(--background);
         padding: 0;
 
         &:hover {
           outline: 1px solid var(--foreground);
-          outline-offset: 1px;
+          outline-offset: 2px;
         }
 
         &::after {

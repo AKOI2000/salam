@@ -8,7 +8,7 @@
   }
 
   &.small {
-    padding: 15rem 7rem 7rem;
+    padding: 15rem 5rem 10rem;
 
     @include respond(lg) {
       padding: 15rem 5rem 12rem;
@@ -29,5 +29,25 @@
     @include respond(xs) {
       padding: 16rem 2rem 10rem;
     }
+  }
+
+  @include respond(lg) {
+    padding: 15rem 5rem;
+  }
+
+  @include respond(mdl) {
+    padding: 15rem 4rem;
+  }
+
+  @include respond(mds) {
+    padding: 16rem 3rem 14rem;
+  }
+
+  @include respond(sm) {
+    padding: 16rem 3rem 14rem;
+  }
+
+  @include respond(xs) {
+    padding: 16rem 2rem 14rem;
   }
 }

@@ -12,8 +12,8 @@
     display: grid;
     grid-template-columns: 0.5fr 1.5fr 2.5fr 1fr 1fr 1fr;
     padding: 0.75rem;
-    background: var(--light-grey);
-    color: var(--foreground);
+    background: var(--dashboard-white-smoke);
+    color: var(--background);
 
     p {
       justify-self: center;
@@ -30,8 +30,8 @@
     display: grid;
     grid-template-columns: 0.5fr 1.5fr 2.5fr 1fr 1fr 1fr;
     padding: 0.75rem;
-    background: var(--white-smoke);
-    color: var(--foreground);
+    background: var(--dashboard-white);
+    color: var(--background);
 
     align-items: center;
 
@@ -39,6 +39,10 @@
       font-weight: 600;
       font-size: 2rem;
       padding-left: 1rem;
+    }
+
+    a,button{
+      color: var(--background);
     }
 
     p {
@@ -95,7 +99,7 @@
     display: grid;
     grid-template-columns: 0.5fr 1.5fr 1.5fr 0.5fr;
     padding: 0.75rem;
-    background: var(--white-smoke);
+    background: var(--dashboard-white-smoke);
     color: var(--foreground);
     border-bottom: 2px solid var(--light-grey);
 
@@ -152,8 +156,8 @@
     display: grid;
     grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1fr 1fr;
     padding: 1rem 0.75rem;
-    background: var(--light-grey);
-    color: var(--foreground);
+    background: var(--dashboard-white);
+    color: var(--background);
 
     p {
       justify-self: center;
@@ -166,8 +170,8 @@
     display: grid;
     grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1fr 1fr;
     padding: 2rem 0.75rem;
-    background: var(--white-smoke);
-    color: var(--foreground);
+    background: var(--dashboard-white);
+    color: var(--background);
 
     align-items: center;
 
@@ -178,11 +182,11 @@
       // min-width: 10rem;
       text-align: center;
       background-color: var(--foreground);
-      color: var(--white-smoke);
+      color: var(--background);
 
       &.new {
        background-color: var(--color-accent-light);
-       color: var(--foreground);
+       color: var(--background);
       }
       &.contacted {
        background-color: var(--color-yellow);
@@ -193,9 +197,10 @@
     }
 
     a,
-    p {
+    p,button {
       justify-self: center;
       font-size: 1.6rem;
+      color: var(--background);
     }
 
     a {

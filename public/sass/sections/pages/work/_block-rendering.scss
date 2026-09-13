@@ -12,11 +12,12 @@
   max-width: 60rem;
   margin: 0 auto 1.5rem 0; /* keep on the left */
   text-align: left;
+  font-weight: 500;
 }
 
 .block-subheading {
   // inherits h3 — no override needed
-  font-weight: 500;
+  font-weight: 400;
   // color: var(--light-grey);
   max-width: 100rem;
   margin: 0 0 1.5rem 0;

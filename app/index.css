@@ -5,7 +5,7 @@
   margin-bottom: 4rem;
 }
 .page-start.small {
-  padding: 15rem 7rem 7rem;
+  padding: 15rem 5rem 10rem;
 }
 @media (max-width: 1024px) {
   .page-start.small {
@@ -32,11 +32,38 @@
     padding: 16rem 2rem 10rem;
   }
 }
+@media (max-width: 1024px) {
+  .page-start {
+    padding: 15rem 5rem;
+  }
+}
+@media (max-width: 880px) {
+  .page-start {
+    padding: 15rem 4rem;
+  }
+}
+@media (max-width: 608px) {
+  .page-start {
+    padding: 16rem 3rem 14rem;
+  }
+}
+@media (max-width: 480px) {
+  .page-start {
+    padding: 16rem 3rem 14rem;
+  }
+}
+@media (max-width: 360px) {
+  .page-start {
+    padding: 16rem 2rem 14rem;
+  }
+}
 
 :root {
   --background: #0b0b0b;
   --white-smoke: #121212;
   --whiter-smoke: #1a1a1a;
+  --dashboard-white: #f5f5f5;
+  --dashboard-white-smoke: #efefee;
   --light-grey: #d7d7d7;
   --grey: #9a9a9a;
   --darker-grey: #b9b9b9;
@@ -434,7 +461,7 @@ h1 {
 
 .dashboard {
   min-height: 100vh;
-  background: var(--background);
+  background: var(--dashboard-white);
   cursor: default;
   display: flex;
 }
@@ -467,7 +494,7 @@ h1 {
   width: var(--sidebar-width);
   min-width: var(--sidebar-width);
   height: 100vh;
-  background: var(--white-smoke);
+  background: var(--dashboard-white);
   border-right: 1px solid var(--border);
   padding: 3rem 1.5rem 7rem;
   position: sticky;
@@ -508,7 +535,7 @@ h1 {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background: var(--light-grey);
+  background: var(--darker-grey);
   color: var(--foreground);
   font-weight: 700;
   font-size: 1.6rem;
@@ -533,7 +560,7 @@ h1 {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  color: var(--foreground);
+  color: var(--background);
   transition: background 0.25s ease, color 0.25s ease;
   position: relative;
   z-index: 0;
@@ -542,7 +569,7 @@ h1 {
   content: "";
   height: 0;
   width: 100%;
-  background: var(--light-grey);
+  background: var(--dashboard-white-smoke);
   position: absolute;
   top: 0;
   left: 0;
@@ -553,8 +580,8 @@ h1 {
   transition: height 0.25s ease;
 }
 .dashboard__nav a.active {
-  background-color: var(--light-grey);
-  color: var(--foreground);
+  background-color: var(--dashboard-white-smoke);
+  color: var(--background);
   font-weight: 500;
 }
 .dashboard__nav a svg {
@@ -578,7 +605,7 @@ h1 {
 .dashboard__header {
   height: var(--header-height);
   padding: 0 2rem;
-  background: var(--white-smoke);
+  background: var(--dashboard-white);
   backdrop-filter: blur(12px);
   position: sticky;
   top: 0;
@@ -590,7 +617,7 @@ h1 {
 @media (max-width: 768px) {
   .dashboard__header {
     padding: 0 1rem;
-    border-bottom: 1px solid var(--grey);
+    border-bottom: 1px solid var(--light-grey);
   }
 }
 
@@ -605,7 +632,7 @@ h1 {
   width: 5rem;
   height: 5rem;
   border-radius: 50%;
-  background: var(--darker-grey);
+  background: var(--light-grey);
   color: var(--background);
   display: none;
   place-items: center;
@@ -633,7 +660,7 @@ h1 {
   width: 100%;
   overflow-y: scroll;
   scrollbar-width: none;
-  background: var(--light-grey);
+  background: var(--dashboard-white-smoke);
   overflow-x: hidden;
 }
 @media (max-width: 768px) {
@@ -643,8 +670,8 @@ h1 {
 }
 
 .btn-dashboard-primary {
-  background: var(--foreground);
-  color: var(--background);
+  background: var(--background);
+  color: var(--foreground);
   padding: 1.5rem 2rem;
   transition: all 0.7s ease-in-out;
   cursor: pointer;
@@ -661,7 +688,8 @@ h1 {
 }
 .btn-dashboard-primary:hover {
   filter: brightness(0.9);
-  color: var(--background);
+  color: var(--foreground-light);
+  background-color: var(--whiter-smoke);
   transform: scale(0.98);
 }
 .btn-dashboard-primary svg {
@@ -2369,10 +2397,11 @@ header .test span {
   max-width: 60rem;
   margin: 0 auto 1.5rem 0; /* keep on the left */
   text-align: left;
+  font-weight: 500;
 }
 
 .block-subheading {
-  font-weight: 500;
+  font-weight: 400;
   max-width: 100rem;
   margin: 0 0 1.5rem 0;
   text-align: left;
@@ -2458,8 +2487,8 @@ header .test span {
   display: grid;
   grid-template-columns: 0.5fr 1.5fr 2.5fr 1fr 1fr 1fr;
   padding: 0.75rem;
-  background: var(--light-grey);
-  color: var(--foreground);
+  background: var(--dashboard-white-smoke);
+  color: var(--background);
 }
 .products-table .products-table-header p {
   justify-self: center;
@@ -2475,14 +2504,17 @@ header .test span {
   display: grid;
   grid-template-columns: 0.5fr 1.5fr 2.5fr 1fr 1fr 1fr;
   padding: 0.75rem;
-  background: var(--white-smoke);
-  color: var(--foreground);
+  background: var(--dashboard-white);
+  color: var(--background);
   align-items: center;
 }
 .products-table .products-table-row .title {
   font-weight: 600;
   font-size: 2rem;
   padding-left: 1rem;
+}
+.products-table .products-table-row a, .products-table .products-table-row button {
+  color: var(--background);
 }
 .products-table .products-table-row p {
   justify-self: center;
@@ -2534,7 +2566,7 @@ header .test span {
   display: grid;
   grid-template-columns: 0.5fr 1.5fr 1.5fr 0.5fr;
   padding: 0.75rem;
-  background: var(--white-smoke);
+  background: var(--dashboard-white-smoke);
   color: var(--foreground);
   border-bottom: 2px solid var(--light-grey);
   align-items: center;
@@ -2585,8 +2617,8 @@ header .test span {
   display: grid;
   grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1fr 1fr;
   padding: 1rem 0.75rem;
-  background: var(--light-grey);
-  color: var(--foreground);
+  background: var(--dashboard-white);
+  color: var(--background);
 }
 .leads-table .leads-table-header p {
   justify-self: center;
@@ -2597,8 +2629,8 @@ header .test span {
   display: grid;
   grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1fr 1fr;
   padding: 2rem 0.75rem;
-  background: var(--white-smoke);
-  color: var(--foreground);
+  background: var(--dashboard-white);
+  color: var(--background);
   align-items: center;
 }
 .leads-table .leads-table-row .status {
@@ -2607,11 +2639,11 @@ header .test span {
   font-weight: 500;
   text-align: center;
   background-color: var(--foreground);
-  color: var(--white-smoke);
+  color: var(--background);
 }
 .leads-table .leads-table-row .status.new {
   background-color: var(--color-accent-light);
-  color: var(--foreground);
+  color: var(--background);
 }
 .leads-table .leads-table-row .status.contacted {
   background-color: var(--color-yellow);
@@ -2620,9 +2652,10 @@ header .test span {
   background-color: var(--color-green);
 }
 .leads-table .leads-table-row a,
-.leads-table .leads-table-row p {
+.leads-table .leads-table-row p, .leads-table .leads-table-row button {
   justify-self: center;
   font-size: 1.6rem;
+  color: var(--background);
 }
 .leads-table .leads-table-row a {
   text-decoration: underline;
@@ -2630,7 +2663,7 @@ header .test span {
 
 .section-checklist-box {
   padding: 4rem 7rem;
-  background-color: var(--white-smoke);
+  background-color: var(--dashboard-white-smoke);
 }
 .section-checklist-box .section-checklist {
   padding: 4rem 0;
@@ -2652,12 +2685,12 @@ header .test span {
   width: 6rem;
   cursor: pointer;
   transition: all 0.2s;
-  border: 1px solid var(--foreground);
+  border: 1px solid var(--background);
   padding: 0;
 }
 .section-checklist-box .section-checklist form input:hover {
   outline: 1px solid var(--foreground);
-  outline-offset: 1px;
+  outline-offset: 2px;
 }
 .section-checklist-box .section-checklist form input::after {
   content: "";
